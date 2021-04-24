@@ -64,7 +64,7 @@ public class Projectile : MonoBehaviour
         {
             canHitActor = false;
         }
-        else if (MyOwner != null && touchedActor == MyOwner)
+        else if (MyOwner != null && touchedActor.GetTribe() == MyOwner.GetTribe())
         {
             canHitActor = false;
         }

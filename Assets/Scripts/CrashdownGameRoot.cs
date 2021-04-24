@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class CrashdownGameRoot : MonoBehaviour
 {
+    public Gradient playerHealthBarColor;
+    public UnityEngine.UI.Slider playerHealthBar;
+    public UnityEngine.UI.Image playerHealthFill;
     public Projectile projectilePrefab;
     public SoundEffectData sound_UiFailToCrashdown;
 
@@ -238,6 +241,24 @@ public class CrashdownGameRoot : MonoBehaviour
 
                     // Player Interactions
 
+                    if (player.CurrentHealthRegenDelay <= 0.0f)
+                    {
+                        float regenThisFrame = player.MaxHealth / player.playerFullRegenWait * Time.deltaTime;
+                        if (debugCombat)
+                        {
+                            Debug.Log("Player is regenerating " + regenThisFrame);
+                        }
+                        player.CurrentHealth = Mathf.Min(player.MaxHealth, player.CurrentHealth + regenThisFrame);
+                    }
+                    else
+                    {
+                        player.CurrentHealthRegenDelay -= Time.deltaTime;
+                        if (debugCombat)
+                        {
+                            Debug.Log("Player has " + player.CurrentHealthRegenDelay + " seconds until they begin to regenerate.");
+                        }
+                    }
+
                 }
 
                 cameraAveragedTargetPosition += player.transform.position;
@@ -247,6 +268,10 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputDodgeDownThisFrame = false;
             player.InputCrashdownDownThisFrame = false;
             player.InputInteractDownThisFrame = false;
+
+            float playerHealthAmount = player.CurrentHealth / player.MaxHealth;
+            playerHealthBar.value = playerHealthAmount;
+            playerHealthFill.color = playerHealthBarColor.Evaluate(playerHealthAmount);
         }
 
         // Update the camera after all the players have moved.

@@ -13,6 +13,11 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float defaultMaxSpeed = 6.0f;
     public float defaultDodgeDuration = 0.5f;
 
+    public float playerStartingHealth = 100.0f;
+    public float playerHealthBoostMultiplier = 1.25f;
+    public float playerDelayBeforeRegen = 4.0f;
+    public float playerFullRegenWait = 6.0f;
+
     public Vector2 InputMovementThisFrame { get; set; }
     public bool InputAttackDownThisFrame { get; set; }
     public bool InputDodgeDownThisFrame { get; set; }
@@ -20,6 +25,9 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public bool InputInteractDownThisFrame { get; set; }
 
     public Vector3 CurrentFacing { get; set; }
+    public float CurrentHealth { get; set; }
+    public float CurrentHealthRegenDelay { get; set; }
+    public float MaxHealth { get; set; }
     public float RemainingDodgeTime { get; set; }
 
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
@@ -38,6 +46,9 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
         {
             CrashdownGameRoot.actorColliders[collider] = this;
         }
+        MaxHealth = playerStartingHealth;
+        CurrentHealth = MaxHealth;
+        CurrentHealthRegenDelay = 0.0f;
     }
 
     private void OnDisable()
@@ -51,7 +62,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public bool IsDead()
     {
-        return false;
+        return CurrentHealth <= 0.0f;
     }
 
     public bool TryGetCurrentWeapon(out WeaponDefinition weapon)
@@ -105,7 +116,22 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     void IGameActor.TakeDamage(float damage, IGameActor attacker)
     {
-        Debug.LogError("TODO: Player took " + damage + " damage.");
+        bool canSurviveOneMore = false;
+        if (CurrentHealth > 1.0f)
+        {
+            canSurviveOneMore = true;
+        }
+        CurrentHealth -= damage;
+        if (CurrentHealth < 0.0f && canSurviveOneMore)
+        {
+            CurrentHealth = 1.0f;
+        }
+        CurrentHealthRegenDelay = playerDelayBeforeRegen;
+    }
+
+    uint IGameActor.GetTribe()
+    {
+        return 255;
     }
 
 }
