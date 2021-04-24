@@ -215,6 +215,52 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""8ec1929d-5046-494e-a3a8-e4fecde99a56"",
+            ""actions"": [
+                {
+                    ""name"": ""Add Max Health"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c632310-2b07-4043-b9f1-f28591b6e2bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Damage Player"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3411f17-f1b2-4a80-8a64-2f474096da78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""50174659-b7fc-4771-8955-7041439ab0b9"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Add Max Health"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""514d7cc0-3308-4d0f-98a5-dcdae188dcc1"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Damage Player"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -226,6 +272,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Crashdown = m_Player.FindAction("Crashdown", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_AddMaxHealth = m_Test.FindAction("Add Max Health", throwIfNotFound: true);
+        m_Test_DamagePlayer = m_Test.FindAction("Damage Player", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -336,6 +386,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private ITestActions m_TestActionsCallbackInterface;
+    private readonly InputAction m_Test_AddMaxHealth;
+    private readonly InputAction m_Test_DamagePlayer;
+    public struct TestActions
+    {
+        private @Controls m_Wrapper;
+        public TestActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AddMaxHealth => m_Wrapper.m_Test_AddMaxHealth;
+        public InputAction @DamagePlayer => m_Wrapper.m_Test_DamagePlayer;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void SetCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterface != null)
+            {
+                @AddMaxHealth.started -= m_Wrapper.m_TestActionsCallbackInterface.OnAddMaxHealth;
+                @AddMaxHealth.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnAddMaxHealth;
+                @AddMaxHealth.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnAddMaxHealth;
+                @DamagePlayer.started -= m_Wrapper.m_TestActionsCallbackInterface.OnDamagePlayer;
+                @DamagePlayer.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnDamagePlayer;
+                @DamagePlayer.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnDamagePlayer;
+            }
+            m_Wrapper.m_TestActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AddMaxHealth.started += instance.OnAddMaxHealth;
+                @AddMaxHealth.performed += instance.OnAddMaxHealth;
+                @AddMaxHealth.canceled += instance.OnAddMaxHealth;
+                @DamagePlayer.started += instance.OnDamagePlayer;
+                @DamagePlayer.performed += instance.OnDamagePlayer;
+                @DamagePlayer.canceled += instance.OnDamagePlayer;
+            }
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     public interface IPlayerActions
     {
         void OnAttack(InputAction.CallbackContext context);
@@ -343,5 +434,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnCrashdown(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
+        void OnAddMaxHealth(InputAction.CallbackContext context);
+        void OnDamagePlayer(InputAction.CallbackContext context);
     }
 }
