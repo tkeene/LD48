@@ -137,17 +137,30 @@ public class CrashdownGameRoot : MonoBehaviour
                 bool debugPlayerIsWalkingAround = true;
                 if (debugPlayerIsWalkingAround)
                 {
-                    Vector2 input = player.InputMovementThisFrame;
-                    // Don't make diagonal walking any faster.
-                    if (input.sqrMagnitude > 1.0f)
-                    {
-                        input = input.normalized;
-                    }
+                    Vector3 playerMovementThisFrame = Vector3.zero;
 
-                    Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
-                    if (worldspaceInput != Vector3.zero)
+                    bool isDodging = player.RemainingDodgeTime > 0.0f;
+                    if (!isDodging)
                     {
-                        player.CurrentFacing = worldspaceInput.normalized;
+                        Vector2 input = player.InputMovementThisFrame;
+                        // Don't make diagonal walking any faster.
+                        if (input.sqrMagnitude > 1.0f)
+                        {
+                            input = input.normalized;
+                        }
+
+                        Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
+                        if (worldspaceInput != Vector3.zero)
+                        {
+                            player.CurrentFacing = worldspaceInput.normalized;
+                        }
+
+                        playerMovementThisFrame = worldspaceInput * player.GetMaxSpeed() * Time.deltaTime;
+                    }
+                    else
+                    {
+                        playerMovementThisFrame = player.CurrentFacing * player.GetDodgeSpeed() * Time.deltaTime;
+                        player.RemainingDodgeTime -= Time.deltaTime;
                     }
 
                     // Move on the X and Z axes separately so the player can slide along walls.
@@ -157,28 +170,30 @@ public class CrashdownGameRoot : MonoBehaviour
                         switch (i)
                         {
                             case 0:
-                                newPosition = player.transform.position + player.GetMaxSpeed() * Time.deltaTime * new Vector3(worldspaceInput.x, 0.0f, 0.0f);
+                                newPosition = player.transform.position + new Vector3(playerMovementThisFrame.x, 0.0f, 0.0f);
                                 break;
                             default:
-                                newPosition = player.transform.position + player.GetMaxSpeed() * Time.deltaTime * new Vector3(0.0f, 0.0f, worldspaceInput.z);
+                                newPosition = player.transform.position + new Vector3(0.0f, 0.0f, playerMovementThisFrame.z);
                                 break;
                         }
-
-                        if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height, terrainLayer.value))
+                        if (playerMovementThisFrame.sqrMagnitude > 0.0f)
                         {
-                            newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
-                            player.transform.position = newPosition;
-                            if (debugPhysics)
+                            if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height, terrainLayer.value))
                             {
-                                Debug.Log("Player " + player.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
+                                player.transform.position = newPosition;
+                                if (debugPhysics)
+                                {
+                                    Debug.Log("Player " + player.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                }
                             }
-                        }
-                        else
-                        {
-                            // Player tried to walk off an edge, so they should stop and not move there.
-                            if (debugPhysics)
+                            else
                             {
-                                Debug.Log("Player " + player.name + " tried to walk off an edge.", player.gameObject);
+                                // Player tried to walk off an edge, so they should stop and not move there.
+                                if (debugPhysics)
+                                {
+                                    Debug.Log("Player " + player.name + " tried to walk off an edge.", player.gameObject);
+                                }
                             }
                         }
                     }
@@ -193,8 +208,19 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     // Player Dodges
+                    if (player.InputDodgeDownThisFrame)
+                    {
+                        // TODO The player should have a number of stored dashes they spend, and then after refraining from dodging for a cooldown period they regain them all.
+                        if (!player.IsDodging())
+                        {
+                            player.RemainingDodgeTime = player.GetDodgeDuration();
+                        }
+                    }
 
                     // Player Crashdown
+
+                    // Player Interactions
+
                 }
 
                 cameraAveragedTargetPosition += player.transform.position;
