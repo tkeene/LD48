@@ -202,6 +202,52 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Test",
+            "id": "8ec1929d-5046-494e-a3a8-e4fecde99a56",
+            "actions": [
+                {
+                    "name": "Add Max Health",
+                    "type": "Button",
+                    "id": "7c632310-2b07-4043-b9f1-f28591b6e2bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Damage Player",
+                    "type": "Button",
+                    "id": "a3411f17-f1b2-4a80-8a64-2f474096da78",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "50174659-b7fc-4771-8955-7041439ab0b9",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Add Max Health",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "514d7cc0-3308-4d0f-98a5-dcdae188dcc1",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Damage Player",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
