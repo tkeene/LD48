@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6478445525694358263}
   - component: {fileID: 7936413375904085282}
+  - component: {fileID: -5743177807189405416}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8695677164077233894, guid: b6a0dfe41bbddc440a7239dd5b7eff3d, type: 3}
+  sound_UiFailToCrashdown: {fileID: 11400000, guid: 5d0dbe964d3307f4cb68e23e42473785, type: 2}
   defaultCameraOffset: {x: 0, y: 15, z: 0}
   defaultCameraAcceleration: 5
   terrainLayer:
@@ -55,3 +57,16 @@ MonoBehaviour:
   debugInput: 0
   debugPhysics: 0
   debugCombat: 0
+--- !u!114 &-5743177807189405416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062327560302993026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98879c5adf20f714285ec32431f6a2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAudioPrefab: {fileID: 7241870305297698887, guid: 6f04cd56441d7d649b90ef2e739aa470, type: 3}
