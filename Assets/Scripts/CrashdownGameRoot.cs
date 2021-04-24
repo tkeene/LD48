@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class CrashdownGameRoot : MonoBehaviour
 {
     public Projectile projectilePrefab;
+    public SoundEffectData sound_UiFailToCrashdown;
 
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
@@ -218,6 +219,21 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     // Player Crashdown
+                    if (player.InputCrashdownDownThisFrame)
+                    {
+                        if (Physics.Raycast(player.transform.position + Vector3.down * player.height * 2.0f, Vector3.down,
+                            out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
+                        {
+                            Vector3 targetPoint = raycastHit.point;
+                            Debug.LogError("TODO The whole crashdown animation and stuff.");
+                            Debug.LogError("TODO Make the floor above animate it breaking to bits I guess");
+                            player.transform.position = targetPoint;
+                        }
+                        else
+                        {
+                            AudioManager.instance.PlaySound(sound_UiFailToCrashdown, player.transform.position);
+                        }
+                    }
 
                     // Player Interactions
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CosmeticEffect : MonoBehaviour
 {
+    public float defaultLifetime = 0.0f;
+
     private Transform transformToFollow = null;
     private float remainingLifetime = 0.0f;
 
@@ -14,6 +16,14 @@ public class CosmeticEffect : MonoBehaviour
         prefab.transform.rotation = rotation;
         prefab.remainingLifetime = lifetime;
         prefab.transformToFollow = transformToFollow;
+    }
+
+    private void OnEnable()
+    {
+        if (remainingLifetime == 0.0f && defaultLifetime > 0.0f)
+        {
+            remainingLifetime = defaultLifetime;
+        }
     }
 
     private void Update()
