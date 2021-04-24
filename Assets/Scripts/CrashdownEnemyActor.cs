@@ -11,6 +11,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     }
     EAiType aiType = EAiType.InanimateObject;
 
+    public Vector3 CurrentFacing { get; set; }
+
     private void OnEnable()
     {
         foreach (Collider collider in myColliders)
@@ -27,4 +29,18 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         }
     }
 
+    Vector3 IGameActor.GetFacing()
+    {
+        return CurrentFacing;
+    }
+
+    Vector3 IGameActor.GetPosition()
+    {
+        return transform.position;
+    }
+
+    Quaternion IGameActor.GetRotation()
+    {
+        return transform.rotation;
+    }
 }

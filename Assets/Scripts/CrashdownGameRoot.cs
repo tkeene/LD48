@@ -13,9 +13,11 @@ public class CrashdownGameRoot : MonoBehaviour
     public LayerMask terrainLayer;
     public bool debugInput = false;
     public bool debugPhysics = false;
+    public bool debugCombat = false;
 
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
+    private static uint currentProjectileCounter = 0;
 
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
@@ -131,7 +133,6 @@ public class CrashdownGameRoot : MonoBehaviour
             if (!player.IsDead())
             {
                 bool debugPlayerIsWalkingAround = true;
-                Vector3 currentFacing = player.CurrentFacing;
                 if (debugPlayerIsWalkingAround)
                 {
                     Vector2 input = player.InputMovementThisFrame;
@@ -144,7 +145,7 @@ public class CrashdownGameRoot : MonoBehaviour
                     Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
                     if (worldspaceInput != Vector3.zero)
                     {
-                        currentFacing = worldspaceInput.normalized;
+                        player.CurrentFacing = worldspaceInput.normalized;
                     }
 
                     // Move on the X and Z axes separately so the player can slide along walls.
@@ -180,11 +181,13 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                     }
 
+                    player.UpdateFacingAndRenderer();
+
                     // Player Attacks
                     if (player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
                     {
                         // TODO Cooldowns and so on.
-                        ActorUsesWeapon(player, weapon);
+                        ActorUsesWeapon(player, weapon, projectilePrefab);
                     }
 
                     // Player Dodges
@@ -218,13 +221,60 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateGameLogic()
     {
+        for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
+        {
+            Projectile currentProjectile = Projectile.activeProjectiles[i];
+            bool shouldDespawn = false;
+            if (currentProjectile.IsLifetimeOver())
+            {
+                shouldDespawn = true;
+            }
+            else
+            {
+                currentProjectile.transform.position += currentProjectile.transform.forward * currentProjectile.GetSpeed() * Time.deltaTime;
+                currentProjectile.RemainingLifetime -= Time.deltaTime;
+                // TODO Projectiles hitting things.
+            }
+            if (shouldDespawn)
+            {
+                GameObject.Destroy(currentProjectile.gameObject);
+                // This calls OnDisable and alters the projectile list.
+                i--;
+            }
+        }
     }
 
-    private static void ActorUsesWeapon(IGameActor actor, WeaponDefinition weapon)
+    private void ActorUsesWeapon(IGameActor actor, WeaponDefinition weapon, Projectile projectilePrefab)
     {
-        if (weapon != null)
+        if (actor != null && weapon != null && weapon.numberToSpawn > 0)
         {
-
+            Quaternion rotationPerShot = Quaternion.identity;
+            Quaternion startRotation = actor.GetRotation();
+            if (weapon.numberToSpawn > 1)
+            {
+                float totalAngle = (weapon.numberToSpawn - 1) * weapon.spreadBetweenShotsDegrees;
+                float startAngle = totalAngle / 2.0f;
+                startRotation = startRotation * Quaternion.Euler(0.0f, startAngle, 0.0f);
+                rotationPerShot = Quaternion.Euler(0.0f, -weapon.spreadBetweenShotsDegrees, 0.0f);
+            }
+            Quaternion currentRotation = startRotation;
+            Vector3 spawnOffset = Vector3.forward * weapon.startDistance;
+            Vector3 actorCenter = actor.GetPosition();
+            for (int i = 0; i < weapon.numberToSpawn; i++)
+            {
+                Vector3 spawnLocation = currentRotation * spawnOffset + actorCenter;
+                Projectile.Spawn(projectilePrefab, weapon, actor, spawnLocation, currentRotation, currentProjectileCounter);
+                if (debugCombat)
+                {
+                    Debug.Log("Actor fired a projectile at " + spawnLocation + " with angle " + currentRotation.eulerAngles.y);
+                }
+                currentRotation = currentRotation * rotationPerShot;
+                if (!weapon.treatProjectilesAsOneWave)
+                {
+                    currentProjectileCounter++;
+                }
+            }
+            currentProjectileCounter++;
         }
     }
 

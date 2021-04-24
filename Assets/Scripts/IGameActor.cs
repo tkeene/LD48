@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IGameActor
 {
-
+    Vector3 GetFacing();
+    Vector3 GetPosition();
+    Quaternion GetRotation();
 }
