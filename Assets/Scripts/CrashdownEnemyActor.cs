@@ -7,7 +7,10 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 {
     public Collider[] myColliders;
     public WeaponDefinition[] weaponsCycle;
+    public List<CrashdownEnemyActor> friendsToNotify;
+    public GameObject[] toSpawnWhenKoed;
     public float aggroRadius = 15.0f;
+    public float maximumRandomAttackDelay = 1.0f;
     public float height = 1.0f;
     public float moveSpeed = 3.0f;
     public bool ignoresTerrain = false;
@@ -19,6 +22,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         InanimateObject = 0,
         Stationary = 1,
         RunAtTheKnees = 2,
+        OneTimeEnemySpawner = 3,
     }
     public EAiType aiType = EAiType.InanimateObject;
 

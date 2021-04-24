@@ -276,6 +276,7 @@ public class CrashdownGameRoot : MonoBehaviour
                 case CrashdownEnemyActor.EAiState.JustSpawned:
                     currentEnemy.CurrentAggroTarget = null;
                     currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.WalkingAndFighting;
+                    currentEnemy.RemainingCooldownTime = UnityEngine.Random.Range(0.0f, currentEnemy.maximumRandomAttackDelay);
                     break;
                 case CrashdownEnemyActor.EAiState.WalkingAndFighting:
                     if (currentEnemy.CurrentAggroTarget == null)
@@ -283,6 +284,13 @@ public class CrashdownGameRoot : MonoBehaviour
                         if (TryGetNearestPlayer(currentEnemy.transform.position, currentEnemy.aggroRadius, out IGameActor actor))
                         {
                             currentEnemy.CurrentAggroTarget = actor;
+                            foreach (CrashdownEnemyActor ally in currentEnemy.friendsToNotify)
+                            {
+                                if (ally != null && ally.CurrentAggroTarget == null)
+                                {
+                                    ally.CurrentAggroTarget = actor;
+                                }
+                            }
                         }
                     }
                     else
@@ -298,6 +306,9 @@ public class CrashdownGameRoot : MonoBehaviour
                                 break;
                             case CrashdownEnemyActor.EAiType.RunAtTheKnees:
                                 worldspaceMotorInput = toTarget.normalized;
+                                break;
+                            case CrashdownEnemyActor.EAiType.OneTimeEnemySpawner:
+                                currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.Dying;
                                 break;
                             default:
                                 Debug.LogError("TODO: " + currentEnemy.aiType);
@@ -350,7 +361,7 @@ public class CrashdownGameRoot : MonoBehaviour
                         if (currentEnemy.CanAttack() && currentEnemy.TryGetCurrentAttack(out WeaponDefinition attack))
                         {
                             ActorUsesWeapon(currentEnemy, attack, projectilePrefab);
-                            currentEnemy.RemainingCooldownTime = attack.cooldown;
+                            currentEnemy.RemainingCooldownTime = attack.cooldown + UnityEngine.Random.Range(0.0f, currentEnemy.maximumRandomAttackDelay);
                             currentEnemy.AdvanceToNextAttack();
                         }
                         else
@@ -362,6 +373,15 @@ public class CrashdownGameRoot : MonoBehaviour
                 case CrashdownEnemyActor.EAiState.Dying:
                     Debug.Log("TODO: Play a death animation and spawn some particles.");
                     currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
+                    foreach (GameObject nextSpawn in currentEnemy.toSpawnWhenKoed)
+                    {
+                        if (nextSpawn != null)
+                        {
+                            Vector2 offset = UnityEngine.Random.insideUnitCircle * currentEnemy.height;
+                            Vector3 spawnPosition = currentEnemy.transform.position + new Vector3(offset.x, 0.0f, offset.y);
+                            GameObject.Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
+                        }
+                    }
                     break;
                 case CrashdownEnemyActor.EAiState.IsDead:
                     shouldDespawn = true;
