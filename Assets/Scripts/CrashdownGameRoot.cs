@@ -2,13 +2,47 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CrashdownGameRoot : MonoBehaviour
 {
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
 
+    private Controls _controls;
+    private Vector2 _curInput = Vector2.zero;
     private Vector3 currentCameraVelocity = Vector3.zero;
+
+    private void OnEnable()
+    {
+        if (_controls == null)
+        {
+            _controls = new Controls();
+        }
+
+        _controls.Player.Move.performed += OnMovementChanged;
+        _controls.Player.Move.canceled += OnMovementChanged;
+        _controls.Player.Move.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _controls.Player.Move.performed -= OnMovementChanged;
+        _controls.Player.Move.canceled -= OnMovementChanged;
+        _controls.Player.Move.Disable();
+    }
+
+    private void OnMovementChanged(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _curInput = context.ReadValue<Vector2>();
+        }
+        if (context.canceled)
+        {
+            _curInput = Vector2.zero;
+        }
+    }
 
     void Update()
     {
@@ -33,23 +67,8 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             if (!player.IsDead())
             {
-                Vector2 input = Vector2.zero;
-                if (Input.GetKey(KeyCode.W))
-                {
-                    input.y += 1.0f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    input.x -= 1.0f;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    input.y -= 1.0f;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    input.x += 1.0f;
-                }
+                Vector2 input = _curInput;
+                
                 Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
 
                 Vector3 newPosition = player.transform.position + player.GetMaxSpeed() * Time.deltaTime * worldspaceInput;
