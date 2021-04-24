@@ -16,6 +16,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public bool debugInput = false;
     public bool debugPhysics = false;
     public bool debugCombat = false;
+    public bool debugAi = false;
 
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
@@ -179,13 +180,13 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         if (playerMovementThisFrame.sqrMagnitude > 0.0f)
                         {
-                            if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height, terrainLayer.value))
+                            if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height * 2.0f, terrainLayer.value))
                             {
                                 newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
                                 player.transform.position = newPosition;
                                 if (debugPhysics)
                                 {
-                                    Debug.Log("Player " + player.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    Debug.Log("Player " + player.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
                                 }
                             }
                             else
@@ -193,7 +194,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                 // Player tried to walk off an edge, so they should stop and not move there.
                                 if (debugPhysics)
                                 {
-                                    Debug.Log("Player " + player.name + " tried to walk off an edge.", player.gameObject);
+                                    Debug.Log("Player " + player.gameObject.name + " tried to walk off an edge.", player.gameObject);
                                 }
                             }
                         }
@@ -227,7 +228,7 @@ public class CrashdownGameRoot : MonoBehaviour
                             Vector3 targetPoint = raycastHit.point;
                             Debug.LogError("TODO The whole crashdown animation and stuff.");
                             Debug.LogError("TODO Make the floor above animate it breaking to bits I guess");
-                            player.transform.position = targetPoint;
+                            player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
                         }
                         else
                         {
@@ -261,6 +262,122 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateEnemies()
     {
+        // TODO Spawners attached to levels.
+        for (int i = 0; i < CrashdownEnemyActor.activeEnemies.Count; i++)
+        {
+            CrashdownEnemyActor currentEnemy = CrashdownEnemyActor.activeEnemies[i];
+            bool shouldDespawn = false;
+            if (debugAi)
+            {
+                Debug.Log("Enemy " + currentEnemy.gameObject.name + " is in state " + currentEnemy.CurrentAiState, currentEnemy.gameObject);
+            }
+            switch (currentEnemy.CurrentAiState)
+            {
+                case CrashdownEnemyActor.EAiState.JustSpawned:
+                    currentEnemy.CurrentAggroTarget = null;
+                    currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.WalkingAndFighting;
+                    break;
+                case CrashdownEnemyActor.EAiState.WalkingAndFighting:
+                    if (currentEnemy.CurrentAggroTarget == null)
+                    {
+                        if (TryGetNearestPlayer(currentEnemy.transform.position, currentEnemy.aggroRadius, out IGameActor actor))
+                        {
+                            currentEnemy.CurrentAggroTarget = actor;
+                        }
+                    }
+                    else
+                    {
+                        Vector3 worldspaceMotorInput = Vector3.zero;
+                        Vector3 toTarget = currentEnemy.CurrentAggroTarget.GetPosition() - currentEnemy.transform.position;
+                        currentEnemy.CurrentFacing = toTarget.normalized;
+                        switch (currentEnemy.aiType)
+                        {
+                            case CrashdownEnemyActor.EAiType.InanimateObject:
+                            case CrashdownEnemyActor.EAiType.Stationary:
+                                // Just don't move.
+                                break;
+                            case CrashdownEnemyActor.EAiType.RunAtTheKnees:
+                                worldspaceMotorInput = toTarget.normalized;
+                                break;
+                            default:
+                                Debug.LogError("TODO: " + currentEnemy.aiType);
+                                break;
+                        }
+
+                        // NOTE: This was copypastaed from the player's movement code.
+                        // Move on the X and Z axes separately so they can slide along walls.
+                        Vector3 enemyMovementThisFrame = worldspaceMotorInput * currentEnemy.moveSpeed * Time.deltaTime;
+                        for (int h = 0; h < 2; h++)
+                        {
+                            Vector3 newPosition;
+                            switch (h)
+                            {
+                                case 0:
+                                    newPosition = currentEnemy.transform.position + new Vector3(enemyMovementThisFrame.x, 0.0f, 0.0f);
+                                    break;
+                                default:
+                                    newPosition = currentEnemy.transform.position + new Vector3(0.0f, 0.0f, enemyMovementThisFrame.z);
+                                    break;
+                            }
+                            if (enemyMovementThisFrame.sqrMagnitude > 0.0f)
+                            {
+                                if (currentEnemy.ignoresTerrain)
+                                {
+                                    currentEnemy.transform.position = newPosition;
+                                }
+                                else if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, currentEnemy.height * 2.0f, terrainLayer.value))
+                                {
+                                    newPosition = floorHit.point + Vector3.up * (currentEnemy.height / 2.0f);
+                                    currentEnemy.transform.position = newPosition;
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Enemy " + currentEnemy.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    }
+                                }
+                                else
+                                {
+                                    // Tried to walk off an edge, so they should stop and not move there.
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Enemy " + currentEnemy.gameObject.name + " tried to walk off an edge.", currentEnemy.gameObject);
+                                    }
+                                }
+                            }
+                        }
+
+                        currentEnemy.UpdateFacingAndRenderer();
+
+                        if (currentEnemy.CanAttack() && currentEnemy.TryGetCurrentAttack(out WeaponDefinition attack))
+                        {
+                            ActorUsesWeapon(currentEnemy, attack, projectilePrefab);
+                            currentEnemy.RemainingCooldownTime = attack.cooldown;
+                            currentEnemy.AdvanceToNextAttack();
+                        }
+                        else
+                        {
+                            currentEnemy.RemainingCooldownTime -= Time.deltaTime;
+                        }
+                    }
+                    break;
+                case CrashdownEnemyActor.EAiState.Dying:
+                    Debug.Log("TODO: Play a death animation and spawn some particles.");
+                    currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
+                    break;
+                case CrashdownEnemyActor.EAiState.IsDead:
+                    shouldDespawn = true;
+                    break;
+                default:
+                    Debug.LogError("TODO: " + currentEnemy.CurrentAiState);
+                    break;
+            }
+
+            if (shouldDespawn)
+            {
+                GameObject.Destroy(currentEnemy.gameObject);
+                // This calls OnDisable and alters the enemy list.
+                i--;
+            }
+        }
     }
 
     private void UpdateGameLogic()
@@ -348,6 +465,22 @@ public class CrashdownGameRoot : MonoBehaviour
             }
             currentProjectileCounter++;
         }
+    }
+
+    private bool TryGetNearestPlayer(Vector3 position, float radius, out IGameActor player)
+    {
+        player = null;
+        float bestDistance = float.PositiveInfinity;
+        foreach (IGameActor actor in CrashdownPlayerController.activePlayerInstances)
+        {
+            float distance = Vector3.Distance(position, actor.GetPosition());
+            if (distance < radius)
+            {
+                bestDistance = distance;
+                player = actor;
+            }
+        }
+        return player != null;
     }
 
 }
