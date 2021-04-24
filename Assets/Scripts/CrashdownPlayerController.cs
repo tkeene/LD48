@@ -86,5 +86,9 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
         return transform.rotation;
     }
 
+    void IGameActor.TakeDamage(float damage, IGameActor attacker)
+    {
+        Debug.LogError("TODO: Player took " + damage + " damage.");
+    }
 }
 

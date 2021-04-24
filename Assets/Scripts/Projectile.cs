@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
 
     public static List<Projectile> activeProjectiles = new List<Projectile>();
 
+    private static Dictionary<uint, List<IGameActor>> actorsHitbyProjectile = new Dictionary<uint, List<IGameActor>>();
+
     private void OnEnable()
     {
         activeProjectiles.Add(this);
@@ -21,6 +23,7 @@ public class Projectile : MonoBehaviour
     private void OnDisable()
     {
         activeProjectiles.Remove(this);
+        actorsHitbyProjectile.Remove(MyId);
     }
 
     public static void Spawn(Projectile prefab, WeaponDefinition weapon, IGameActor owner, Vector3 position, Quaternion rotation, uint projectileId)
@@ -36,6 +39,7 @@ public class Projectile : MonoBehaviour
         RemainingLifetime = weapon.lifetime;
         RemainingHits = weapon.maximumEnemiesHit;
         MyId = projectileId;
+        // Don't spawn the actorsHitByProjectile array until it actually hits something.
     }
 
     public bool IsLifetimeOver()
@@ -51,5 +55,40 @@ public class Projectile : MonoBehaviour
             speed = MyWeaponData.moveSpeed;
         }
         return speed;
+    }
+
+    public bool CanHitActor(IGameActor touchedActor)
+    {
+        bool canHitActor = true;
+        if (touchedActor == null)
+        {
+            canHitActor = false;
+        }
+        else if (MyOwner != null && touchedActor == MyOwner)
+        {
+            canHitActor = false;
+        }
+        else if (actorsHitbyProjectile.TryGetValue(MyId, out List<IGameActor> actors)
+            && actors.Contains(touchedActor))
+        {
+            canHitActor = false;
+        }
+        return canHitActor;
+    }
+
+    public void AddHitToActor(IGameActor touchedActor)
+    {
+        if (touchedActor != null)
+        {
+            if (!actorsHitbyProjectile.ContainsKey(MyId))
+            {
+                actorsHitbyProjectile[MyId] = new List<IGameActor>();
+            }
+            if (!actorsHitbyProjectile[MyId].Contains(touchedActor))
+            {
+                actorsHitbyProjectile[MyId].Add(touchedActor);
+            }
+            RemainingHits--;
+        }
     }
 }

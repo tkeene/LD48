@@ -11,6 +11,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
     public LayerMask terrainLayer;
+    public LayerMask actorsLayer;
     public bool debugInput = false;
     public bool debugPhysics = false;
     public bool debugCombat = false;
@@ -18,6 +19,7 @@ public class CrashdownGameRoot : MonoBehaviour
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
     private static uint currentProjectileCounter = 0;
+    private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
 
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
@@ -224,6 +226,10 @@ public class CrashdownGameRoot : MonoBehaviour
         for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
         {
             Projectile currentProjectile = Projectile.activeProjectiles[i];
+            if (debugCombat)
+            {
+                Debug.Log("Updating projectile " + currentProjectile.MyId);
+            }
             bool shouldDespawn = false;
             if (currentProjectile.IsLifetimeOver())
             {
@@ -231,9 +237,33 @@ public class CrashdownGameRoot : MonoBehaviour
             }
             else
             {
-                currentProjectile.transform.position += currentProjectile.transform.forward * currentProjectile.GetSpeed() * Time.deltaTime;
+                float distanceToMoveThisFrame = currentProjectile.GetSpeed() * Time.deltaTime;
+                int numberOfHits = Physics.SphereCastNonAlloc(currentProjectile.transform.position, currentProjectile.MyWeaponData.radius, currentProjectile.transform.forward, cachedRaycastHitArray, distanceToMoveThisFrame, actorsLayer.value);
+                for (int h = 0; h < numberOfHits; h++)
+                {
+                    RaycastHit currentHit = cachedRaycastHitArray[h];
+                    if (debugCombat)
+                    {
+                        Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name, currentHit.collider.gameObject);
+                    }
+                    Collider hitCollider = currentHit.collider;
+                    if (actorColliders.TryGetValue(hitCollider, out IGameActor touchedActor))
+                    {
+                        bool canProjectileHitActor = currentProjectile.CanHitActor(touchedActor);
+                        if (canProjectileHitActor)
+                        {
+                            touchedActor.TakeDamage(currentProjectile.MyWeaponData.damage, currentProjectile.MyOwner);
+                            currentProjectile.AddHitToActor(touchedActor);
+                        }
+                    }
+                    else
+                    {
+                        // Recently destroyed colliders might still take raycasts if we're not using DestroyImmediate, so just ignore them.
+                    }
+                }
+
+                currentProjectile.transform.position += currentProjectile.transform.forward * distanceToMoveThisFrame;
                 currentProjectile.RemainingLifetime -= Time.deltaTime;
-                // TODO Projectiles hitting things.
             }
             if (shouldDespawn)
             {

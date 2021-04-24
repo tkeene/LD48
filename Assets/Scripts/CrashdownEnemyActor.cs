@@ -13,12 +13,22 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     public Vector3 CurrentFacing { get; set; }
 
+    public enum EAiState
+    {
+        JustSpawned,
+        WalkingAndFighting,
+        Dying,
+        IsDead,
+    }
+    public EAiState CurrentAiState { get; set; }
+
     private void OnEnable()
     {
         foreach (Collider collider in myColliders)
         {
             CrashdownGameRoot.actorColliders[collider] = this;
         }
+        CurrentAiState = EAiState.JustSpawned;
     }
 
     private void OnDisable()
@@ -42,5 +52,12 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     Quaternion IGameActor.GetRotation()
     {
         return transform.rotation;
+    }
+
+    void IGameActor.TakeDamage(float damage, IGameActor attacker)
+    {
+        // TODO Dying animation.
+        // TODO Loot.
+        GameObject.Destroy(gameObject);
     }
 }
