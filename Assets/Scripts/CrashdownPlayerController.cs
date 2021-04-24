@@ -11,6 +11,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public float height = 1.0f;
     public float defaultMaxSpeed = 6.0f;
+    public float defaultDodgeDuration = 0.5f;
 
     public Vector2 InputMovementThisFrame { get; set; }
     public bool InputAttackDownThisFrame { get; set; }
@@ -19,6 +20,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public bool InputInteractDownThisFrame { get; set; }
 
     public Vector3 CurrentFacing { get; set; }
+    public float RemainingDodgeTime { get; set; }
 
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
 
@@ -71,6 +73,16 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
         return defaultMaxSpeed;
     }
 
+    public float GetDodgeSpeed()
+    {
+        return defaultMaxSpeed * 3.0f;
+    }
+
+    public float GetDodgeDuration()
+    {
+        return defaultDodgeDuration;
+    }
+
     Vector3 IGameActor.GetFacing()
     {
         return CurrentFacing;
@@ -86,9 +98,15 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
         return transform.rotation;
     }
 
+    public bool IsDodging()
+    {
+        return RemainingDodgeTime > 0.0f;
+    }
+
     void IGameActor.TakeDamage(float damage, IGameActor attacker)
     {
         Debug.LogError("TODO: Player took " + damage + " damage.");
     }
+
 }
 

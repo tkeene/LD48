@@ -54,6 +54,11 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         return transform.rotation;
     }
 
+    bool IGameActor.IsDodging()
+    {
+        return false;
+    }
+
     void IGameActor.TakeDamage(float damage, IGameActor attacker)
     {
         // TODO Dying animation.

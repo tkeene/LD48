@@ -7,5 +7,6 @@ public interface IGameActor
     Vector3 GetFacing();
     Vector3 GetPosition();
     Quaternion GetRotation();
+    bool IsDodging(); 
     void TakeDamage(float damage, IGameActor attacker);
 }
