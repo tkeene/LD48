@@ -14,7 +14,11 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private Controls _controls;
     private Vector2 _curInput = Vector2.zero;
-    private Vector3 currentCameraVelocity = Vector3.zero;
+    private bool _inputAttackDownLastFrame = false;
+    private bool _inputDodgeDownLastFrame = false;
+    private bool _inputCrashdownDownLastFrame = false;
+    private bool _inputInteractDownThisFrame = false;
+    private Vector3 _currentCameraVelocity = Vector3.zero;
 
     private void OnEnable()
     {
@@ -26,6 +30,14 @@ public class CrashdownGameRoot : MonoBehaviour
         _controls.Player.Move.performed += OnMovementChanged;
         _controls.Player.Move.canceled += OnMovementChanged;
         _controls.Player.Move.Enable();
+        _controls.Player.Attack.performed += OnAttackDown;
+        _controls.Player.Attack.Enable();
+        _controls.Player.Dodge.performed += OnDodgeDown;
+        _controls.Player.Dodge.Enable();
+        _controls.Player.Crashdown.performed += OnCrashdownDown;
+        _controls.Player.Crashdown.Enable();
+        _controls.Player.Interact.performed += OnInteractDown;
+        _controls.Player.Interact.Enable();
     }
 
     private void OnDisable()
@@ -33,6 +45,14 @@ public class CrashdownGameRoot : MonoBehaviour
         _controls.Player.Move.performed -= OnMovementChanged;
         _controls.Player.Move.canceled -= OnMovementChanged;
         _controls.Player.Move.Disable();
+        _controls.Player.Attack.performed -= OnAttackDown;
+        _controls.Player.Attack.Disable();
+        _controls.Player.Dodge.performed -= OnDodgeDown;
+        _controls.Player.Dodge.Disable();
+        _controls.Player.Crashdown.performed -= OnCrashdownDown;
+        _controls.Player.Crashdown.Disable();
+        _controls.Player.Interact.performed -= OnInteractDown;
+        _controls.Player.Interact.Disable();
     }
 
     private void OnMovementChanged(InputAction.CallbackContext context)
@@ -49,6 +69,42 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             _curInput = Vector2.zero;
         }
+    }
+
+    private void OnAttackDown(InputAction.CallbackContext context)
+    {
+        if (debugInput)
+        {
+            Debug.Log("OnAttackDown " + context.ToString());
+        }
+        _inputAttackDownLastFrame = true;
+    }
+
+    private void OnDodgeDown(InputAction.CallbackContext context)
+    {
+        if (debugInput)
+        {
+            Debug.Log("OnDodgeDown " + context.ToString());
+        }
+        _inputDodgeDownLastFrame = true;
+    }
+
+    private void OnCrashdownDown(InputAction.CallbackContext context)
+    {
+        if (debugInput)
+        {
+            Debug.Log("OnCrashdownDown " + context.ToString());
+        }
+        _inputCrashdownDownLastFrame = true;
+    }
+
+    private void OnInteractDown(InputAction.CallbackContext context)
+    {
+        if (debugInput)
+        {
+            Debug.Log("OnInteractDown " + context.ToString());
+        }
+        _inputInteractDownThisFrame = true;
     }
 
     void Update()
@@ -130,7 +186,7 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             cameraAveragedTargetPosition /= numberOfCameraTargets;
             Vector3 cameraNewPosition = cameraAveragedTargetPosition + defaultCameraOffset;
-            cameraNewPosition = Vector3.SmoothDamp(Camera.main.transform.position, cameraNewPosition, ref currentCameraVelocity, 1.0f / defaultCameraAcceleration);
+            cameraNewPosition = Vector3.SmoothDamp(Camera.main.transform.position, cameraNewPosition, ref _currentCameraVelocity, 1.0f / defaultCameraAcceleration);
             Camera.main.transform.position = cameraNewPosition;
             Camera.main.transform.LookAt(cameraAveragedTargetPosition, Vector3.forward);
         }
