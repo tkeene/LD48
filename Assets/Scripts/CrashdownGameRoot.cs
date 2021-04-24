@@ -6,11 +6,15 @@ using UnityEngine.InputSystem;
 
 public class CrashdownGameRoot : MonoBehaviour
 {
+    public Projectile projectilePrefab;
+    public SoundEffectData sound_UiFailToCrashdown;
+
     public Gradient playerHealthBarColor;
     public UnityEngine.UI.Slider playerHealthBar;
     public UnityEngine.UI.Image playerHealthFill;
-    public Projectile projectilePrefab;
-    public SoundEffectData sound_UiFailToCrashdown;
+    public GameObject gameOverScreen;
+    public int gameOverSceneIndex = 3;
+    public float gameOverScreenDuration = 6.0f;
 
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
@@ -23,9 +27,9 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
+    private float _gameOverTimer = 0.0f;
     private static uint currentProjectileCounter = 0;
     private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
-
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
     private void OnEnable()
@@ -135,10 +139,13 @@ public class CrashdownGameRoot : MonoBehaviour
         inputUp.y = 0.0f;
         inputUp = inputUp.normalized;
 
+        bool allPlayersDead = true;
         foreach (CrashdownPlayerController player in CrashdownPlayerController.activePlayerInstances)
         {
             if (!player.IsDead())
             {
+                allPlayersDead = false;
+
                 bool debugPlayerIsWalkingAround = true;
                 if (debugPlayerIsWalkingAround)
                 {
@@ -282,6 +289,16 @@ public class CrashdownGameRoot : MonoBehaviour
             cameraNewPosition = Vector3.SmoothDamp(Camera.main.transform.position, cameraNewPosition, ref _currentCameraVelocity, 1.0f / defaultCameraAcceleration);
             Camera.main.transform.position = cameraNewPosition;
             Camera.main.transform.LookAt(cameraAveragedTargetPosition, Vector3.forward);
+        }
+
+        if (allPlayersDead)
+        {
+            gameOverScreen.SetActive(true);
+            _gameOverTimer += Time.deltaTime;
+            if (_gameOverTimer > gameOverScreenDuration)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(gameOverSceneIndex);
+            }
         }
     }
 
