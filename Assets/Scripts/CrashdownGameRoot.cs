@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class CrashdownGameRoot : MonoBehaviour
 {
+    public Projectile projectilePrefab;
+
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
     public LayerMask terrainLayer;
@@ -13,12 +15,9 @@ public class CrashdownGameRoot : MonoBehaviour
     public bool debugPhysics = false;
 
     private Controls _controls;
-    private Vector2 _curInput = Vector2.zero;
-    private bool _inputAttackDownLastFrame = false;
-    private bool _inputDodgeDownLastFrame = false;
-    private bool _inputCrashdownDownLastFrame = false;
-    private bool _inputInteractDownThisFrame = false;
     private Vector3 _currentCameraVelocity = Vector3.zero;
+
+    public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
     private void OnEnable()
     {
@@ -63,11 +62,11 @@ public class CrashdownGameRoot : MonoBehaviour
         }
         if (context.performed)
         {
-            _curInput = context.ReadValue<Vector2>();
+            CrashdownPlayerController.activePlayerInstances[0].InputMovementThisFrame = context.ReadValue<Vector2>();
         }
         if (context.canceled)
         {
-            _curInput = Vector2.zero;
+            CrashdownPlayerController.activePlayerInstances[0].InputMovementThisFrame = Vector2.zero;
         }
     }
 
@@ -77,7 +76,7 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             Debug.Log("OnAttackDown " + context.ToString());
         }
-        _inputAttackDownLastFrame = true;
+        CrashdownPlayerController.activePlayerInstances[0].InputAttackDownThisFrame = true;
     }
 
     private void OnDodgeDown(InputAction.CallbackContext context)
@@ -86,7 +85,7 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             Debug.Log("OnDodgeDown " + context.ToString());
         }
-        _inputDodgeDownLastFrame = true;
+        CrashdownPlayerController.activePlayerInstances[0].InputDodgeDownThisFrame = true;
     }
 
     private void OnCrashdownDown(InputAction.CallbackContext context)
@@ -95,7 +94,7 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             Debug.Log("OnCrashdownDown " + context.ToString());
         }
-        _inputCrashdownDownLastFrame = true;
+        CrashdownPlayerController.activePlayerInstances[0].InputCrashdownDownThisFrame = true;
     }
 
     private void OnInteractDown(InputAction.CallbackContext context)
@@ -104,7 +103,7 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             Debug.Log("OnInteractDown " + context.ToString());
         }
-        _inputInteractDownThisFrame = true;
+        CrashdownPlayerController.activePlayerInstances[0].InputInteractDownThisFrame = true;
     }
 
     void Update()
@@ -119,6 +118,7 @@ public class CrashdownGameRoot : MonoBehaviour
         Vector3 cameraAveragedTargetPosition = Vector3.zero;
         int numberOfCameraTargets = 0;
 
+        // Flatten out inputs relative to the camera.
         Vector3 inputRight = Camera.main.transform.right;
         inputRight.y = 0.0f;
         inputRight = inputRight.normalized;
@@ -131,9 +131,10 @@ public class CrashdownGameRoot : MonoBehaviour
             if (!player.IsDead())
             {
                 bool debugPlayerIsWalkingAround = true;
+                Vector3 currentFacing = player.CurrentFacing;
                 if (debugPlayerIsWalkingAround)
                 {
-                    Vector2 input = _curInput;
+                    Vector2 input = player.InputMovementThisFrame;
                     // Don't make diagonal walking any faster.
                     if (input.sqrMagnitude > 1.0f)
                     {
@@ -141,6 +142,10 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
+                    if (worldspaceInput != Vector3.zero)
+                    {
+                        currentFacing = worldspaceInput.normalized;
+                    }
 
                     // Move on the X and Z axes separately so the player can slide along walls.
                     for (int i = 0; i < 2; i++)
@@ -174,11 +179,26 @@ public class CrashdownGameRoot : MonoBehaviour
                             }
                         }
                     }
+
+                    // Player Attacks
+                    if (player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
+                    {
+                        // TODO Cooldowns and so on.
+                        ActorUsesWeapon(player, weapon);
+                    }
+
+                    // Player Dodges
+
+                    // Player Crashdown
                 }
 
                 cameraAveragedTargetPosition += player.transform.position;
                 numberOfCameraTargets++;
             }
+            player.InputAttackDownThisFrame = false;
+            player.InputDodgeDownThisFrame = false;
+            player.InputCrashdownDownThisFrame = false;
+            player.InputInteractDownThisFrame = false;
         }
 
         // Update the camera after all the players have moved.
@@ -198,6 +218,14 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateGameLogic()
     {
+    }
+
+    private static void ActorUsesWeapon(IGameActor actor, WeaponDefinition weapon)
+    {
+        if (weapon != null)
+        {
+
+        }
     }
 
 }
