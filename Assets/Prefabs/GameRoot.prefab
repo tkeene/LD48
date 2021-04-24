@@ -45,3 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultCameraOffset: {x: 0, y: 15, z: 0}
   defaultCameraAcceleration: 5
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  debugInput: 0
+  debugPhysics: 0

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CrashdownPlayerController : MonoBehaviour
 {
+    public float height = 1.0f;
+    public float defaultMaxSpeed = 6.0f;
+
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
 
     // Nope, use CrashdownGameRoot.UpdatePlayers()
@@ -30,7 +33,7 @@ public class CrashdownPlayerController : MonoBehaviour
 
     public float GetMaxSpeed()
     {
-        return 6.0f;
+        return defaultMaxSpeed;
     }
 }
 
