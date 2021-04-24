@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
   m_Name: EnemyBullet_Level01
   m_EditorClassIdentifier: 
+  actorEffectOnFiring: {fileID: 0}
+  projectileLockedEffect: {fileID: 0}
+  onFinalHitEffect: {fileID: 0}
   startDistance: 0.5
-  radius: 1
-  moveSpeed: 0.1
+  radius: 0.1
+  moveSpeed: 20
   lifetime: 10
   cooldown: 6
   damage: 2
   maximumEnemiesHit: 1
   numberToSpawn: 2
+  treatProjectilesAsOneWave: 0
   spreadBetweenShotsDegrees: 5

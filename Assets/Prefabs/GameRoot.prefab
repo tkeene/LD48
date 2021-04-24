@@ -49,5 +49,9 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 1
+  actorsLayer:
+    serializedVersion: 2
+    m_Bits: 64
   debugInput: 0
   debugPhysics: 0
+  debugCombat: 0

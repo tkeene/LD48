@@ -11,11 +11,15 @@ public class CrashdownGameRoot : MonoBehaviour
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
     public LayerMask terrainLayer;
+    public LayerMask actorsLayer;
     public bool debugInput = false;
     public bool debugPhysics = false;
+    public bool debugCombat = false;
 
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
+    private static uint currentProjectileCounter = 0;
+    private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
 
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
@@ -131,7 +135,6 @@ public class CrashdownGameRoot : MonoBehaviour
             if (!player.IsDead())
             {
                 bool debugPlayerIsWalkingAround = true;
-                Vector3 currentFacing = player.CurrentFacing;
                 if (debugPlayerIsWalkingAround)
                 {
                     Vector2 input = player.InputMovementThisFrame;
@@ -144,7 +147,7 @@ public class CrashdownGameRoot : MonoBehaviour
                     Vector3 worldspaceInput = inputRight * input.x + inputUp * input.y;
                     if (worldspaceInput != Vector3.zero)
                     {
-                        currentFacing = worldspaceInput.normalized;
+                        player.CurrentFacing = worldspaceInput.normalized;
                     }
 
                     // Move on the X and Z axes separately so the player can slide along walls.
@@ -180,11 +183,13 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                     }
 
+                    player.UpdateFacingAndRenderer();
+
                     // Player Attacks
                     if (player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
                     {
                         // TODO Cooldowns and so on.
-                        ActorUsesWeapon(player, weapon);
+                        ActorUsesWeapon(player, weapon, projectilePrefab);
                     }
 
                     // Player Dodges
@@ -218,13 +223,88 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateGameLogic()
     {
+        for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
+        {
+            Projectile currentProjectile = Projectile.activeProjectiles[i];
+            if (debugCombat)
+            {
+                Debug.Log("Updating projectile " + currentProjectile.MyId);
+            }
+            bool shouldDespawn = false;
+            if (currentProjectile.IsLifetimeOver())
+            {
+                shouldDespawn = true;
+            }
+            else
+            {
+                float distanceToMoveThisFrame = currentProjectile.GetSpeed() * Time.deltaTime;
+                int numberOfHits = Physics.SphereCastNonAlloc(currentProjectile.transform.position, currentProjectile.MyWeaponData.radius, currentProjectile.transform.forward, cachedRaycastHitArray, distanceToMoveThisFrame, actorsLayer.value);
+                for (int h = 0; h < numberOfHits; h++)
+                {
+                    RaycastHit currentHit = cachedRaycastHitArray[h];
+                    if (debugCombat)
+                    {
+                        Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name, currentHit.collider.gameObject);
+                    }
+                    Collider hitCollider = currentHit.collider;
+                    if (actorColliders.TryGetValue(hitCollider, out IGameActor touchedActor))
+                    {
+                        bool canProjectileHitActor = currentProjectile.CanHitActor(touchedActor);
+                        if (canProjectileHitActor)
+                        {
+                            touchedActor.TakeDamage(currentProjectile.MyWeaponData.damage, currentProjectile.MyOwner);
+                            currentProjectile.AddHitToActor(touchedActor);
+                        }
+                    }
+                    else
+                    {
+                        // Recently destroyed colliders might still take raycasts if we're not using DestroyImmediate, so just ignore them.
+                    }
+                }
+
+                currentProjectile.transform.position += currentProjectile.transform.forward * distanceToMoveThisFrame;
+                currentProjectile.RemainingLifetime -= Time.deltaTime;
+            }
+            if (shouldDespawn)
+            {
+                GameObject.Destroy(currentProjectile.gameObject);
+                // This calls OnDisable and alters the projectile list.
+                i--;
+            }
+        }
     }
 
-    private static void ActorUsesWeapon(IGameActor actor, WeaponDefinition weapon)
+    private void ActorUsesWeapon(IGameActor actor, WeaponDefinition weapon, Projectile projectilePrefab)
     {
-        if (weapon != null)
+        if (actor != null && weapon != null && weapon.numberToSpawn > 0)
         {
-
+            Quaternion rotationPerShot = Quaternion.identity;
+            Quaternion startRotation = actor.GetRotation();
+            if (weapon.numberToSpawn > 1)
+            {
+                float totalAngle = (weapon.numberToSpawn - 1) * weapon.spreadBetweenShotsDegrees;
+                float startAngle = totalAngle / 2.0f;
+                startRotation = startRotation * Quaternion.Euler(0.0f, startAngle, 0.0f);
+                rotationPerShot = Quaternion.Euler(0.0f, -weapon.spreadBetweenShotsDegrees, 0.0f);
+            }
+            Quaternion currentRotation = startRotation;
+            Vector3 spawnOffset = Vector3.forward * weapon.startDistance;
+            Vector3 actorCenter = actor.GetPosition();
+            for (int i = 0; i < weapon.numberToSpawn; i++)
+            {
+                Vector3 spawnLocation = currentRotation * spawnOffset + actorCenter;
+                Projectile.Spawn(projectilePrefab, weapon, actor, spawnLocation, currentRotation, currentProjectileCounter);
+                if (debugCombat)
+                {
+                    Debug.Log("Actor fired a projectile at " + spawnLocation + " with angle " + currentRotation.eulerAngles.y);
+                }
+                currentRotation = currentRotation * rotationPerShot;
+                if (!weapon.treatProjectilesAsOneWave)
+                {
+                    currentProjectileCounter++;
+                }
+            }
+            currentProjectileCounter++;
         }
     }
 

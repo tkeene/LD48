@@ -60,9 +60,35 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
         return weapon != null;
     }
 
+    public void UpdateFacingAndRenderer()
+    {
+        transform.LookAt(transform.position + CurrentFacing, Vector3.up);
+        // TODO Keep renderer facing camera? Do we need that if we use a sprite renderer?
+    }
+
     public float GetMaxSpeed()
     {
         return defaultMaxSpeed;
+    }
+
+    Vector3 IGameActor.GetFacing()
+    {
+        return CurrentFacing;
+    }
+
+    Vector3 IGameActor.GetPosition()
+    {
+        return transform.position;
+    }
+
+    Quaternion IGameActor.GetRotation()
+    {
+        return transform.rotation;
+    }
+
+    void IGameActor.TakeDamage(float damage, IGameActor attacker)
+    {
+        Debug.LogError("TODO: Player took " + damage + " damage.");
     }
 }
 

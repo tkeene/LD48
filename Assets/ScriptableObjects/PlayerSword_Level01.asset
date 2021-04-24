@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
   m_Name: PlayerSword_Level01
   m_EditorClassIdentifier: 
+  actorEffectOnFiring: {fileID: 0}
+  projectileLockedEffect: {fileID: 0}
+  onFinalHitEffect: {fileID: 0}
   startDistance: 0.5
   radius: 1
-  moveSpeed: 0.1
+  moveSpeed: 4
   lifetime: 0.2
+  cooldown: 0.2
   damage: 10
   maximumEnemiesHit: 128
+  numberToSpawn: 3
+  treatProjectilesAsOneWave: 1
+  spreadBetweenShotsDegrees: 30
