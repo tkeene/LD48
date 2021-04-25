@@ -76,7 +76,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public void UpdateFacingAndRenderer()
     {
         transform.LookAt(transform.position + CurrentFacing, Vector3.up);
-        // TODO Keep renderer facing camera? Do we need that if we use a sprite renderer?
+        // TODO Keep renderer facing camera? Do we need that if we use a sprite renderer? 
+        // No, since we can just use the billboard code to always face the sprite renderer to camera regardless of PlayerController facing.
     }
 
     public float GetMaxSpeed()

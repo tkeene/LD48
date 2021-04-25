@@ -130,6 +130,11 @@ public class CrashdownGameRoot : MonoBehaviour
         UpdateGameLogic();
     }
 
+    private void LateUpdate()
+    {
+        ClearFlags();
+    }
+
     private void UpdatePlayers()
     {
         Vector3 cameraAveragedTargetPosition = Vector3.zero;
@@ -309,10 +314,10 @@ public class CrashdownGameRoot : MonoBehaviour
                 cameraAveragedTargetPosition += player.transform.position;
                 numberOfCameraTargets++;
             }
-            player.InputAttackDownThisFrame = false;
-            player.InputDodgeDownThisFrame = false;
-            player.InputCrashdownDownThisFrame = false;
-            player.InputInteractDownThisFrame = false;
+            //player.InputAttackDownThisFrame = false;
+            //player.InputDodgeDownThisFrame = false;
+            //player.InputCrashdownDownThisFrame = false;
+            //player.InputInteractDownThisFrame = false;
 
             float playerHealthAmount = player.CurrentHealth / player.MaxHealth;
             playerHealthBar.SetMaxHealth((int)player.MaxHealth);
@@ -587,6 +592,17 @@ public class CrashdownGameRoot : MonoBehaviour
             }
         }
         return player != null;
+    }
+
+    private void ClearFlags()
+    {
+        foreach (CrashdownPlayerController player in CrashdownPlayerController.activePlayerInstances)
+        {
+            player.InputAttackDownThisFrame = false;
+            player.InputDodgeDownThisFrame = false;
+            player.InputCrashdownDownThisFrame = false;
+            player.InputInteractDownThisFrame = false;
+        }
     }
 
 }
