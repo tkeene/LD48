@@ -14,6 +14,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public float height = 1.0f;
     public float moveSpeed = 3.0f;
     public bool ignoresTerrain = false;
+    public float maximumHealth = 40.0f;
+    public uint tribeNumber = 0;
 
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
 
@@ -38,6 +40,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public EAiState CurrentAiState { get; set; }
     public IGameActor CurrentAggroTarget { get; set; }
     public float RemainingCooldownTime { get; set; }
+    public float CurrentHealth { get; set; }
 
     private int currentAttack = 0;
 
@@ -107,15 +110,25 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     bool IGameActor.IsDodging()
     {
-        return false;
+        return !(CurrentAiState == EAiState.JustSpawned || CurrentAiState == EAiState.WalkingAndFighting);
     }
 
     void IGameActor.TakeDamage(float damage, IGameActor attacker)
     {
-        // TODO Dying animation.
         // TODO Loot.
-        // TODO Switch aggro if the attacker isn't null.
-        GameObject.Destroy(gameObject);
+        CurrentHealth -= damage;
+        if (CurrentHealth <= 0.0f && CurrentAiState == EAiState.WalkingAndFighting)
+        {
+            CurrentAiState = EAiState.Dying;
+        }
+        if (CurrentAggroTarget == null)
+        {
+            CurrentAggroTarget = attacker;
+        }
     }
 
+    uint IGameActor.GetTribe()
+    {
+        return tribeNumber;
+    }
 }

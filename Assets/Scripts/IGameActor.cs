@@ -9,4 +9,5 @@ public interface IGameActor
     Quaternion GetRotation();
     bool IsDodging(); 
     void TakeDamage(float damage, IGameActor attacker);
+    uint GetTribe();
 }

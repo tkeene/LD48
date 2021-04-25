@@ -20,7 +20,7 @@ MonoBehaviour:
   moveSpeed: 0.1
   lifetime: 0.1
   cooldown: 0.5
-  damage: 4
+  damage: 35
   maximumEnemiesHit: 5
   numberToSpawn: 2
   treatProjectilesAsOneWave: 1
