@@ -1,0 +1,708 @@
+fileFormatVersion: 2
+guid: 6e90987b788b1d04183a2b215219c1b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5130282178264743448
+    second: hacker_Sheet_0
+  - first:
+      213: -8852407180496634724
+    second: hacker_Sheet_1
+  - first:
+      213: 1586361003095163034
+    second: hacker_Sheet_2
+  - first:
+      213: -7342054264067726041
+    second: hacker_Sheet_3
+  - first:
+      213: -5141408147534815237
+    second: hacker_Sheet_4
+  - first:
+      213: 2789259154961291320
+    second: hacker_Sheet_5
+  - first:
+      213: -8957324856292381465
+    second: hacker_Sheet_6
+  - first:
+      213: -3885131324225798358
+    second: hacker_Sheet_7
+  - first:
+      213: -5135341582666158713
+    second: hacker_Sheet_8
+  - first:
+      213: -4786382296228714843
+    second: hacker_Sheet_9
+  - first:
+      213: -8186464955800202511
+    second: hacker_Sheet_10
+  - first:
+      213: -3836605363929166389
+    second: hacker_Sheet_11
+  - first:
+      213: -2790885151873333438
+    second: hacker_Sheet_12
+  - first:
+      213: 5501485155696903800
+    second: hacker_Sheet_13
+  - first:
+      213: 4877745281877788239
+    second: hacker_Sheet_14
+  - first:
+      213: -7648818540221047399
+    second: hacker_Sheet_15
+  - first:
+      213: -3796108946385281048
+    second: hacker_Sheet_16
+  - first:
+      213: -2243054945603355190
+    second: hacker_Sheet_17
+  - first:
+      213: -7747640725409718737
+    second: hacker_Sheet_18
+  - first:
+      213: 6298777773395335050
+    second: hacker_Sheet_19
+  - first:
+      213: 2775549190291869641
+    second: hacker_Sheet_20
+  - first:
+      213: -4632358397414974081
+    second: hacker_Sheet_21
+  - first:
+      213: 412666662553264029
+    second: hacker_Sheet_22
+  - first:
+      213: -7740238767046989216
+    second: hacker_Sheet_23
+  - first:
+      213: 16647724790685061
+    second: hacker_Sheet_24
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: hacker_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ebcf0b57c623740800000000000000
+      internalID: 5130282178264743448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 2
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c7167429ee52580800000000000000
+      internalID: -8852407180496634724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 2
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a90050b6de2e30610800000000000000
+      internalID: 1586361003095163034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 2
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725e994fb88cb1a90800000000000000
+      internalID: -7342054264067726041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 2
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bff53e8b78c06a8b0800000000000000
+      internalID: -5141408147534815237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 2
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83859fd5c6075b620800000000000000
+      internalID: 2789259154961291320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 2
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec6aea408031b380800000000000000
+      internalID: -8957324856292381465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 2
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f37c915ad351ac0800000000000000
+      internalID: -3885131324225798358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78d24ece90a9bb8b0800000000000000
+      internalID: -5135341582666158713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 3
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a6a11239aa539db0800000000000000
+      internalID: -4786382296228714843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 2
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f258571f75d36e80800000000000000
+      internalID: -8186464955800202511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 3
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcdc4abafb3a1cac0800000000000000
+      internalID: -3836605363929166389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 2
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2478da9bdb8c449d0800000000000000
+      internalID: -2790885151873333438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 2
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 876066ad993395c40800000000000000
+      internalID: 5501485155696903800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 2
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46c92f8d7b31b340800000000000000
+      internalID: 4877745281877788239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 2
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99dd3b61010f9d590800000000000000
+      internalID: -7648818540221047399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 3
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8efd502a603815bc0800000000000000
+      internalID: -3796108946385281048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 2
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acdf0a349611fd0e0800000000000000
+      internalID: -2243054945603355190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 2
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e9a9a1fc9da7490800000000000000
+      internalID: -7747640725409718737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 2
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a87da563301c96750800000000000000
+      internalID: 6298777773395335050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 2
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cf48f7784bb48620800000000000000
+      internalID: 2775549190291869641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 2
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d58c1b49e86bfb0800000000000000
+      internalID: -4632358397414974081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 2
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f1228a4261ab500800000000000000
+      internalID: 412666662553264029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 3
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06ae475d9d5259490800000000000000
+      internalID: -7740238767046989216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hacker_Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 3
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58d977a74052b3000800000000000000
+      internalID: 16647724790685061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
