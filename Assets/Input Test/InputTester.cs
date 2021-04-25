@@ -55,4 +55,9 @@ public class InputTester : MonoBehaviour, Controls.IPlayerActions
         if (context.canceled)
             _movement = Vector2.zero;
     }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
