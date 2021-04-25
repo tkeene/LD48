@@ -13,6 +13,9 @@ public class CrashdownGameRoot : MonoBehaviour
     public GameObject gameOverScreen;
     public int gameOverSceneIndex = 3;
     public float gameOverScreenDuration = 6.0f;
+    public GameObject crashdownPromptRoot;
+    public UnityEngine.UI.Text crashdownText;
+    public Gradient crashdownTextColorGradient;
 
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
@@ -28,6 +31,7 @@ public class CrashdownGameRoot : MonoBehaviour
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
     private float _gameOverTimer = 0.0f;
+    private float _currentCrashdownPromptFlash = 0.0f;
     private static uint currentProjectileCounter = 0;
     private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
     private static Collider[] cachedColliderHitArray = new Collider[8];
@@ -42,6 +46,8 @@ public class CrashdownGameRoot : MonoBehaviour
 
         QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 60;
+
+        crashdownPromptRoot.gameObject.SetActive(false);
 
         _controls.Player.Move.performed += OnMovementChanged;
         _controls.Player.Move.canceled += OnMovementChanged;
@@ -244,20 +250,34 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     // Player Crashdown
-                    if (player.InputCrashdownDownThisFrame)
+                    if (player.HasCrashdownAttack)
                     {
-                        if (Physics.Raycast(player.transform.position + Vector3.down * player.height * 2.0f, Vector3.down,
-                            out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
+                        if (player.InputCrashdownDownThisFrame)
                         {
-                            Vector3 targetPoint = raycastHit.point;
-                            Debug.Log("TODO The whole crashdown animation and stuff.");
-                            Debug.Log("TODO Make the floor above animate it breaking to bits I guess");
-                            player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
+                            if (Physics.Raycast(player.transform.position + Vector3.down * player.height * 2.0f, Vector3.down,
+                                out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
+                            {
+                                Vector3 targetPoint = raycastHit.point;
+                                player.HasCrashdownAttack = false;
+                                player.CurrentFacing = Vector3.back;
+                                Debug.Log("TODO The whole crashdown animation and stuff.");
+                                Debug.Log("TODO Make the floor above animate it breaking to bits I guess");
+                                {
+                                    Debug.Log("TODO If there's a delay and animation, this stuff should only happen on the player's landing.");
+                                    player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
+                                    ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
+                                    crashdownPromptRoot.SetActive(false);
+                                }
+                            }
+                            else
+                            {
+                                AudioManager.instance.PlaySound(sound_UiFailToCrashdown, player.transform.position);
+                            }
                         }
-                        else
-                        {
-                            AudioManager.instance.PlaySound(sound_UiFailToCrashdown, player.transform.position);
-                        }
+                        _currentCrashdownPromptFlash = Mathf.Repeat(_currentCrashdownPromptFlash + Time.deltaTime, 1.0f);
+                        crashdownText.color = crashdownTextColorGradient.Evaluate(_currentCrashdownPromptFlash);
+                        player.CurrentHealth -= player.crashdownHealthDrainPerSecond * Time.deltaTime;
+                        player.CurrentHealthRegenDelay = 1.0f;
                     }
 
                     // Player Interactions
@@ -275,12 +295,19 @@ public class CrashdownGameRoot : MonoBehaviour
                                 {
                                     case PlayerInteraction.EInteractionType.HealthPowerUp:
                                         player.MaxHealth *= player.playerHealthBoostMultiplier;
+                                        player.CurrentHealth = player.MaxHealth;
                                         float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
                                         Debug.Log("TODO: Sound/Particle Effect on leveling up the player's health.");
                                         break;
                                     case PlayerInteraction.EInteractionType.WeaponPickup:
                                         player.SetCurrentWeapon(thisInteraction.weaponDefinition);
                                         Debug.Log("TODO Sound/Particle Effect picking up a weapon");
+                                        break;
+                                    case PlayerInteraction.EInteractionType.CrashdownKey:
+                                        player.HasCrashdownAttack = true;
+                                        player.CurrentHealth = player.MaxHealth; // Fully heal the player so the key can't instakill them.
+                                        Debug.Log("TODO: Sound/Particle Effect picking up the crashdown key");
+                                        crashdownPromptRoot.gameObject.SetActive(true);
                                         break;
                                     case PlayerInteraction.EInteractionType.WinTheGame:
                                         Debug.LogError("Some delay and a fireworks show?");
