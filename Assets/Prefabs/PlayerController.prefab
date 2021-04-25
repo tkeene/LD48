@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -7747640725409718737, guid: 6e90987b788b1d04183a2b215219c1b8, type: 3}
+  m_Sprite: {fileID: -4632358397414974081, guid: 6e90987b788b1d04183a2b215219c1b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,16 +134,26 @@ MonoBehaviour:
   animationIdleDown: Idle
   animationWalkDown: walk_forward
   animationDodgeDown: dash_down
+  animationAttackDown: attack_down
+  animationHurtDown: hurt-down
   animationIdleUp: idle_up
   animationWalkUp: walk_up
   animationDodgeUp: dash_up
+  animationAttackUp: attack_up
+  animationHurtUp: hurt_up
   animationIdleLeft: idle_left
   animationWalkLeft: walk_left
   animationDodgeLeft: dash_left
+  animationAttackLeft: attack_left
+  animationHurtLeft: hurt_left
   animationIdleRight: idle_right
   animationWalkRight: walk_right
   animationDodgeRight: dash_right
+  animationAttackRight: attack_right
+  animationHurtRight: hurt_right
   dashAnimLength: 0.3
+  attackAnimLength: 0.2
+  hurtAnimLength: 1
 --- !u!1 &8353119716241376724
 GameObject:
   m_ObjectHideFlags: 0

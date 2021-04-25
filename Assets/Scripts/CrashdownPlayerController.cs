@@ -23,6 +23,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public bool InputDodgeDownThisFrame { get; set; }
     public bool InputCrashdownDownThisFrame { get; set; }
     public bool InputInteractDownThisFrame { get; set; }
+    public bool WasDamagedThisFrame { get; set; }
 
     public Vector3 CurrentFacing { get; set; }
     public float CurrentHealth { get; set; }
@@ -128,6 +129,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
             CurrentHealth = 1.0f;
         }
         CurrentHealthRegenDelay = playerDelayBeforeRegen;
+        WasDamagedThisFrame = true;
     }
 
     uint IGameActor.GetTribe()
