@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 
 public class CrashdownGameRoot : MonoBehaviour
 {
+    private const string _mouseAndKeyboardScheme = "Keyboard&Mouse";
+
     public Projectile projectilePrefab;
     public SoundEffectData sound_UiFailToCrashdown;
+    public PlayerInput playerInput;
 
     public HealthbarFill playerHealthBar;
     public GameObject gameOverScreen;
@@ -37,6 +40,9 @@ public class CrashdownGameRoot : MonoBehaviour
     private static Collider[] cachedColliderHitArray = new Collider[8];
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
+    private string _currentControlScheme;
+    private InputAction _aimAction;
+
     private void OnEnable()
     {
         if (_controls == null)
@@ -60,6 +66,9 @@ public class CrashdownGameRoot : MonoBehaviour
         _controls.Player.Crashdown.Enable();
         _controls.Player.Interact.performed += OnInteractDown;
         _controls.Player.Interact.Enable();
+
+        _currentControlScheme = playerInput.currentControlScheme;
+        _aimAction = playerInput.actions["Aim"];
     }
 
     private void OnDisable()
@@ -75,6 +84,11 @@ public class CrashdownGameRoot : MonoBehaviour
         _controls.Player.Crashdown.Disable();
         _controls.Player.Interact.performed -= OnInteractDown;
         _controls.Player.Interact.Disable();
+    }
+    
+    public void OnControlsChanged()
+    {
+        _currentControlScheme = playerInput.currentControlScheme;
     }
 
     private void OnMovementChanged(InputAction.CallbackContext context)
@@ -223,6 +237,31 @@ public class CrashdownGameRoot : MonoBehaviour
                                 }
                             }
                         }
+                    }
+
+                    if (_currentControlScheme == _mouseAndKeyboardScheme)
+                    {
+                        Vector2 mousePosition = _aimAction.ReadValue<Vector2>();
+
+                        Plane plane = new Plane(Vector3.up, player.transform.position);
+
+                        float distance;
+                        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+                        if (plane.Raycast(ray, out distance))
+                        {
+                            var point = ray.GetPoint(distance);
+                            var vector = point - player.transform.position;
+                            player.CurrentAiming = vector.normalized;
+                        }
+                        else
+                        {
+                            player.CurrentAiming = player.CurrentFacing;
+                        }
+                    }
+                    else
+                    {
+                        player.CurrentAiming = player.CurrentFacing;
                     }
 
                     player.UpdateFacingAndRenderer();
