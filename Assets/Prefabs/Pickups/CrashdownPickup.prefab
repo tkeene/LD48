@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerCollider: {fileID: 7325442757291093374}
-  interactionType: 0
+  interactionType: 4
   weaponDefinition: {fileID: 0}
   objectsToToggle: []
   removeAfterActivation: 1
