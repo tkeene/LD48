@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4c6987db2a3d794ea867f59f0ad54f3, type: 2}
+  - {fileID: 2100000, guid: b9808d473ef4116429295d86554615aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7325442757291093375}
   - component: {fileID: 7325442757291093374}
   m_Layer: 7
-  m_Name: WeaponPickup_Sword_Level_01
+  m_Name: DodgeUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerCollider: {fileID: 7325442757291093374}
-  interactionType: 1
-  weaponDefinition: {fileID: 11400000, guid: 024433790efa5e24c8eb47beb45f75e1, type: 2}
+  interactionType: 2
+  weaponDefinition: {fileID: 0}
   objectsToToggle: []
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 7325442757450005184}
@@ -329,11 +329,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Press E/A:
 
-    Get Level 1
+    Get Dodge
 
-    Sword
+    Upgrade
 
-    Click/P'
+    Press Shift/B to Dodge'
 --- !u!114 &7325442757787539984
 MonoBehaviour:
   m_ObjectHideFlags: 0

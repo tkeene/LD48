@@ -28,6 +28,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float CurrentHealthRegenDelay { get; set; }
     public float MaxHealth { get; set; }
     public float RemainingDodgeTime { get; set; }
+    public float RemainingWeaponCooldown { get; set; }
 
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
 

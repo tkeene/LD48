@@ -222,10 +222,15 @@ public class CrashdownGameRoot : MonoBehaviour
                     player.UpdateFacingAndRenderer();
 
                     // Player Attacks
-                    if (player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
+                    if (player.RemainingWeaponCooldown <= 0.0f && player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
                     {
                         // TODO Cooldowns and so on.
                         ActorUsesWeapon(player, weapon, projectilePrefab);
+                        player.RemainingWeaponCooldown = weapon.cooldown;
+                    }
+                    else
+                    {
+                        player.RemainingWeaponCooldown -= Time.deltaTime;
                     }
 
                     // Player Dodges
