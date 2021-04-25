@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myColliders:
   - {fileID: -4266036069335511616}
-  debugStarterWeapon: {fileID: 11400000, guid: 024433790efa5e24c8eb47beb45f75e1, type: 2}
+  crashdownSmashWeapon: {fileID: 11400000, guid: 9bfbead4f0728324ab082e54655b7f0a, type: 2}
   height: 1
   defaultMaxSpeed: 6
   defaultDodgeDuration: 0.5
@@ -323,6 +323,7 @@ MonoBehaviour:
   playerHealthBoostMultiplier: 1.3
   playerDelayBeforeRegen: 4
   playerFullRegenWait: 6
+  crashdownHealthDrainPerSecond: 5
 --- !u!135 &-4266036069335511616
 SphereCollider:
   m_ObjectHideFlags: 0

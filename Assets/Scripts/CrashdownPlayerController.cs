@@ -7,6 +7,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 {
     public Collider[] myColliders;
 
+    public WeaponDefinition crashdownSmashWeapon;
+
     public float height = 1.0f;
     public float defaultMaxSpeed = 6.0f;
     public float defaultDodgeDuration = 0.5f;
@@ -15,6 +17,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float playerHealthBoostMultiplier = 1.25f;
     public float playerDelayBeforeRegen = 4.0f;
     public float playerFullRegenWait = 6.0f;
+    public float crashdownHealthDrainPerSecond = 10.0f;
 
     public Vector2 InputMovementThisFrame { get; set; }
     public bool InputAttackDownThisFrame { get; set; }
@@ -29,6 +32,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float MaxHealth { get; set; }
     public float RemainingDodgeTime { get; set; }
     public float RemainingWeaponCooldown { get; set; }
+    public bool HasCrashdownAttack { get; set; }
 
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
 
