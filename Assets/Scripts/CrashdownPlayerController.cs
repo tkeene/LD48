@@ -34,6 +34,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float RemainingWeaponCooldown { get; set; }
     public bool HasCrashdownAttack { get; set; }
 
+    public Vector3 CurrentAiming { get; set; }
+
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
 
     private WeaponDefinition equippedWeapon = null;
