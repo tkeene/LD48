@@ -313,6 +313,11 @@ public class CrashdownGameRoot : MonoBehaviour
             {
                 Debug.Log("Enemy " + currentEnemy.gameObject.name + " is in state " + currentEnemy.CurrentAiState, currentEnemy.gameObject);
             }
+            // Despawn enemies on floors above.
+            if (currentEnemy.transform.position.y - CrashdownPlayerController.activePlayerInstances[0].transform.position.y > CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f)
+            {
+                currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
+            }
             switch (currentEnemy.CurrentAiState)
             {
                 case CrashdownEnemyActor.EAiState.JustSpawned:
