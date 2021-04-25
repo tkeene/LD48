@@ -1,6 +1,8 @@
 // Standard shader with triplanar mapping
 // https://github.com/keijiro/StandardTriplanar
 
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 
@@ -61,3 +63,5 @@ public class StandardTriplanarInspector : ShaderGUI
             m.DisableKeyword(keyword);
     }
 }
+
+#endif
