@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CrashdownLevelParent : MonoBehaviour
 {
+    public AudioClip myMusic;
+    public float myMusicSpeed = 1.0f;
+
     public static SortedList<float, CrashdownLevelParent> activeCrashdownLevels = new SortedList<float, CrashdownLevelParent>();
 
     public static float kExpectedDistanceBetweenFloors = 10.0f;
@@ -11,7 +15,8 @@ public class CrashdownLevelParent : MonoBehaviour
 
     private void OnEnable()
     {
-        activeCrashdownLevels.Add(this.transform.position.y, this);
+        float sortedListPosition = -this.transform.position.y;
+        activeCrashdownLevels.Add(sortedListPosition, this);
     }
 
     private void OnDisable()
@@ -20,5 +25,10 @@ public class CrashdownLevelParent : MonoBehaviour
         {
             activeCrashdownLevels.RemoveAt(activeCrashdownLevels.IndexOfValue(this));
         }
+    }
+
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
     }
 }
