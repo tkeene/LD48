@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         HealthPowerUp = 0,
         WeaponPickup = 1,
-        DashPowerUp = 2,
+        DodgePowerUp = 2,
         ToggleSomething = 3,
         CrashdownKey = 4,
         WinTheGame = 101,

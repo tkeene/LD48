@@ -414,9 +414,12 @@ MonoBehaviour:
   myColliders:
   - {fileID: -4266036069335511616}
   crashdownSmashWeapon: {fileID: 11400000, guid: 9bfbead4f0728324ab082e54655b7f0a, type: 2}
+  playerDodgeEffect: {fileID: 7119664739184973055, guid: 0c214afdabe63484789eb6b979f6c08d, type: 3}
+  playerDodgeRefreshEffect: {fileID: 7119664739184973055, guid: a7fb7d812709a1348b248e26f3107b0b, type: 3}
   height: 1
   defaultMaxSpeed: 6
-  defaultDodgeDuration: 0.5
+  defaultDodgeDuration: 0.3
+  playerDodgeSpeed: 18
   playerStartingHealth: 100
   playerHealthBoostMultiplier: 1.3
   playerDelayBeforeRegen: 4

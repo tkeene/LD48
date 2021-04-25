@@ -64,6 +64,10 @@ public class Projectile : MonoBehaviour
         {
             canHitActor = false;
         }
+        else if (touchedActor.IsDodging())
+        {
+            canHitActor = false;
+        }
         else if (MyOwner != null && touchedActor.GetTribe() == MyOwner.GetTribe())
         {
             canHitActor = false;
@@ -71,6 +75,7 @@ public class Projectile : MonoBehaviour
         else if (actorsHitbyProjectile.TryGetValue(MyId, out List<IGameActor> actors)
             && actors.Contains(touchedActor))
         {
+            // Don't let a bullet hit the same character multiple times.
             canHitActor = false;
         }
         return canHitActor;

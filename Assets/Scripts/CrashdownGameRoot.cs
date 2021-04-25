@@ -85,7 +85,7 @@ public class CrashdownGameRoot : MonoBehaviour
         _controls.Player.Interact.performed -= OnInteractDown;
         _controls.Player.Interact.Disable();
     }
-    
+
     public void OnControlsChanged()
     {
         _currentControlScheme = playerInput.currentControlScheme;
@@ -201,7 +201,17 @@ public class CrashdownGameRoot : MonoBehaviour
                     else
                     {
                         playerMovementThisFrame = player.CurrentFacing * player.GetDodgeSpeed() * Time.deltaTime;
-                        player.RemainingDodgeTime -= Time.deltaTime;
+                    }
+                    float previousDodgeTime = player.RemainingDodgeTime;
+                    player.RemainingDodgeTime -= Time.deltaTime;
+                    if (previousDodgeTime >= -player.playerDodgeRefreshDuration && player.RemainingDodgeTime < -player.playerDodgeRefreshDuration)
+                    {
+                        player.RemainingNumberOfDodges = player.MaximumNumberOfDodges;
+                        if (player.RemainingNumberOfDodges > 0)
+                        {
+                            CosmeticEffect.Spawn(player.playerDodgeRefreshEffect, player.playerDodgeRefreshEffect.defaultLifetime,
+                                player.transform.position, Quaternion.identity, player.transform);
+                        }
                     }
 
                     // Move on the X and Z axes separately so the player can slide along walls.
@@ -281,10 +291,19 @@ public class CrashdownGameRoot : MonoBehaviour
                     // Player Dodges
                     if (player.InputDodgeDownThisFrame)
                     {
-                        // TODO The player should have a number of stored dashes they spend, and then after refraining from dodging for a cooldown period they regain them all.
-                        if (!player.IsDodging())
+                        bool canDodge = true;
+                        if (player.IsDodging()
+                            || player.RemainingNumberOfDodges <= 0)
+                        {
+                            canDodge = false;
+                        }
+
+                        if (canDodge)
                         {
                             player.RemainingDodgeTime = player.GetDodgeDuration();
+                            player.RemainingNumberOfDodges--;
+                            CosmeticEffect.Spawn(player.playerDodgeEffect, player.playerDodgeEffect.defaultLifetime,
+                                player.transform.position, player.transform.rotation);
                         }
                     }
 
@@ -347,6 +366,11 @@ public class CrashdownGameRoot : MonoBehaviour
                                     case PlayerInteraction.EInteractionType.WeaponPickup:
                                         player.SetCurrentWeapon(thisInteraction.weaponDefinition);
                                         Debug.Log("TODO Sound/Particle Effect picking up a weapon");
+                                        break;
+                                    case PlayerInteraction.EInteractionType.DodgePowerUp:
+                                        player.MaximumNumberOfDodges++;
+                                        player.RemainingNumberOfDodges = player.MaximumNumberOfDodges;
+                                        Debug.Log("TODO Sound/Particle Effect picking up a dash upgrade");
                                         break;
                                     case PlayerInteraction.EInteractionType.CrashdownKey:
                                         player.HasCrashdownAttack = true;

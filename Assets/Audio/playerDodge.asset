@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a3ab15ff1bbd14caef01c0df2ce771, type: 3}
+  m_Name: playerDodge
+  m_EditorClassIdentifier: 
+  soundEffect: {fileID: 8300000, guid: a79196425aa829c4a921f0150a5975b4, type: 3}
+  volume: 1
+  pitchVariation: 0.2
+  timeBetweenMultipleSounds: 0.1

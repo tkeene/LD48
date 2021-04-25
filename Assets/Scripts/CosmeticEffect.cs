@@ -11,11 +11,9 @@ public class CosmeticEffect : MonoBehaviour
 
     public static void Spawn(CosmeticEffect prefab, float lifetime, Vector3 position, Quaternion rotation, Transform transformToFollow = null)
     {
-        CosmeticEffect effect = GameObject.Instantiate<CosmeticEffect>(prefab);
-        prefab.transform.position = position;
-        prefab.transform.rotation = rotation;
-        prefab.remainingLifetime = lifetime;
-        prefab.transformToFollow = transformToFollow;
+        CosmeticEffect spawnedEffect = GameObject.Instantiate<CosmeticEffect>(prefab, position, rotation);
+        spawnedEffect.remainingLifetime = lifetime;
+        spawnedEffect.transformToFollow = transformToFollow;
     }
 
     private void OnEnable()

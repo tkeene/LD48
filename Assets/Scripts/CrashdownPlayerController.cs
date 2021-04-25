@@ -9,9 +9,14 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public WeaponDefinition crashdownSmashWeapon;
 
+    public CosmeticEffect playerDodgeEffect;
+    public CosmeticEffect playerDodgeRefreshEffect;
+
     public float height = 1.0f;
     public float defaultMaxSpeed = 6.0f;
     public float defaultDodgeDuration = 0.5f;
+    public float playerDodgeSpeed = 16.0f;
+    public float playerDodgeRefreshDuration = 2.0f;
 
     public float playerStartingHealth = 100.0f;
     public float playerHealthBoostMultiplier = 1.25f;
@@ -33,6 +38,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float RemainingDodgeTime { get; set; }
     public float RemainingWeaponCooldown { get; set; }
     public bool HasCrashdownAttack { get; set; }
+    public int MaximumNumberOfDodges { get; set; }
+    public int RemainingNumberOfDodges { get; set; }
 
     public Vector3 CurrentAiming { get; set; }
 
@@ -98,7 +105,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public float GetDodgeSpeed()
     {
-        return defaultMaxSpeed * 3.0f;
+        return playerDodgeSpeed;
     }
 
     public float GetDodgeDuration()
