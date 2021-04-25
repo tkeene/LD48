@@ -329,9 +329,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Press E/A:
 
-    Get Health
+    Override
 
-    Upgrade'
+    Security Layer'
 --- !u!114 &7325442757787539984
 MonoBehaviour:
   m_ObjectHideFlags: 0
