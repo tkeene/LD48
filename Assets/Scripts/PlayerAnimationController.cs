@@ -17,26 +17,36 @@ public class PlayerAnimationController : MonoBehaviour
     public string animationIdleDown;
     public string animationWalkDown;
     public string animationDodgeDown;
+    public string animationAttackDown;
+    public string animationHurtDown;
 
     public string animationIdleUp;
     public string animationWalkUp;
     public string animationDodgeUp;
+    public string animationAttackUp;
+    public string animationHurtUp;
 
     public string animationIdleLeft;
     public string animationWalkLeft;
     public string animationDodgeLeft;
+    public string animationAttackLeft;
+    public string animationHurtLeft;
 
     public string animationIdleRight;
     public string animationWalkRight;
     public string animationDodgeRight;
+    public string animationAttackRight;
+    public string animationHurtRight;
 
     public float dashAnimLength;
+    public float attackAnimLength;
+    public float hurtAnimLength;
 
     private float _timeForCurrentState = 0f;
     private float _timeInCurrentState = 0f;
     private bool _inActionAnimation = false;
     
-    void Update()
+    public void Update()
     {
         if (_inActionAnimation)
         {
@@ -57,6 +67,12 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (playerController.InputDodgeDownThisFrame)
             animToPlay = DashAnimation();
+
+        if (playerController.InputAttackDownThisFrame)
+            animToPlay = AttackAnimation();
+
+        if (playerController.WasDamagedThisFrame)
+            animToPlay = HurtAnimation();
         
         spriteAnimator.CrossFade(animToPlay, 0f);
     }
@@ -99,8 +115,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     private string DashAnimation()
     {
-        Debug.Log("Dashing?");
-
         _inActionAnimation = true;
         _timeInCurrentState = 0f;
         _timeForCurrentState = dashAnimLength;
@@ -117,6 +131,48 @@ public class PlayerAnimationController : MonoBehaviour
                 return animationDodgeRight;
             default:
                 return animationDodgeDown;
+        }
+    }
+
+    private string AttackAnimation()
+    {
+        _inActionAnimation = true;
+        _timeInCurrentState = 0f;
+        _timeForCurrentState = attackAnimLength;
+
+        switch (GetFacing())
+        {
+            case Facing.Down:
+                return animationAttackDown;
+            case Facing.Up:
+                return animationAttackUp;
+            case Facing.Left:
+                return animationAttackLeft;
+            case Facing.Right:
+                return animationAttackRight;
+            default:
+                return animationAttackDown;
+        }
+    }
+
+    private string HurtAnimation()
+    {
+        _inActionAnimation = true;
+        _timeInCurrentState = 0f;
+        _timeForCurrentState = hurtAnimLength;
+
+        switch (GetFacing())
+        {
+            case Facing.Down:
+                return animationHurtDown;
+            case Facing.Up:
+                return animationHurtUp;
+            case Facing.Left:
+                return animationHurtLeft;
+            case Facing.Right:
+                return animationHurtRight;
+            default:
+                return animationHurtDown;
         }
     }
 

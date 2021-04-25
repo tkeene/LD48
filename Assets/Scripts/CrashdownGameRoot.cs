@@ -606,6 +606,7 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputDodgeDownThisFrame = false;
             player.InputCrashdownDownThisFrame = false;
             player.InputInteractDownThisFrame = false;
+            player.WasDamagedThisFrame = false;
         }
     }
 
