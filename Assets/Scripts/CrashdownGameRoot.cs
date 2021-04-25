@@ -259,6 +259,7 @@ public class CrashdownGameRoot : MonoBehaviour
                             {
                                 Vector3 targetPoint = raycastHit.point;
                                 player.HasCrashdownAttack = false;
+                                crashdownPromptRoot.SetActive(false);
                                 player.CurrentFacing = Vector3.back;
                                 Debug.Log("TODO The whole crashdown animation and stuff.");
                                 Debug.Log("TODO Make the floor above animate it breaking to bits I guess");
@@ -266,7 +267,12 @@ public class CrashdownGameRoot : MonoBehaviour
                                     Debug.Log("TODO If there's a delay and animation, this stuff should only happen on the player's landing.");
                                     player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
                                     ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
-                                    crashdownPromptRoot.SetActive(false);
+                                    float levelCutoff = targetPoint.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
+                                    while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
+                                        && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
+                                    {
+                                        CrashdownLevelParent.activeCrashdownLevels.Values[0].Dispose();
+                                    }
                                 }
                             }
                             else
@@ -577,6 +583,26 @@ public class CrashdownGameRoot : MonoBehaviour
                 // This calls OnDisable and alters the projectile list.
                 i--;
             }
+        }
+
+        if (CrashdownLevelParent.activeCrashdownLevels.Count > 0
+            && MusicManager.instance.musicSource.clip != CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusic)
+        {
+            float currentTime = MusicManager.instance.musicSource.time;
+            MusicManager.instance.musicSource.clip = CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusic;
+            MusicManager.instance.musicSource.pitch = CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusicSpeed;
+            MusicManager.instance.musicSource.Play();
+            MusicManager.instance.musicSource.time = currentTime;
+        }
+        if (CrashdownPlayerController.activePlayerInstances[0].IsDead())
+        {
+            MusicManager.instance.musicSource.pitch = 0.5f;
+            MusicManager.instance.SetFilterAmount(1.0f);
+        }
+        else
+        {
+            float playerHealth = CrashdownPlayerController.activePlayerInstances[0].CurrentHealth / CrashdownPlayerController.activePlayerInstances[0].MaxHealth;
+            MusicManager.instance.SetFilterAmount(1.0f - playerHealth);
         }
     }
 
