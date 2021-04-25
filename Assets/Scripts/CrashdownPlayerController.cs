@@ -118,7 +118,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     Quaternion IGameActor.GetRotation()
     {
-        return transform.rotation;
+        return Quaternion.LookRotation(CurrentAiming, Vector3.up);
     }
 
     public bool IsDodging()

@@ -256,13 +256,11 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("???");
+                            player.CurrentAiming = player.CurrentFacing;
                         }
                     }
                     else
                     {
-                        Debug.Log("???");
-                        Debug.Log($"Facing: ({player.CurrentFacing.x},{player.CurrentFacing.z})");
                         player.CurrentAiming = player.CurrentFacing;
                     }
 
