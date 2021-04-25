@@ -222,10 +222,15 @@ public class CrashdownGameRoot : MonoBehaviour
                     player.UpdateFacingAndRenderer();
 
                     // Player Attacks
-                    if (player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
+                    if (player.RemainingWeaponCooldown <= 0.0f && player.InputAttackDownThisFrame && player.TryGetCurrentWeapon(out WeaponDefinition weapon))
                     {
                         // TODO Cooldowns and so on.
                         ActorUsesWeapon(player, weapon, projectilePrefab);
+                        player.RemainingWeaponCooldown = weapon.cooldown;
+                    }
+                    else
+                    {
+                        player.RemainingWeaponCooldown -= Time.deltaTime;
                     }
 
                     // Player Dodges
@@ -271,7 +276,11 @@ public class CrashdownGameRoot : MonoBehaviour
                                     case PlayerInteraction.EInteractionType.HealthPowerUp:
                                         player.MaxHealth *= player.playerHealthBoostMultiplier;
                                         float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
-                                        Debug.Log("TODO: Effect on leveling up the player's health.");
+                                        Debug.Log("TODO: Sound/Particle Effect on leveling up the player's health.");
+                                        break;
+                                    case PlayerInteraction.EInteractionType.WeaponPickup:
+                                        player.SetCurrentWeapon(thisInteraction.weaponDefinition);
+                                        Debug.Log("TODO Sound/Particle Effect picking up a weapon");
                                         break;
                                     case PlayerInteraction.EInteractionType.WinTheGame:
                                         Debug.LogError("Some delay and a fireworks show?");

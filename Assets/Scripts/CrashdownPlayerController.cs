@@ -6,8 +6,6 @@ using UnityEngine;
 public class CrashdownPlayerController : MonoBehaviour, IGameActor
 {
     public Collider[] myColliders;
-    [SerializeField]
-    protected WeaponDefinition debugStarterWeapon = null;
 
     public float height = 1.0f;
     public float defaultMaxSpeed = 6.0f;
@@ -30,8 +28,11 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float CurrentHealthRegenDelay { get; set; }
     public float MaxHealth { get; set; }
     public float RemainingDodgeTime { get; set; }
+    public float RemainingWeaponCooldown { get; set; }
 
     public static List<CrashdownPlayerController> activePlayerInstances = new List<CrashdownPlayerController>();
+
+    private WeaponDefinition equippedWeapon = null;
 
     // Nope, use CrashdownGameRoot.UpdatePlayers()
     //private void Update()
@@ -68,10 +69,13 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public bool TryGetCurrentWeapon(out WeaponDefinition weapon)
     {
-        weapon = null;
-        // TODO
-        weapon = debugStarterWeapon;
+        weapon = equippedWeapon;
         return weapon != null;
+    }
+
+    public void SetCurrentWeapon(WeaponDefinition weaponDefinition)
+    {
+        equippedWeapon = weaponDefinition;
     }
 
     public void UpdateFacingAndRenderer()
