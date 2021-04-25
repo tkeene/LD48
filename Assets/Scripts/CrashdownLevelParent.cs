@@ -18,7 +18,6 @@ public class CrashdownLevelParent : MonoBehaviour
     {
         if (activeCrashdownLevels.ContainsValue(this))
         {
-            Debug.LogError("Error: CrashdownLevelParent was destroyed before it could play an awesome animation.");
             activeCrashdownLevels.RemoveAt(activeCrashdownLevels.IndexOfValue(this));
         }
     }

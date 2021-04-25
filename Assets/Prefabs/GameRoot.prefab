@@ -657,14 +657,17 @@ MonoBehaviour:
   gameOverScreen: {fileID: 412433503}
   gameOverSceneIndex: 2
   gameOverScreenDuration: 6
-  defaultCameraOffset: {x: 0, y: 15, z: 0}
-  defaultCameraAcceleration: 5
   terrainLayer:
     serializedVersion: 2
     m_Bits: 1
   actorsLayer:
     serializedVersion: 2
     m_Bits: 64
+  interactionsLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  defaultCameraOffset: {x: 0, y: 15, z: 0}
+  defaultCameraAcceleration: 5
   debugInput: 0
   debugPhysics: 0
   debugCombat: 0

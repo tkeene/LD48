@@ -16,10 +16,12 @@ public class CrashdownGameRoot : MonoBehaviour
     public int gameOverSceneIndex = 3;
     public float gameOverScreenDuration = 6.0f;
 
-    public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
-    public float defaultCameraAcceleration = 5.0f;
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
+    public LayerMask interactionsLayer;
+
+    public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
+    public float defaultCameraAcceleration = 5.0f;
     public bool debugInput = false;
     public bool debugPhysics = false;
     public bool debugCombat = false;
@@ -30,6 +32,7 @@ public class CrashdownGameRoot : MonoBehaviour
     private float _gameOverTimer = 0.0f;
     private static uint currentProjectileCounter = 0;
     private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
+    private static Collider[] cachedColliderHitArray = new Collider[8];
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
     private void OnEnable()
@@ -236,8 +239,8 @@ public class CrashdownGameRoot : MonoBehaviour
                             out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
                         {
                             Vector3 targetPoint = raycastHit.point;
-                            Debug.LogError("TODO The whole crashdown animation and stuff.");
-                            Debug.LogError("TODO Make the floor above animate it breaking to bits I guess");
+                            Debug.Log("TODO The whole crashdown animation and stuff.");
+                            Debug.Log("TODO Make the floor above animate it breaking to bits I guess");
                             player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
                         }
                         else
@@ -247,6 +250,36 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     // Player Interactions
+                    int numberOfInteractions = Physics.OverlapSphereNonAlloc(player.transform.position, player.height / 2.0f, cachedColliderHitArray, interactionsLayer.value);
+                    if (numberOfInteractions > 0)
+                    {
+                        // Only handle the first one, overlapping could get messy.
+                        Collider thisInteractionCollider = cachedColliderHitArray[0];
+                        if (PlayerInteraction.activeInteractions.TryGetValue(thisInteractionCollider, out PlayerInteraction thisInteraction))
+                        {
+                            thisInteraction.OnPlayerStaysThisFrame();
+                            if (player.InputInteractDownThisFrame)
+                            {
+                                switch (thisInteraction.interactionType)
+                                {
+                                    case PlayerInteraction.EInteractionType.HealthPowerUp:
+                                        player.MaxHealth *= player.playerHealthBoostMultiplier;
+                                        float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
+                                        Debug.Log("TODO: Effect on leveling up the player's health.");
+                                        break;
+                                    case PlayerInteraction.EInteractionType.WinTheGame:
+                                        Debug.LogError("Some delay and a fireworks show?");
+                                        UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.victorySceneIndex);
+                                        break;
+                                    default:
+                                        Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    // Player Health Regen
 
                     if (player.CurrentHealthRegenDelay <= 0.0f)
                     {
@@ -291,6 +324,7 @@ public class CrashdownGameRoot : MonoBehaviour
             Camera.main.transform.LookAt(cameraAveragedTargetPosition, Vector3.forward);
         }
 
+        // Game Over Handling
         if (allPlayersDead)
         {
             gameOverScreen.SetActive(true);
