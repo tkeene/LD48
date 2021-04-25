@@ -9,9 +9,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public Projectile projectilePrefab;
     public SoundEffectData sound_UiFailToCrashdown;
 
-    public Gradient playerHealthBarColor;
-    public UnityEngine.UI.Slider playerHealthBar;
-    public UnityEngine.UI.Image playerHealthFill;
+    public HealthbarFill playerHealthBar;
     public GameObject gameOverScreen;
     public int gameOverSceneIndex = 3;
     public float gameOverScreenDuration = 6.0f;
@@ -41,6 +39,9 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             _controls = new Controls();
         }
+
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
 
         _controls.Player.Move.performed += OnMovementChanged;
         _controls.Player.Move.canceled += OnMovementChanged;
@@ -275,6 +276,10 @@ public class CrashdownGameRoot : MonoBehaviour
                                         Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
                                         break;
                                 }
+                                if (thisInteraction.removeAfterActivation)
+                                {
+                                    GameObject.Destroy(thisInteraction.gameObject);
+                                }
                             }
                         }
                     }
@@ -310,8 +315,8 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputInteractDownThisFrame = false;
 
             float playerHealthAmount = player.CurrentHealth / player.MaxHealth;
-            playerHealthBar.value = playerHealthAmount;
-            playerHealthFill.color = playerHealthBarColor.Evaluate(playerHealthAmount);
+            playerHealthBar.SetMaxHealth((int)player.MaxHealth);
+            playerHealthBar.SetHealth((int)player.CurrentHealth);
         }
 
         // Update the camera after all the players have moved.
