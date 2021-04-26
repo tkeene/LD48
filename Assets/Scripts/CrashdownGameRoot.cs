@@ -233,21 +233,48 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         if (playerMovementThisFrame.sqrMagnitude > 0.0f)
                         {
-                            if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height * 2.0f, terrainLayer.value))
+                            bool targetPositionIsOccupied = false;
+                            int numberOfThingsInFrontOfMe = Physics.OverlapSphereNonAlloc(newPosition, player.height / 2.0f, cachedColliderHitArray, actorsLayer.value);
+                            if (numberOfThingsInFrontOfMe > 0)
                             {
-                                newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
-                                player.transform.position = newPosition;
-                                if (debugPhysics)
+                                for (int q = 0; q < numberOfThingsInFrontOfMe; q++)
                                 {
-                                    Debug.Log("Player " + player.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    Collider possibleBlocker = cachedColliderHitArray[q];
+                                    if (actorColliders.TryGetValue(possibleBlocker, out IGameActor blockerActor))
+                                    {
+                                        if (blockerActor is CrashdownEnemyActor
+                                            && (blockerActor as CrashdownEnemyActor).aiType == CrashdownEnemyActor.EAiType.InanimateObject)
+                                        {
+                                            targetPositionIsOccupied = true;
+                                            if (debugPhysics)
+                                            {
+                                                Debug.Log("Player " + player.gameObject.name + " tried to walk into " + (blockerActor as CrashdownEnemyActor).gameObject.name, (blockerActor as CrashdownEnemyActor).gameObject);
+                                            }
+                                            break;
+                                        }
+                                    }
                                 }
                             }
-                            else
+                            bool targetPositionIsOverFloor = Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height * 2.0f, terrainLayer.value);
+
+                            if (!targetPositionIsOccupied)
                             {
-                                // Player tried to walk off an edge, so they should stop and not move there.
-                                if (debugPhysics)
+                                if (targetPositionIsOverFloor)
                                 {
-                                    Debug.Log("Player " + player.gameObject.name + " tried to walk off an edge.", player.gameObject);
+                                    newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
+                                    player.transform.position = newPosition;
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Player " + player.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    }
+                                }
+                                else
+                                {
+                                    // Player tried to walk off an edge, so they should stop and not move there.
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Player " + player.gameObject.name + " tried to walk off an edge.", player.gameObject);
+                                    }
                                 }
                             }
                         }
