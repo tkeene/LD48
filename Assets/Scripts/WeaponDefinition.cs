@@ -19,4 +19,5 @@ public class WeaponDefinition : ScriptableObject
     public int numberToSpawn = 1;
     public bool treatProjectilesAsOneWave = false;
     public float spreadBetweenShotsDegrees = 5.0f;
+    public bool hiddenAttack = false;
 }
