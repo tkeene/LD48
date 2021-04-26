@@ -442,6 +442,13 @@ public class CrashdownGameRoot : MonoBehaviour
                                     case PlayerInteraction.EInteractionType.Nothing:
                                         // This object is not interactable, just is there for tutorial
                                         break;
+                                    case PlayerInteraction.EInteractionType.ToggleSomething:
+                                        foreach(GameObject thing in thisInteraction.objectsToToggle)
+                                        {
+                                            bool toggle = thing.activeInHierarchy;
+                                            thing.SetActive(!toggle);
+                                        }
+                                        break;
                                     default:
                                         Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
                                         break;
