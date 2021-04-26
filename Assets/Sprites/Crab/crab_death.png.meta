@@ -1,16 +1,28 @@
 fileFormatVersion: 2
-guid: b5030a79e248ea44da903ef4a8b643f9
+guid: ce7163780bc0ce1438a804da2b826529
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -914170352746468580
-    second: hurt-read_0
+      213: 7087520360583927523
+    second: crab_death_0
   - first:
-      213: 2975528218221002972
-    second: hurt-read_1
+      213: -4356273255297575982
+    second: crab_death_1
   - first:
-      213: 141109725000040549
-    second: hurt-read_2
+      213: 7078211931990588682
+    second: crab_death_2
+  - first:
+      213: -2978763312166181316
+    second: crab_death_3
+  - first:
+      213: -2487091733123588902
+    second: crab_death_4
+  - first:
+      213: -1167867534929752949
+    second: crab_death_5
+  - first:
+      213: 2081413570976752953
+    second: crab_death_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hurt-read_0
+      name: crab_death_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 3
-        width: 20
-        height: 30
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1b6a5c58e63053f0800000000000000
-      internalID: -914170352746468580
+      spriteID: 3e614f6773eeb5260800000000000000
+      internalID: 7087520360583927523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_1
+      name: crab_death_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 3
-        width: 19
-        height: 29
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0c63246233b4920800000000000000
-      internalID: 2975528218221002972
+      spriteID: 2d314790e886b83c0800000000000000
+      internalID: -4356273255297575982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_2
+      name: crab_death_2
       rect:
         serializedVersion: 2
-        x: 50
-        y: 4
-        width: 20
-        height: 29
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +180,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5600bf81c8255f100800000000000000
-      internalID: 141109725000040549
+      spriteID: a0dfa3b004cda3260800000000000000
+      internalID: 7078211931990588682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_death_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c366e5cbc8e49a6d0800000000000000
+      internalID: -2978763312166181316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_death_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adc9b53fe331c7dd0800000000000000
+      internalID: -2487091733123588902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_death_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c0dc32aa6eacfe0800000000000000
+      internalID: -1167867534929752949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_death_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9352fb07d9aa2ec10800000000000000
+      internalID: 2081413570976752953
       vertices: []
       indices: 
       edges: []

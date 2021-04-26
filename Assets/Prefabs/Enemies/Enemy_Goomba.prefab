@@ -131,8 +131,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actor: {fileID: 2316110975215587566}
   spriteAnimator: {fileID: 1099143796532478716}
-  animationIdle: idle
-  animationMoving: walk
+  animationIdleLeft: idle_flip
+  animationIdleRight: idle
+  animationMovingLeft: walk_flip
+  animationMovingRight: walk
+  animationDyingLeft: die_flip
+  animationDyingRight: die
 --- !u!1 &8958740648068725837
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +196,12 @@ MonoBehaviour:
   ignoresTerrain: 0
   maximumHealth: 40
   tribeNumber: 0
+  enrageDuration: 1
+  enrageSpeedBonus: 0.7
+  enrageWeaponCooldownMultiplier: 2
+  enrageSidewaysStaggerSpeed: 3
+  deathTime: 0.5
+  timeDying: 0
   movedThisFrame: 0
   aiType: 2
 --- !u!135 &3832413115603464917

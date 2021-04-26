@@ -21,6 +21,12 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public float enrageWeaponCooldownMultiplier = 2.0f;
     public float enrageSidewaysStaggerSpeed = 3.0f;
 
+    public float deathTime = 1f;
+
+    [HideInInspector]
+    public float timeDying = 0f;
+
+    [HideInInspector]
     public bool movedThisFrame = false;
 
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
@@ -85,8 +91,14 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     public void MoveTo(Vector3 newPosition)
     {
+        var dif = newPosition - transform.position;
+
+        if (dif.magnitude >= .005f)
+        {
+            movedThisFrame = true;
+        }
+
         transform.position = newPosition;
-        movedThisFrame = true;
     }
 
     public bool CanAttack()
