@@ -12,6 +12,7 @@ public class PlayerInteraction : MonoBehaviour
         DodgePowerUp = 2,
         ToggleSomething = 3,
         CrashdownKey = 4,
+        Nothing = 5,
         WinTheGame = 101,
     }
     public EInteractionType interactionType;

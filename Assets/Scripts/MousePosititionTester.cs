@@ -22,6 +22,7 @@ public class MousePosititionTester : MonoBehaviour
 
     public void OnControlsChanged()
     {
+        Debug.Log("huh?");
         _currentScheme = playerInput.currentControlScheme;
     }
 

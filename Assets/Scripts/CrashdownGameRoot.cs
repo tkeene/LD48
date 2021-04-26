@@ -439,6 +439,9 @@ public class CrashdownGameRoot : MonoBehaviour
                                         Debug.LogError("Some delay and a fireworks show?");
                                         UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.victorySceneIndex);
                                         break;
+                                    case PlayerInteraction.EInteractionType.Nothing:
+                                        // This object is not interactable, just is there for tutorial
+                                        break;
                                     default:
                                         Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
                                         break;

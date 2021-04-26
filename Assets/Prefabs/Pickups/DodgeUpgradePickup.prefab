@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7325442757291093375}
   - component: {fileID: 7325442757291093374}
   m_Layer: 7
-  m_Name: DodgeUpgrade
+  m_Name: DodgeUpgradePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7325442757291093248}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.25, y: -9.75, z: -16.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -321,19 +321,17 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 64
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press E/A:
+  m_Text: 'Keyboard E
 
-    Get Dodge
+    Controller A
 
-    Upgrade
-
-    Press Shift/B to Dodge'
+    to pickup powerups'
 --- !u!114 &7325442757787539984
 MonoBehaviour:
   m_ObjectHideFlags: 0
