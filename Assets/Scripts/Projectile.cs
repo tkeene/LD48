@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     public float RemainingLifetime { get; set; }
     public int RemainingHits { get; set; }
     public uint MyId { get; set; }
+    public GameObject Renderer;
 
     public static List<Projectile> activeProjectiles = new List<Projectile>();
 
@@ -39,6 +40,7 @@ public class Projectile : MonoBehaviour
         RemainingLifetime = weapon.lifetime;
         RemainingHits = weapon.maximumEnemiesHit;
         MyId = projectileId;
+        Renderer.SetActive(!weapon.hiddenAttack);
         // Don't spawn the actorsHitByProjectile array until it actually hits something.
     }
 

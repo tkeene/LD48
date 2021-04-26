@@ -25,3 +25,4 @@ MonoBehaviour:
   numberToSpawn: 1
   treatProjectilesAsOneWave: 1
   spreadBetweenShotsDegrees: 1
+  hiddenAttack: 1
