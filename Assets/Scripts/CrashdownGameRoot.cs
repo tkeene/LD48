@@ -443,7 +443,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                         // This object is not interactable, just is there for tutorial
                                         break;
                                     case PlayerInteraction.EInteractionType.ToggleSomething:
-                                        foreach(GameObject thing in thisInteraction.objectsToToggle)
+                                        foreach (GameObject thing in thisInteraction.objectsToToggle)
                                         {
                                             bool toggle = thing.activeInHierarchy;
                                             thing.SetActive(!toggle);
@@ -797,7 +797,12 @@ public class CrashdownGameRoot : MonoBehaviour
 
             if (weapon.actorEffectOnFiring != null)
             {
-                CosmeticEffect.Spawn(weapon.actorEffectOnFiring, weapon.actorEffectOnFiring.defaultLifetime, actor.GetPosition(), actor.GetRotation());
+                Transform transformToFollow = null;
+                if (actor is Component)
+                {
+                    transformToFollow = (actor as Component).transform;
+                }
+                CosmeticEffect.Spawn(weapon.actorEffectOnFiring, weapon.actorEffectOnFiring.defaultLifetime, actor.GetPosition(), actor.GetRotation(), transformToFollow);
             }
         }
     }
@@ -843,7 +848,7 @@ public class CrashdownGameRoot : MonoBehaviour
             enemy.ClearFlags();
         }
 
-        foreach(PlayerInteraction interaction in PlayerInteraction.activeInteractions.Values)
+        foreach (PlayerInteraction interaction in PlayerInteraction.activeInteractions.Values)
         {
             interaction.ClearFlags();
         }

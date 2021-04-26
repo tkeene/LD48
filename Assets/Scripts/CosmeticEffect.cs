@@ -29,10 +29,6 @@ public class CosmeticEffect : MonoBehaviour
         if (remainingLifetime > 0.0f)
         {
             remainingLifetime -= Time.deltaTime;
-            if (transformToFollow != null)
-            {
-                transform.position = transformToFollow.position;
-            }
         }
         else
         {
@@ -40,4 +36,11 @@ public class CosmeticEffect : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (transformToFollow != null)
+        {
+            transform.position = transformToFollow.position;
+        }
+    }
 }
