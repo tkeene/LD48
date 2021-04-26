@@ -58,6 +58,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
             CrashdownGameRoot.actorColliders[collider] = this;
         }
         CurrentAiState = EAiState.JustSpawned;
+        CurrentHealth = maximumHealth;
     }
 
     private void OnDisable()

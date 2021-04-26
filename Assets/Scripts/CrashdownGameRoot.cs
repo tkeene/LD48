@@ -181,7 +181,11 @@ public class CrashdownGameRoot : MonoBehaviour
                     Vector3 playerMovementThisFrame = Vector3.zero;
 
                     bool isDodging = player.RemainingDodgeTime > 0.0f;
-                    if (!isDodging)
+                    if (player.CrashdownTarget.HasValue)
+                    {
+                        // Don't take any input or do any lateral movement.
+                    }
+                    else if (!isDodging)
                     {
                         Vector2 input = player.InputMovementThisFrame;
                         // Don't make diagonal walking any faster.
@@ -424,12 +428,15 @@ public class CrashdownGameRoot : MonoBehaviour
 
                     if (player.CurrentHealthRegenDelay <= 0.0f)
                     {
-                        float regenThisFrame = player.MaxHealth / player.playerFullRegenWait * Time.deltaTime;
-                        if (debugCombat)
+                        if (player.CurrentHealth < player.MaxHealth)
                         {
-                            Debug.Log("Player is regenerating " + regenThisFrame);
+                            float regenThisFrame = player.MaxHealth / player.playerFullRegenWait * Time.deltaTime;
+                            if (debugCombat)
+                            {
+                                Debug.Log("Player is regenerating " + regenThisFrame);
+                            }
+                            player.CurrentHealth = Mathf.Min(player.MaxHealth, player.CurrentHealth + regenThisFrame);
                         }
-                        player.CurrentHealth = Mathf.Min(player.MaxHealth, player.CurrentHealth + regenThisFrame);
                     }
                     else
                     {
@@ -642,10 +649,6 @@ public class CrashdownGameRoot : MonoBehaviour
         for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
         {
             Projectile currentProjectile = Projectile.activeProjectiles[i];
-            if (debugCombat)
-            {
-                Debug.Log("Updating projectile " + currentProjectile.MyId);
-            }
             bool shouldDespawn = false;
             if (currentProjectile.IsLifetimeOver())
             {
@@ -658,16 +661,16 @@ public class CrashdownGameRoot : MonoBehaviour
                 for (int h = 0; h < numberOfHits; h++)
                 {
                     RaycastHit currentHit = cachedRaycastHitArray[h];
-                    if (debugCombat)
-                    {
-                        Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name, currentHit.collider.gameObject);
-                    }
                     Collider hitCollider = currentHit.collider;
                     if (actorColliders.TryGetValue(hitCollider, out IGameActor touchedActor))
                     {
                         bool canProjectileHitActor = currentProjectile.CanHitActor(touchedActor);
                         if (canProjectileHitActor)
                         {
+                            if (debugCombat)
+                            {
+                                Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name + " for " + currentProjectile.MyWeaponData.damage, currentHit.collider.gameObject);
+                            }
                             touchedActor.TakeDamage(currentProjectile.MyWeaponData.damage, currentProjectile.MyOwner);
                             currentProjectile.AddHitToActor(touchedActor);
                         }
