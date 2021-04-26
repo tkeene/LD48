@@ -22,6 +22,9 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject verbLabelRoot;
     public int victorySceneIndex = 4;
 
+    [HideInInspector]
+    public bool interactedWithThisFrame = false;
+
     public static Dictionary<Collider, PlayerInteraction> activeInteractions = new Dictionary<Collider, PlayerInteraction>();
 
     private float timeSinceLastPlayerTouch = float.PositiveInfinity;
@@ -55,5 +58,10 @@ public class PlayerInteraction : MonoBehaviour
     public void OnPlayerStaysThisFrame()
     {
         timeSinceLastPlayerTouch = 0.0f;
+    }
+
+    public void ClearFlags()
+    {
+        interactedWithThisFrame = false;
     }
 }

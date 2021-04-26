@@ -457,6 +457,10 @@ public class CrashdownGameRoot : MonoBehaviour
                                 {
                                     GameObject.Destroy(thisInteraction.gameObject);
                                 }
+                                else
+                                {
+                                    thisInteraction.interactedWithThisFrame = true;
+                                }
                             }
                         }
                     }
@@ -656,13 +660,19 @@ public class CrashdownGameRoot : MonoBehaviour
                     if (currentEnemy.timeDying >= currentEnemy.deathTime)
                     {
                         currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
+
                         foreach (GameObject nextSpawn in currentEnemy.toSpawnWhenKoed)
                         {
                             if (nextSpawn != null)
                             {
                                 Vector2 offset = UnityEngine.Random.insideUnitCircle * currentEnemy.height;
                                 Vector3 spawnPosition = currentEnemy.transform.position + new Vector3(offset.x, 0.0f, offset.y);
-                                GameObject.Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
+                                GameObject babby = Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
+                                CrashdownEnemyActor babbyActor = babby.GetComponent<CrashdownEnemyActor>();
+                                if (babbyActor != null)
+                                {
+                                    babbyActor.CurrentAggroTarget = currentEnemy.CurrentAggroTarget;
+                                }
                             }
                         }
                     }
@@ -822,6 +832,11 @@ public class CrashdownGameRoot : MonoBehaviour
         foreach (CrashdownEnemyActor enemy in CrashdownEnemyActor.activeEnemies)
         {
             enemy.ClearFlags();
+        }
+
+        foreach(PlayerInteraction interaction in PlayerInteraction.activeInteractions.Values)
+        {
+            interaction.ClearFlags();
         }
     }
 
