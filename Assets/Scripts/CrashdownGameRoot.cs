@@ -444,6 +444,8 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             gameOverScreen.SetActive(true);
             _gameOverTimer += Time.deltaTime;
+            const float kCameraSpeed = 3.0f;
+            Camera.main.transform.position += Vector3.up * Time.deltaTime * kCameraSpeed;
             if (_gameOverTimer > gameOverScreenDuration)
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(gameOverSceneIndex);
