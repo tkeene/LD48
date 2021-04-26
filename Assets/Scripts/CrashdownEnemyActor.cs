@@ -16,6 +16,10 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public bool ignoresTerrain = false;
     public float maximumHealth = 40.0f;
     public uint tribeNumber = 0;
+    public float enrageDuration = 1.0f;
+    public float enrageSpeedBonus = 0.7f;
+    public float enrageWeaponCooldownMultiplier = 2.0f;
+    public float enrageSidewaysStaggerSpeed = 3.0f;
 
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
 
@@ -41,6 +45,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public IGameActor CurrentAggroTarget { get; set; }
     public float RemainingCooldownTime { get; set; }
     public float CurrentHealth { get; set; }
+    public float RemainingEnrageDuration { get; set; }
+    public float CurrentSidewaysStaggerAmount { get; set; }
 
     private int currentAttack = 0;
 
@@ -125,10 +131,23 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         {
             CurrentAggroTarget = attacker;
         }
+        RemainingEnrageDuration = enrageDuration;
+        float staggerSign = Mathf.Sign(UnityEngine.Random.Range(-1.0f, 1.0f));
+        CurrentSidewaysStaggerAmount = enrageSidewaysStaggerSpeed * staggerSign;
     }
 
     uint IGameActor.GetTribe()
     {
         return tribeNumber;
+    }
+
+    public float GetMoveSpeed()
+    {
+        float speed = moveSpeed;
+        if (RemainingEnrageDuration > 0.0f)
+        {
+            speed += enrageSpeedBonus;
+        }
+        return speed;
     }
 }

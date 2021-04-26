@@ -505,6 +505,7 @@ public class CrashdownGameRoot : MonoBehaviour
                 case CrashdownEnemyActor.EAiState.WalkingAndFighting:
                     if (currentEnemy.CurrentAggroTarget == null)
                     {
+                        // Enemy Idle
                         if (TryGetNearestPlayer(currentEnemy.transform.position, currentEnemy.aggroRadius, out IGameActor actor))
                         {
                             currentEnemy.CurrentAggroTarget = actor;
@@ -519,6 +520,7 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
                     else
                     {
+                        // Enemy Try To Kill Player
                         Vector3 worldspaceMotorInput = Vector3.zero;
                         Vector3 toTarget = currentEnemy.CurrentAggroTarget.GetPosition() - currentEnemy.transform.position;
                         currentEnemy.CurrentFacing = toTarget.normalized;
@@ -541,7 +543,12 @@ public class CrashdownGameRoot : MonoBehaviour
 
                         // NOTE: This was copypastaed from the player's movement code.
                         // Move on the X and Z axes separately so they can slide along walls.
-                        Vector3 enemyMovementThisFrame = worldspaceMotorInput * currentEnemy.moveSpeed * Time.deltaTime;
+                        Vector3 enemyMovementThisFrame = worldspaceMotorInput * currentEnemy.GetMoveSpeed() * Time.deltaTime;
+                        if (currentEnemy.RemainingEnrageDuration > 0.0f)
+                        {
+                            Vector3 staggerDirection = Quaternion.Euler(0.0f, 90.0f, 0.0f) * worldspaceMotorInput;
+                            enemyMovementThisFrame += staggerDirection * currentEnemy.CurrentSidewaysStaggerAmount * Time.deltaTime;
+                        }
                         for (int h = 0; h < 2; h++)
                         {
                             Vector3 newPosition;
@@ -590,8 +597,14 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         else
                         {
-                            currentEnemy.RemainingCooldownTime -= Time.deltaTime;
+                            float cooldownToLose = Time.deltaTime;
+                            if (currentEnemy.RemainingEnrageDuration > 0.0f)
+                            {
+                                cooldownToLose *= currentEnemy.enrageWeaponCooldownMultiplier;
+                            }
+                            currentEnemy.RemainingCooldownTime -= cooldownToLose;
                         }
+                        currentEnemy.RemainingEnrageDuration -= Time.deltaTime;
                     }
                     break;
                 case CrashdownEnemyActor.EAiState.Dying:
