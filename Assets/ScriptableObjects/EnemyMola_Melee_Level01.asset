@@ -22,6 +22,6 @@ MonoBehaviour:
   cooldown: 0.25
   damage: 45
   maximumEnemiesHit: 5
-  numberToSpawn: 0
+  numberToSpawn: 1
   treatProjectilesAsOneWave: 1
   spreadBetweenShotsDegrees: 1
