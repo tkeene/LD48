@@ -36,7 +36,7 @@ public class CosmeticEffect : MonoBehaviour
         }
         else
         {
-            GameObject.Destroy(this);
+            GameObject.Destroy(gameObject);
         }
     }
 
