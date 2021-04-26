@@ -131,12 +131,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actor: {fileID: 2316110975215587566}
   spriteAnimator: {fileID: 6189546900320463008}
+  enragedSprite: {fileID: 0}
   animationIdleLeft: idle
   animationIdleRight: idle
   animationMovingLeft: idle
   animationMovingRight: idle
+  animationFiringLeft: 
+  animationFiringRight: 
   animationDyingLeft: burst
   animationDyingRight: burst
+  fireAnimationLength: 0.2
 --- !u!1 &8958740648068725837
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +200,7 @@ MonoBehaviour:
   height: 2
   moveSpeed: 1
   ignoresTerrain: 1
-  maximumHealth: 1
+  maximumHealth: 30
   tribeNumber: 20
   enrageDuration: 0
   enrageSpeedBonus: 1
@@ -205,6 +209,7 @@ MonoBehaviour:
   deathTime: 1
   timeDying: 0
   movedThisFrame: 0
+  firedThisFrame: 0
   aiType: 0
 --- !u!135 &3832413115603464917
 SphereCollider:

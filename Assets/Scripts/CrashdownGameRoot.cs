@@ -669,8 +669,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                 Vector2 offset = UnityEngine.Random.insideUnitCircle * currentEnemy.height;
                                 Vector3 spawnPosition = currentEnemy.transform.position + new Vector3(offset.x, 0.0f, offset.y);
                                 GameObject babby = Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
-                                CrashdownEnemyActor babbyActor = babby.GetComponent<CrashdownEnemyActor>();
-                                if (babbyActor != null)
+                                if (babby.TryGetComponent(out CrashdownEnemyActor babbyActor))
                                 {
                                     babbyActor.CurrentAggroTarget = currentEnemy.CurrentAggroTarget;
                                 }
