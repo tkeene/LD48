@@ -661,6 +661,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  crashdownStartToFinishSound: {fileID: 11400000, guid: 5646e07869d1e964581256e4ff653465, type: 2}
   terrainLayer:
     serializedVersion: 2
     m_Bits: 1
