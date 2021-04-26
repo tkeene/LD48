@@ -1,16 +1,28 @@
 fileFormatVersion: 2
-guid: b5030a79e248ea44da903ef4a8b643f9
+guid: adb7110c8ce82be4fbfde99e107a42aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -914170352746468580
-    second: hurt-read_0
+      213: 6347746373538581502
+    second: crab_idle_0
   - first:
-      213: 2975528218221002972
-    second: hurt-read_1
+      213: -6766279131934069781
+    second: crab_idle_1
   - first:
-      213: 141109725000040549
-    second: hurt-read_2
+      213: -5635668903899532367
+    second: crab_idle_2
+  - first:
+      213: 5019264417718704570
+    second: crab_idle_3
+  - first:
+      213: -7456368924635257731
+    second: crab_idle_4
+  - first:
+      213: 4850889862905425427
+    second: crab_idle_5
+  - first:
+      213: 3828713644860276638
+    second: crab_idle_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -96,29 +108,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hurt-read_0
+      name: crab_idle_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 3
-        width: 20
-        height: 30
+        x: 14
+        y: 17
+        width: 35
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,20 +126,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1b6a5c58e63053f0800000000000000
-      internalID: -914170352746468580
+      spriteID: efb8a07e1b9b71850800000000000000
+      internalID: 6347746373538581502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_1
+      name: crab_idle_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 3
-        width: 19
-        height: 29
+        x: 78
+        y: 17
+        width: 35
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0c63246233b4920800000000000000
-      internalID: 2975528218221002972
+      spriteID: beb6ee19af85912a0800000000000000
+      internalID: -6766279131934069781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_2
+      name: crab_idle_2
       rect:
         serializedVersion: 2
-        x: 50
-        y: 4
-        width: 20
-        height: 29
+        x: 142
+        y: 17
+        width: 35
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +168,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5600bf81c8255f100800000000000000
-      internalID: 141109725000040549
+      spriteID: 1b37a5fadf41ac1b0800000000000000
+      internalID: -5635668903899532367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_idle_3
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 17
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab991eb056208a540800000000000000
+      internalID: 5019264417718704570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_idle_4
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 17
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74aad4f7f7a58890800000000000000
+      internalID: -7456368924635257731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_idle_5
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 17
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e650311a2d15340800000000000000
+      internalID: 4850889862905425427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crab_idle_6
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 17
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9f769c46c2522530800000000000000
+      internalID: 3828713644860276638
       vertices: []
       indices: 
       edges: []

@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: b5030a79e248ea44da903ef4a8b643f9
+guid: 6efc4cefbbb824c4791a21d211ac7c6c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -914170352746468580
-    second: hurt-read_0
+      213: 1149953472845718588
+    second: crab_walk_0
   - first:
-      213: 2975528218221002972
-    second: hurt-read_1
+      213: 1965935103630606822
+    second: crab_walk_1
   - first:
-      213: 141109725000040549
-    second: hurt-read_2
+      213: -6274852451504108432
+    second: crab_walk_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hurt-read_0
+      name: crab_walk_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 3
-        width: 20
-        height: 30
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,20 +126,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1b6a5c58e63053f0800000000000000
-      internalID: -914170352746468580
+      spriteID: c342231479475ff00800000000000000
+      internalID: 1149953472845718588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_1
+      name: crab_walk_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 3
-        width: 19
-        height: 29
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0c63246233b4920800000000000000
-      internalID: 2975528218221002972
+      spriteID: 6e18f5f8f87684b10800000000000000
+      internalID: 1965935103630606822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hurt-read_2
+      name: crab_walk_2
       rect:
         serializedVersion: 2
-        x: 50
-        y: 4
-        width: 20
-        height: 29
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5600bf81c8255f100800000000000000
-      internalID: 141109725000040549
+      spriteID: 07ccb12e0fe3be8a0800000000000000
+      internalID: -6274852451504108432
       vertices: []
       indices: 
       edges: []

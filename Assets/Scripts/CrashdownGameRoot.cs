@@ -599,12 +599,12 @@ public class CrashdownGameRoot : MonoBehaviour
                             {
                                 if (currentEnemy.ignoresTerrain)
                                 {
-                                    currentEnemy.transform.position = newPosition;
+                                    currentEnemy.MoveTo(newPosition);
                                 }
                                 else if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, currentEnemy.height * 2.0f, terrainLayer.value))
                                 {
                                     newPosition = floorHit.point + Vector3.up * (currentEnemy.height / 2.0f);
-                                    currentEnemy.transform.position = newPosition;
+                                    currentEnemy.MoveTo(newPosition);
                                     if (debugPhysics)
                                     {
                                         Debug.Log("Enemy " + currentEnemy.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
@@ -642,15 +642,18 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
                     break;
                 case CrashdownEnemyActor.EAiState.Dying:
-                    Debug.Log("TODO: Play a death animation and spawn some particles.");
-                    currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
-                    foreach (GameObject nextSpawn in currentEnemy.toSpawnWhenKoed)
+                    currentEnemy.timeDying += Time.deltaTime;
+                    if (currentEnemy.timeDying >= currentEnemy.deathTime)
                     {
-                        if (nextSpawn != null)
+                        currentEnemy.CurrentAiState = CrashdownEnemyActor.EAiState.IsDead;
+                        foreach (GameObject nextSpawn in currentEnemy.toSpawnWhenKoed)
                         {
-                            Vector2 offset = UnityEngine.Random.insideUnitCircle * currentEnemy.height;
-                            Vector3 spawnPosition = currentEnemy.transform.position + new Vector3(offset.x, 0.0f, offset.y);
-                            GameObject.Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
+                            if (nextSpawn != null)
+                            {
+                                Vector2 offset = UnityEngine.Random.insideUnitCircle * currentEnemy.height;
+                                Vector3 spawnPosition = currentEnemy.transform.position + new Vector3(offset.x, 0.0f, offset.y);
+                                GameObject.Instantiate(nextSpawn, spawnPosition, currentEnemy.transform.rotation);
+                            }
                         }
                     }
                     break;
@@ -799,6 +802,11 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputCrashdownDownThisFrame = false;
             player.InputInteractDownThisFrame = false;
             player.WasDamagedThisFrame = false;
+        }
+
+        foreach (CrashdownEnemyActor enemy in CrashdownEnemyActor.activeEnemies)
+        {
+            enemy.ClearFlags();
         }
     }
 

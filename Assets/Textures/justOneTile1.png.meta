@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: b5030a79e248ea44da903ef4a8b643f9
+guid: db9ffef683fd41f48b67885b20222f34
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -914170352746468580
-    second: hurt-read_0
-  - first:
-      213: 2975528218221002972
-    second: hurt-read_1
-  - first:
-      213: 141109725000040549
-    second: hurt-read_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,16 +32,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -110,70 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: hurt-read_0
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 3
-        width: 20
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1b6a5c58e63053f0800000000000000
-      internalID: -914170352746468580
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hurt-read_1
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 3
-        width: 19
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd0c63246233b4920800000000000000
-      internalID: 2975528218221002972
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hurt-read_2
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 4
-        width: 20
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5600bf81c8255f100800000000000000
-      internalID: 141109725000040549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
