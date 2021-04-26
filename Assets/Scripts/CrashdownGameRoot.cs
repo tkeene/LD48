@@ -809,6 +809,15 @@ public class CrashdownGameRoot : MonoBehaviour
         float bestDistance = float.PositiveInfinity;
         foreach (IGameActor actor in CrashdownPlayerController.activePlayerInstances)
         {
+            Vector3 actorPos = actor.GetPosition();
+
+            // do not aggro on player if they are on different floor.
+            if (Mathf.Abs(actorPos.y - position.y) > 1)
+            {
+                player = null;
+                return false;
+            }
+
             float distance = Vector3.Distance(position, actor.GetPosition());
             if (distance < radius)
             {
