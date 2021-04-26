@@ -17,6 +17,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public float maximumHealth = 40.0f;
     public uint tribeNumber = 0;
 
+    public bool movedThisFrame = false;
+
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
 
     public enum EAiType
@@ -69,6 +71,12 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         // TODO Keep renderer facing camera? Do we need that if we use a sprite renderer?
     }
 
+    public void MoveTo(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+        movedThisFrame = true;
+    }
+
     public bool CanAttack()
     {
         return RemainingCooldownTime <= 0.0f;
@@ -91,6 +99,11 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         {
             currentAttack = 0;
         }
+    }
+
+    public void ClearFlags()
+    {
+        movedThisFrame = false;
     }
 
     Vector3 IGameActor.GetFacing()

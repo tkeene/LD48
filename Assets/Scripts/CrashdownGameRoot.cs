@@ -558,12 +558,12 @@ public class CrashdownGameRoot : MonoBehaviour
                             {
                                 if (currentEnemy.ignoresTerrain)
                                 {
-                                    currentEnemy.transform.position = newPosition;
+                                    currentEnemy.MoveTo(newPosition);
                                 }
                                 else if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, currentEnemy.height * 2.0f, terrainLayer.value))
                                 {
                                     newPosition = floorHit.point + Vector3.up * (currentEnemy.height / 2.0f);
-                                    currentEnemy.transform.position = newPosition;
+                                    currentEnemy.MoveTo(newPosition);
                                     if (debugPhysics)
                                     {
                                         Debug.Log("Enemy " + currentEnemy.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
@@ -756,6 +756,11 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputCrashdownDownThisFrame = false;
             player.InputInteractDownThisFrame = false;
             player.WasDamagedThisFrame = false;
+        }
+
+        foreach (CrashdownEnemyActor enemy in CrashdownEnemyActor.activeEnemies)
+        {
+            enemy.ClearFlags();
         }
     }
 
