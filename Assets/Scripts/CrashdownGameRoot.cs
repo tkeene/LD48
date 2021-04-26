@@ -19,6 +19,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public GameObject crashdownPromptRoot;
     public UnityEngine.UI.Text crashdownText;
     public Gradient crashdownTextColorGradient;
+    public SoundEffectData crashdownStartToFinishSound;
 
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
@@ -388,8 +389,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                 player.HasCrashdownAttack = false;
                                 crashdownPromptRoot.SetActive(false);
                                 player.CurrentFacing = Vector3.back;
-                                Debug.Log("TODO Make player animate their sprite or something during crashdown");
-                                Debug.Log("TODO Charge-up and smashthrough effect. I recommend making both the audio and particle effects have a 1-second delay, and spawning just one VFX+SFX effect object right here at the start of the animation.");
+                                AudioManager.instance.PlaySound(crashdownStartToFinishSound, player.transform.position);
                             }
                             else
                             {
@@ -445,7 +445,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                         // This object is not interactable, just is there for tutorial
                                         break;
                                     case PlayerInteraction.EInteractionType.ToggleSomething:
-                                        foreach(GameObject thing in thisInteraction.objectsToToggle)
+                                        foreach (GameObject thing in thisInteraction.objectsToToggle)
                                         {
                                             bool toggle = thing.activeInHierarchy;
                                             thing.SetActive(!toggle);
@@ -799,7 +799,12 @@ public class CrashdownGameRoot : MonoBehaviour
 
             if (weapon.actorEffectOnFiring != null)
             {
-                CosmeticEffect.Spawn(weapon.actorEffectOnFiring, weapon.actorEffectOnFiring.defaultLifetime, actor.GetPosition(), actor.GetRotation());
+                Transform transformToFollow = null;
+                if (actor is Component)
+                {
+                    transformToFollow = (actor as Component).transform;
+                }
+                CosmeticEffect.Spawn(weapon.actorEffectOnFiring, weapon.actorEffectOnFiring.defaultLifetime, actor.GetPosition(), actor.GetRotation(), transformToFollow);
             }
         }
     }
@@ -845,7 +850,7 @@ public class CrashdownGameRoot : MonoBehaviour
             enemy.ClearFlags();
         }
 
-        foreach(PlayerInteraction interaction in PlayerInteraction.activeInteractions.Values)
+        foreach (PlayerInteraction interaction in PlayerInteraction.activeInteractions.Values)
         {
             interaction.ClearFlags();
         }
