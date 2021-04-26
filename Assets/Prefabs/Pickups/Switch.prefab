@@ -393,4 +393,4 @@ MonoBehaviour:
   spriteAnimator: {fileID: 7553311184392920664}
   animationIdle: button_idle
   animationReact: cha_chunk
-  reactTime: 1
+  reactTime: 0.65
