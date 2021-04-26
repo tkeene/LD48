@@ -794,6 +794,11 @@ public class CrashdownGameRoot : MonoBehaviour
                 }
             }
             currentProjectileCounter++;
+
+            if (weapon.actorEffectOnFiring != null)
+            {
+                CosmeticEffect.Spawn(weapon.actorEffectOnFiring, weapon.actorEffectOnFiring.defaultLifetime, actor.GetPosition(), actor.GetRotation());
+            }
         }
     }
 
