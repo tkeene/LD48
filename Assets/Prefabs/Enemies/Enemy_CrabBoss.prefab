@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2316110975215587566}
   - component: {fileID: 3832413115603464917}
   m_Layer: 6
-  m_Name: Enemy_Barrel
+  m_Name: Enemy_CrabBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,17 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myColliders:
   - {fileID: 3832413115603464917}
-  weaponsCycle: []
+  weaponsCycle:
+  - {fileID: 11400000, guid: b7d3ce323db26ce4c8797cf3b92f8b13, type: 2}
+  - {fileID: 11400000, guid: b7d3ce323db26ce4c8797cf3b92f8b13, type: 2}
+  - {fileID: 11400000, guid: 2b36948d22299614cbc7987d14442095, type: 2}
   friendsToNotify: []
-  toSpawnWhenKoed: []
-  aggroRadius: 15
-  maximumRandomAttackDelay: 1
-  height: 1
-  moveSpeed: 3
-  ignoresTerrain: 0
-  maximumHealth: 40
-  tribeNumber: 20
-  aiType: 0
+  toSpawnWhenKoed:
+  - {fileID: 7325442757291093248, guid: 5013bcbee37958a4ba5c40e464ba93d3, type: 3}
+  aggroRadius: 30
+  maximumRandomAttackDelay: 0
+  height: 2
+  moveSpeed: 1
+  ignoresTerrain: 1
+  maximumHealth: 1500
+  tribeNumber: 0
+  aiType: 2
 --- !u!135 &3832413115603464917
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -69,7 +73,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8958740648372864028
 GameObject:
@@ -98,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 8958740648372864028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 8958740648068725836}
   m_RootOrder: 0
