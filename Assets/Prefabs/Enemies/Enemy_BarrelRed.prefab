@@ -153,6 +153,10 @@ MonoBehaviour:
   ignoresTerrain: 0
   maximumHealth: 40
   tribeNumber: 20
+  enrageDuration: 0
+  enrageSpeedBonus: 0
+  enrageWeaponCooldownMultiplier: 0
+  enrageSidewaysStaggerSpeed: 0
   aiType: 0
 --- !u!135 &3832413115603464917
 SphereCollider:

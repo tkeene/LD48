@@ -50,7 +50,14 @@ MonoBehaviour:
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
   aggroRadius: 6
+  maximumRandomAttackDelay: 1
   height: 0.25
   moveSpeed: 3
   ignoresTerrain: 0
+  maximumHealth: 40
+  tribeNumber: 0
+  enrageDuration: 0
+  enrageSpeedBonus: 0
+  enrageWeaponCooldownMultiplier: 0
+  enrageSidewaysStaggerSpeed: 0
   aiType: 3
