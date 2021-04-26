@@ -38,6 +38,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public float RemainingDodgeTime { get; set; }
     public float RemainingWeaponCooldown { get; set; }
     public bool HasCrashdownAttack { get; set; }
+    public Vector3? CrashdownTarget { get; set; }
+    public float CurrentCrashdownTime { get; set; }
     public int MaximumNumberOfDodges { get; set; }
     public int RemainingNumberOfDodges { get; set; }
 
@@ -130,7 +132,7 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
 
     public bool IsDodging()
     {
-        return RemainingDodgeTime > 0.0f;
+        return RemainingDodgeTime > 0.0f || CrashdownTarget.HasValue;
     }
 
     void IGameActor.TakeDamage(float damage, IGameActor attacker)

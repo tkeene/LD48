@@ -308,30 +308,55 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
 
                     // Player Crashdown
-                    if (player.HasCrashdownAttack)
+                    if (player.CrashdownTarget.HasValue)
+                    {
+                        const float kDefaultCrashdownDuration = 1.5f;
+                        if (player.CurrentCrashdownTime <= kDefaultCrashdownDuration)
+                        {
+                            // Crashdown Update Tick
+                            player.CurrentCrashdownTime += Time.deltaTime;
+                            const float kCrashdownPhaseOneDuration = 1.0f;
+                            const float kPlayerRiseDuringCrashdown = 20.0f;
+                            if (player.CurrentCrashdownTime < kCrashdownPhaseOneDuration)
+                            {
+                                player.transform.position += Vector3.up * Time.deltaTime * kPlayerRiseDuringCrashdown / kCrashdownPhaseOneDuration;
+                            }
+                            else
+                            {
+                                float distanceToMoveThisFrame = (CrashdownLevelParent.kExpectedDistanceBetweenFloors + kPlayerRiseDuringCrashdown) / (kDefaultCrashdownDuration - kCrashdownPhaseOneDuration) * Time.deltaTime;
+                                player.transform.position = Vector3.MoveTowards(player.transform.position, player.CrashdownTarget.Value, distanceToMoveThisFrame); ;
+                            }
+                        }
+                        else
+                        {
+                            // Crashdown Exit
+                            player.transform.position = player.CrashdownTarget.Value + Vector3.up * player.height / 2.0f;
+                            ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
+                            player.CrashdownTarget = null;
+                            float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
+                            while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
+                                && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
+                            {
+                                CrashdownLevelParent.activeCrashdownLevels.Values[0].Dispose();
+                            }
+                        }
+                    }
+                    else if (player.HasCrashdownAttack)
                     {
                         if (player.InputCrashdownDownThisFrame)
                         {
                             if (Physics.Raycast(player.transform.position + Vector3.down * player.height * 2.0f, Vector3.down,
                                 out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
                             {
+                                // Crashdown Start
                                 Vector3 targetPoint = raycastHit.point;
+                                player.CrashdownTarget = targetPoint;
+                                player.CurrentCrashdownTime = 0.0f;
                                 player.HasCrashdownAttack = false;
                                 crashdownPromptRoot.SetActive(false);
                                 player.CurrentFacing = Vector3.back;
-                                Debug.Log("TODO The whole crashdown animation and stuff.");
-                                Debug.Log("TODO Make the floor above animate it breaking to bits I guess");
-                                {
-                                    Debug.Log("TODO If there's a delay and animation, this stuff should only happen on the player's landing.");
-                                    player.transform.position = targetPoint + Vector3.up * player.height / 2.0f;
-                                    ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
-                                    float levelCutoff = targetPoint.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
-                                    while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
-                                        && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
-                                    {
-                                        CrashdownLevelParent.activeCrashdownLevels.Values[0].Dispose();
-                                    }
-                                }
+                                Debug.Log("TODO Make player animate their sprite or something during crashdown");
+                                Debug.Log("TODO Charge-up and smashthrough effect. I recommend making both the audio and particle effects have a 1-second delay, and spawning just one VFX+SFX effect object right here at the start of the animation.");
                             }
                             else
                             {
@@ -340,6 +365,7 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         _currentCrashdownPromptFlash = Mathf.Repeat(_currentCrashdownPromptFlash + Time.deltaTime, 1.0f);
                         crashdownText.color = crashdownTextColorGradient.Evaluate(_currentCrashdownPromptFlash);
+                        // Force the player to use the ability by slowly draining their health while they have it.
                         player.CurrentHealth -= player.crashdownHealthDrainPerSecond * Time.deltaTime;
                         player.CurrentHealthRegenDelay = 1.0f;
                     }

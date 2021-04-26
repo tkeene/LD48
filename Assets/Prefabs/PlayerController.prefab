@@ -420,11 +420,12 @@ MonoBehaviour:
   defaultMaxSpeed: 6
   defaultDodgeDuration: 0.3
   playerDodgeSpeed: 18
+  playerDodgeRefreshDuration: 2
   playerStartingHealth: 100
   playerHealthBoostMultiplier: 1.3
   playerDelayBeforeRegen: 4
   playerFullRegenWait: 6
-  crashdownHealthDrainPerSecond: 5
+  crashdownHealthDrainPerSecond: 2
 --- !u!135 &-4266036069335511616
 SphereCollider:
   m_ObjectHideFlags: 0
