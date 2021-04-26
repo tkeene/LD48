@@ -19,6 +19,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public GameObject crashdownPromptRoot;
     public UnityEngine.UI.Text crashdownText;
     public Gradient crashdownTextColorGradient;
+    public SoundEffectData crashdownStartToFinishSound;
 
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
@@ -386,8 +387,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                 player.HasCrashdownAttack = false;
                                 crashdownPromptRoot.SetActive(false);
                                 player.CurrentFacing = Vector3.back;
-                                Debug.Log("TODO Make player animate their sprite or something during crashdown");
-                                Debug.Log("TODO Charge-up and smashthrough effect. I recommend making both the audio and particle effects have a 1-second delay, and spawning just one VFX+SFX effect object right here at the start of the animation.");
+                                AudioManager.instance.PlaySound(crashdownStartToFinishSound, player.transform.position);
                             }
                             else
                             {
