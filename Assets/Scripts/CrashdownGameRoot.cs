@@ -363,6 +363,8 @@ public class CrashdownGameRoot : MonoBehaviour
                             // Crashdown Exit
                             player.transform.position = player.CrashdownTarget.Value + Vector3.up * player.height / 2.0f;
                             ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
+                            // spawn here.
+                            CosmeticEffect.Spawn(
                             player.CrashdownTarget = null;
                             float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
                             while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
