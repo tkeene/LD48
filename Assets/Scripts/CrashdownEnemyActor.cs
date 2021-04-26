@@ -29,6 +29,9 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     [HideInInspector]
     public bool movedThisFrame = false;
 
+    [HideInInspector]
+    public bool firedThisFrame = false;
+
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
 
     public enum EAiType
@@ -106,6 +109,11 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         return RemainingCooldownTime <= 0.0f;
     }
 
+    public bool IsEnraged()
+    {
+        return RemainingEnrageDuration > 0f;
+    }
+
     public bool TryGetCurrentAttack(out WeaponDefinition attack)
     {
         attack = null;
@@ -128,6 +136,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public void ClearFlags()
     {
         movedThisFrame = false;
+        firedThisFrame = false;
     }
 
     Vector3 IGameActor.GetFacing()

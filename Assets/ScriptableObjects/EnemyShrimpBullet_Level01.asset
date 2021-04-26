@@ -18,10 +18,11 @@ MonoBehaviour:
   startDistance: 0.2
   radius: 0.05
   moveSpeed: 20
-  lifetime: 0.3
-  cooldown: 1
+  lifetime: 0.2
+  cooldown: 2.5
   damage: 24
   maximumEnemiesHit: 1
   numberToSpawn: 1
   treatProjectilesAsOneWave: 0
   spreadBetweenShotsDegrees: 5
+  hiddenAttack: 0

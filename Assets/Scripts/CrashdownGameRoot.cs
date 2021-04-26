@@ -640,6 +640,7 @@ public class CrashdownGameRoot : MonoBehaviour
                         if (currentEnemy.CanAttack() && currentEnemy.TryGetCurrentAttack(out WeaponDefinition attack))
                         {
                             ActorUsesWeapon(currentEnemy, attack, projectilePrefab);
+                            currentEnemy.firedThisFrame = true;
                             currentEnemy.RemainingCooldownTime = attack.cooldown + UnityEngine.Random.Range(0.0f, currentEnemy.maximumRandomAttackDelay);
                             currentEnemy.AdvanceToNextAttack();
                         }

@@ -5,16 +5,39 @@ public class EnemyAnimationController : MonoBehaviour
     public CrashdownEnemyActor Actor;
 
     public Animator spriteAnimator;
+    public GameObject enragedSprite;
 
     public string animationIdleLeft;
     public string animationIdleRight;
     public string animationMovingLeft;
     public string animationMovingRight;
+    public string animationFiringLeft;
+    public string animationFiringRight;
     public string animationDyingLeft;
     public string animationDyingRight;
 
+    public float fireAnimationLength = .2f;
+
+
+    private float _timeFiring = 0f;
+    private bool _isFiring = false;
+
     public void Update()
     {
+        if (_isFiring)
+        {
+            _timeFiring += Time.deltaTime;
+            if (_timeFiring >= fireAnimationLength)
+            {
+                _isFiring = false;
+                _timeFiring = 0f;
+            }
+            else
+            {
+                return;
+            }
+        }
+
         string animToPlay = WalkOrIdleAnimation();
 
         if (Actor.CurrentAiState == CrashdownEnemyActor.EAiState.Dying)
@@ -25,6 +48,17 @@ public class EnemyAnimationController : MonoBehaviour
         {
             spriteAnimator.StopPlayback();
             return;
+        }
+        else if (Actor.firedThisFrame)
+        {
+            animToPlay = Fire();
+        }
+
+        if (enragedSprite != null)
+        {
+            bool enraged = Actor.CurrentAiState != CrashdownEnemyActor.EAiState.Dying
+                        && Actor.IsEnraged();
+            enragedSprite.SetActive(enraged);
         }
 
         spriteAnimator.CrossFade(animToPlay, 0f);
@@ -82,6 +116,27 @@ public class EnemyAnimationController : MonoBehaviour
                 return animationDyingRight;
             default:
                 return animationDyingRight;
+        }
+    }
+
+    private string Fire()
+    {
+        if (string.IsNullOrEmpty(animationFiringLeft) || string.IsNullOrEmpty(animationFiringRight))
+        {
+            return WalkOrIdleAnimation();
+        }
+
+        _isFiring = true;
+        _timeFiring = 0f;
+
+        switch (GetFacing())
+        {
+            case Facing.Left:
+                return animationFiringLeft;
+            case Facing.Right:
+                return animationFiringRight;
+            default:
+                return animationFiringRight;
         }
     }
 
