@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: dodgeRechargeFinished
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 1778895d35922884db21b52d9441f501, type: 3}
-  volume: 0.4
+  volume: 0.1
   pitchVariation: 0.03
   timeBetweenMultipleSounds: 0.25
