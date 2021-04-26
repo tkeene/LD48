@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
   m_Name: PlayerSword_Level05
   m_EditorClassIdentifier: 
-  actorEffectOnFiring: {fileID: 0}
+  actorEffectOnFiring: {fileID: 5797155174901540253, guid: da4db8a4b30c4c44c861d1ed3662746f, type: 3}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
   startDistance: 0.1
