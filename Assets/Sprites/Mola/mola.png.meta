@@ -1,28 +1,40 @@
 fileFormatVersion: 2
-guid: ce7163780bc0ce1438a804da2b826529
+guid: 2a14e0e24dd1f4b45a954c6b3dfd1566
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7087520360583927523
-    second: crab_death_0
+      213: 3465510393525527013
+    second: mola_0
   - first:
-      213: -4356273255297575982
-    second: crab_death_1
+      213: 6391875810334909285
+    second: mola_1
   - first:
-      213: 7078211931990588682
-    second: crab_death_2
+      213: -1340825488900142079
+    second: mola_2
   - first:
-      213: -2978763312166181316
-    second: crab_death_3
+      213: 3532667044343200640
+    second: mola_3
   - first:
-      213: -2487091733123588902
-    second: crab_death_4
+      213: -1890553138156818230
+    second: mola_4
   - first:
-      213: -1167867534929752949
-    second: crab_death_5
+      213: 5960176540836872099
+    second: mola_5
   - first:
-      213: 2081413570976752953
-    second: crab_death_6
+      213: 2286537889993080830
+    second: mola_6
+  - first:
+      213: 6414227858369665429
+    second: mola_7
+  - first:
+      213: 1472858840433460978
+    second: mola_8
+  - first:
+      213: -3383662581911898347
+    second: mola_9
+  - first:
+      213: -754532493772165485
+    second: mola_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crab_death_0
+      name: mola_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 64
-        height: 64
+        y: 78
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +150,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e614f6773eeb5260800000000000000
-      internalID: 7087520360583927523
+      spriteID: 5e163838757f71030800000000000000
+      internalID: 3465510393525527013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_1
+      name: mola_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 78
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 563ac631f2184b850800000000000000
+      internalID: 6391875810334909285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mola_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
-        width: 64
-        height: 64
+        y: 78
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +192,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d314790e886b83c0800000000000000
-      internalID: -4356273255297575982
+      spriteID: 10c4154625e646de0800000000000000
+      internalID: -1340825488900142079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_2
+      name: mola_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 78
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08b3ecfb5fd860130800000000000000
+      internalID: 3532667044343200640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mola_4
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
-        width: 64
-        height: 64
+        y: 78
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +234,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0dfa3b004cda3260800000000000000
-      internalID: 7078211931990588682
+      spriteID: ac0b92bffe763c5e0800000000000000
+      internalID: -1890553138156818230
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_3
+      name: mola_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 78
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3afb23b4cfcc6b250800000000000000
+      internalID: 5960176540836872099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mola_6
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
-        width: 64
-        height: 64
+        y: 78
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c366e5cbc8e49a6d0800000000000000
-      internalID: -2978763312166181316
+      spriteID: eff328aa81a6bbf10800000000000000
+      internalID: 2286537889993080830
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_4
+      name: mola_7
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
+        x: 224
+        y: 78
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +297,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adc9b53fe331c7dd0800000000000000
-      internalID: -2487091733123588902
+      spriteID: 599d98ec04ae30950800000000000000
+      internalID: 6414227858369665429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_5
+      name: mola_8
       rect:
         serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
+        x: 0
+        y: 28
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,20 +318,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8c0dc32aa6eacfe0800000000000000
-      internalID: -1167867534929752949
+      spriteID: 2f68454df45a07410800000000000000
+      internalID: 1472858840433460978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_death_6
+      name: mola_9
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
+        x: 32
+        y: 28
+        width: 32
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,8 +339,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9352fb07d9aa2ec10800000000000000
-      internalID: 2081413570976752953
+      spriteID: 5173c552fc0da01d0800000000000000
+      internalID: -3383662581911898347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mola_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 28
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e6831d1bc5785f0800000000000000
+      internalID: -754532493772165485
       vertices: []
       indices: 
       edges: []

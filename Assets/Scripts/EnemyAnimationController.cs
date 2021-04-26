@@ -79,7 +79,7 @@ public class EnemyAnimationController : MonoBehaviour
             case Facing.Left:
                 return animationDyingLeft;
             case Facing.Right:
-                return animationMovingRight;
+                return animationDyingRight;
             default:
                 return animationDyingRight;
         }
