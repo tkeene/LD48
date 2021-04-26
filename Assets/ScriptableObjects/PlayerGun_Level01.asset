@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
-  m_Name: PlayerGun_Level02
+  m_Name: PlayerGun_Level01
   m_EditorClassIdentifier: 
   actorEffectOnFiring: {fileID: 0}
   projectileLockedEffect: {fileID: 0}
@@ -20,9 +20,9 @@ MonoBehaviour:
   moveSpeed: 14
   lifetime: 8
   cooldown: 0.1
-  damage: 20
+  damage: 15
   maximumEnemiesHit: 1
-  numberToSpawn: 2
-  treatProjectilesAsOneWave: 1
+  numberToSpawn: 1
+  treatProjectilesAsOneWave: 0
   spreadBetweenShotsDegrees: 5
   hiddenAttack: 0

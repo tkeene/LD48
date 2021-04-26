@@ -197,7 +197,7 @@ MonoBehaviour:
   moveSpeed: 1
   ignoresTerrain: 1
   maximumHealth: 1
-  tribeNumber: 5
+  tribeNumber: 20
   enrageDuration: 0
   enrageSpeedBonus: 1
   enrageWeaponCooldownMultiplier: 1
