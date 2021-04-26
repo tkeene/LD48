@@ -62,7 +62,7 @@ MonoBehaviour:
   maximumHealth: 1500
   tribeNumber: 0
   enrageDuration: 3
-  enrageSpeedBonus: 1.5
+  enrageSpeedBonus: 2.2
   enrageWeaponCooldownMultiplier: 0.7
   enrageSidewaysStaggerSpeed: 3
   aiType: 2

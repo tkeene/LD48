@@ -52,6 +52,11 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     private void OnEnable()
     {
+        if (aiType != EAiType.InanimateObject)
+        {
+            // This is a hack to fix a bug where an enemy that spawns precisely inside a floor (like if you drag and drop a spawner into the scene view) will not be able to seek down and find the floor.
+            transform.position += Vector3.up * 0.02f;
+        }
         activeEnemies.Add(this);
         foreach (Collider collider in myColliders)
         {

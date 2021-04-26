@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2316110975215587566}
   - component: {fileID: 3832413115603464917}
   m_Layer: 6
-  m_Name: Enemy_Turret
+  m_Name: Enemy_SwordfishSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,22 +48,22 @@ MonoBehaviour:
   myColliders:
   - {fileID: 3832413115603464917}
   weaponsCycle:
-  - {fileID: 11400000, guid: 5e616f392cbb95b4098e3a2d270d9e6b, type: 2}
-  - {fileID: 11400000, guid: 4333793412a74654483fbe43f3b5743e, type: 2}
+  - {fileID: 11400000, guid: f1eabe1442fe8824b93a7aa5e7bb344e, type: 2}
+  - {fileID: 11400000, guid: 4e8b657a011623045812cd6cf036fb18, type: 2}
   friendsToNotify: []
   toSpawnWhenKoed: []
-  aggroRadius: 15
+  aggroRadius: 25
   maximumRandomAttackDelay: 1
   height: 1
-  moveSpeed: 3
-  ignoresTerrain: 0
-  maximumHealth: 45
+  moveSpeed: 1
+  ignoresTerrain: 1
+  maximumHealth: 75
   tribeNumber: 0
-  enrageDuration: 2
-  enrageSpeedBonus: 0
-  enrageWeaponCooldownMultiplier: 0.4
-  enrageSidewaysStaggerSpeed: 0
-  aiType: 1
+  enrageDuration: 1
+  enrageSpeedBonus: -2
+  enrageWeaponCooldownMultiplier: 0.2
+  enrageSidewaysStaggerSpeed: 6
+  aiType: 2
 --- !u!135 &3832413115603464917
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 8958740648372864028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 0.75, y: 1.5, z: 0.75}
   m_Children: []
   m_Father: {fileID: 8958740648068725836}
   m_RootOrder: 0
