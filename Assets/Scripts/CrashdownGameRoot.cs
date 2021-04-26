@@ -181,7 +181,11 @@ public class CrashdownGameRoot : MonoBehaviour
                     Vector3 playerMovementThisFrame = Vector3.zero;
 
                     bool isDodging = player.RemainingDodgeTime > 0.0f;
-                    if (!isDodging)
+                    if (player.CrashdownTarget.HasValue)
+                    {
+                        // Don't take any input or do any lateral movement.
+                    }
+                    else if (!isDodging)
                     {
                         Vector2 input = player.InputMovementThisFrame;
                         // Don't make diagonal walking any faster.
@@ -229,21 +233,48 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         if (playerMovementThisFrame.sqrMagnitude > 0.0f)
                         {
-                            if (Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height * 2.0f, terrainLayer.value))
+                            bool targetPositionIsOccupied = false;
+                            int numberOfThingsInFrontOfMe = Physics.OverlapSphereNonAlloc(newPosition, player.height / 2.0f, cachedColliderHitArray, actorsLayer.value);
+                            if (numberOfThingsInFrontOfMe > 0)
                             {
-                                newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
-                                player.transform.position = newPosition;
-                                if (debugPhysics)
+                                for (int q = 0; q < numberOfThingsInFrontOfMe; q++)
                                 {
-                                    Debug.Log("Player " + player.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    Collider possibleBlocker = cachedColliderHitArray[q];
+                                    if (actorColliders.TryGetValue(possibleBlocker, out IGameActor blockerActor))
+                                    {
+                                        if (blockerActor is CrashdownEnemyActor
+                                            && (blockerActor as CrashdownEnemyActor).aiType == CrashdownEnemyActor.EAiType.InanimateObject)
+                                        {
+                                            targetPositionIsOccupied = true;
+                                            if (debugPhysics)
+                                            {
+                                                Debug.Log("Player " + player.gameObject.name + " tried to walk into " + (blockerActor as CrashdownEnemyActor).gameObject.name, (blockerActor as CrashdownEnemyActor).gameObject);
+                                            }
+                                            break;
+                                        }
+                                    }
                                 }
                             }
-                            else
+                            bool targetPositionIsOverFloor = Physics.Raycast(newPosition, Vector3.down, out RaycastHit floorHit, player.height * 2.0f, terrainLayer.value);
+
+                            if (!targetPositionIsOccupied)
                             {
-                                // Player tried to walk off an edge, so they should stop and not move there.
-                                if (debugPhysics)
+                                if (targetPositionIsOverFloor)
                                 {
-                                    Debug.Log("Player " + player.gameObject.name + " tried to walk off an edge.", player.gameObject);
+                                    newPosition = floorHit.point + Vector3.up * (player.height / 2.0f);
+                                    player.transform.position = newPosition;
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Player " + player.gameObject.name + " is walking on " + floorHit.collider.gameObject.name + " and moved to " + newPosition, floorHit.collider.gameObject);
+                                    }
+                                }
+                                else
+                                {
+                                    // Player tried to walk off an edge, so they should stop and not move there.
+                                    if (debugPhysics)
+                                    {
+                                        Debug.Log("Player " + player.gameObject.name + " tried to walk off an edge.", player.gameObject);
+                                    }
                                 }
                             }
                         }
@@ -424,12 +455,15 @@ public class CrashdownGameRoot : MonoBehaviour
 
                     if (player.CurrentHealthRegenDelay <= 0.0f)
                     {
-                        float regenThisFrame = player.MaxHealth / player.playerFullRegenWait * Time.deltaTime;
-                        if (debugCombat)
+                        if (player.CurrentHealth < player.MaxHealth)
                         {
-                            Debug.Log("Player is regenerating " + regenThisFrame);
+                            float regenThisFrame = player.MaxHealth / player.playerFullRegenWait * Time.deltaTime;
+                            if (debugCombat)
+                            {
+                                Debug.Log("Player is regenerating " + regenThisFrame);
+                            }
+                            player.CurrentHealth = Mathf.Min(player.MaxHealth, player.CurrentHealth + regenThisFrame);
                         }
-                        player.CurrentHealth = Mathf.Min(player.MaxHealth, player.CurrentHealth + regenThisFrame);
                     }
                     else
                     {
@@ -505,6 +539,7 @@ public class CrashdownGameRoot : MonoBehaviour
                 case CrashdownEnemyActor.EAiState.WalkingAndFighting:
                     if (currentEnemy.CurrentAggroTarget == null)
                     {
+                        // Enemy Idle
                         if (TryGetNearestPlayer(currentEnemy.transform.position, currentEnemy.aggroRadius, out IGameActor actor))
                         {
                             currentEnemy.CurrentAggroTarget = actor;
@@ -519,6 +554,7 @@ public class CrashdownGameRoot : MonoBehaviour
                     }
                     else
                     {
+                        // Enemy Try To Kill Player
                         Vector3 worldspaceMotorInput = Vector3.zero;
                         Vector3 toTarget = currentEnemy.CurrentAggroTarget.GetPosition() - currentEnemy.transform.position;
                         currentEnemy.CurrentFacing = toTarget.normalized;
@@ -541,7 +577,12 @@ public class CrashdownGameRoot : MonoBehaviour
 
                         // NOTE: This was copypastaed from the player's movement code.
                         // Move on the X and Z axes separately so they can slide along walls.
-                        Vector3 enemyMovementThisFrame = worldspaceMotorInput * currentEnemy.moveSpeed * Time.deltaTime;
+                        Vector3 enemyMovementThisFrame = worldspaceMotorInput * currentEnemy.GetMoveSpeed() * Time.deltaTime;
+                        if (currentEnemy.RemainingEnrageDuration > 0.0f)
+                        {
+                            Vector3 staggerDirection = Quaternion.Euler(0.0f, 90.0f, 0.0f) * worldspaceMotorInput;
+                            enemyMovementThisFrame += staggerDirection * currentEnemy.CurrentSidewaysStaggerAmount * Time.deltaTime;
+                        }
                         for (int h = 0; h < 2; h++)
                         {
                             Vector3 newPosition;
@@ -590,8 +631,14 @@ public class CrashdownGameRoot : MonoBehaviour
                         }
                         else
                         {
-                            currentEnemy.RemainingCooldownTime -= Time.deltaTime;
+                            float cooldownToLose = Time.deltaTime;
+                            if (currentEnemy.RemainingEnrageDuration > 0.0f)
+                            {
+                                cooldownToLose *= currentEnemy.enrageWeaponCooldownMultiplier;
+                            }
+                            currentEnemy.RemainingCooldownTime -= cooldownToLose;
                         }
+                        currentEnemy.RemainingEnrageDuration -= Time.deltaTime;
                     }
                     break;
                 case CrashdownEnemyActor.EAiState.Dying:
@@ -629,10 +676,6 @@ public class CrashdownGameRoot : MonoBehaviour
         for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
         {
             Projectile currentProjectile = Projectile.activeProjectiles[i];
-            if (debugCombat)
-            {
-                Debug.Log("Updating projectile " + currentProjectile.MyId);
-            }
             bool shouldDespawn = false;
             if (currentProjectile.IsLifetimeOver())
             {
@@ -645,16 +688,16 @@ public class CrashdownGameRoot : MonoBehaviour
                 for (int h = 0; h < numberOfHits; h++)
                 {
                     RaycastHit currentHit = cachedRaycastHitArray[h];
-                    if (debugCombat)
-                    {
-                        Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name, currentHit.collider.gameObject);
-                    }
                     Collider hitCollider = currentHit.collider;
                     if (actorColliders.TryGetValue(hitCollider, out IGameActor touchedActor))
                     {
                         bool canProjectileHitActor = currentProjectile.CanHitActor(touchedActor);
                         if (canProjectileHitActor)
                         {
+                            if (debugCombat)
+                            {
+                                Debug.Log("Projectile hit on " + currentHit.collider.gameObject.name + " for " + currentProjectile.MyWeaponData.damage, currentHit.collider.gameObject);
+                            }
                             touchedActor.TakeDamage(currentProjectile.MyWeaponData.damage, currentProjectile.MyOwner);
                             currentProjectile.AddHitToActor(touchedActor);
                         }

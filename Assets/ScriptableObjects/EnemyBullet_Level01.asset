@@ -16,7 +16,7 @@ MonoBehaviour:
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
   startDistance: 0.5
-  radius: 0.1
+  radius: 0.05
   moveSpeed: 14
   lifetime: 10
   cooldown: 3

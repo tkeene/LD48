@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8958740648068725836}
   - component: {fileID: 2316110975215587566}
-  - component: {fileID: 3832413115603464917}
+  - component: {fileID: -1686974845774431654}
   m_Layer: 6
   m_Name: Enemy_BarrelGreen
   m_TagString: Untagged
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myColliders:
-  - {fileID: 3832413115603464917}
+  - {fileID: -1686974845774431654}
   weaponsCycle: []
   friendsToNotify: []
   toSpawnWhenKoed: []
@@ -153,9 +153,13 @@ MonoBehaviour:
   ignoresTerrain: 0
   maximumHealth: 40
   tribeNumber: 20
+  enrageDuration: 0
+  enrageSpeedBonus: 0
+  enrageWeaponCooldownMultiplier: 0
+  enrageSidewaysStaggerSpeed: 0
   aiType: 0
---- !u!135 &3832413115603464917
-SphereCollider:
+--- !u!65 &-1686974845774431654
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -165,5 +169,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

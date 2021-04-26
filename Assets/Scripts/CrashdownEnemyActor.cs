@@ -16,6 +16,10 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public bool ignoresTerrain = false;
     public float maximumHealth = 40.0f;
     public uint tribeNumber = 0;
+    public float enrageDuration = 1.0f;
+    public float enrageSpeedBonus = 0.7f;
+    public float enrageWeaponCooldownMultiplier = 2.0f;
+    public float enrageSidewaysStaggerSpeed = 3.0f;
 
     public bool movedThisFrame = false;
 
@@ -43,17 +47,25 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public IGameActor CurrentAggroTarget { get; set; }
     public float RemainingCooldownTime { get; set; }
     public float CurrentHealth { get; set; }
+    public float RemainingEnrageDuration { get; set; }
+    public float CurrentSidewaysStaggerAmount { get; set; }
 
     private int currentAttack = 0;
 
     private void OnEnable()
     {
+        if (aiType != EAiType.InanimateObject)
+        {
+            // This is a hack to fix a bug where an enemy that spawns precisely inside a floor (like if you drag and drop a spawner into the scene view) will not be able to seek down and find the floor.
+            transform.position += Vector3.up * 0.02f;
+        }
         activeEnemies.Add(this);
         foreach (Collider collider in myColliders)
         {
             CrashdownGameRoot.actorColliders[collider] = this;
         }
         CurrentAiState = EAiState.JustSpawned;
+        CurrentHealth = maximumHealth;
     }
 
     private void OnDisable()
@@ -138,10 +150,23 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         {
             CurrentAggroTarget = attacker;
         }
+        RemainingEnrageDuration = enrageDuration;
+        float staggerSign = Mathf.Sign(UnityEngine.Random.Range(-1.0f, 1.0f));
+        CurrentSidewaysStaggerAmount = enrageSidewaysStaggerSpeed * staggerSign;
     }
 
     uint IGameActor.GetTribe()
     {
         return tribeNumber;
+    }
+
+    public float GetMoveSpeed()
+    {
+        float speed = moveSpeed;
+        if (RemainingEnrageDuration > 0.0f)
+        {
+            speed += enrageSpeedBonus;
+        }
+        return speed;
     }
 }
