@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7325442757291093375}
   - component: {fileID: 7325442757291093374}
   m_Layer: 7
-  m_Name: DodgeUpgradePickup
+  m_Name: Dodge 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 7325442757450005184}
   victorySceneIndex: 3
+  interactedWithThisFrame: 0
 --- !u!65 &7325442757291093374
 BoxCollider:
   m_ObjectHideFlags: 0

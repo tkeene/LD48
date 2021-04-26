@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5361814053137628738, guid: ac7a414a06d99ef499d5e080695b1cc2, type: 3}
+  m_Sprite: {fileID: 213192068993993137, guid: 511c95ff40970bf4a92feeb5c72c54ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 7325442757450005184}
   victorySceneIndex: 3
+  interactedWithThisFrame: 0
 --- !u!65 &7325442757291093374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 64
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

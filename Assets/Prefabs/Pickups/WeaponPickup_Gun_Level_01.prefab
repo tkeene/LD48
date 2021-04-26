@@ -169,7 +169,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 64
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -341,6 +341,7 @@ MonoBehaviour:
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 841764398048663446}
   victorySceneIndex: 3
+  interactedWithThisFrame: 0
 --- !u!65 &841764399299035176
 BoxCollider:
   m_ObjectHideFlags: 0
