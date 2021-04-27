@@ -635,6 +635,8 @@ public class CrashdownGameRoot : MonoBehaviour
                                     }
                                 }
                             }
+
+                            currentEnemy.CurrentMoving = enemyMovementThisFrame;
                         }
 
                         currentEnemy.UpdateFacingAndRenderer();

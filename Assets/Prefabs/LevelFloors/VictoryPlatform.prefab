@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8531342244437831706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: -20}
+  m_LocalPosition: {x: -6, y: 0, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8531342246006457866}
@@ -345,6 +345,7 @@ MonoBehaviour:
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 8531342245197366015}
   victorySceneIndex: 2
+  interactedWithThisFrame: 0
 --- !u!65 &8531342245319955342
 BoxCollider:
   m_ObjectHideFlags: 0
