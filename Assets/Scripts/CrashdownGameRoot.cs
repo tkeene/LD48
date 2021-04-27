@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +19,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public Gradient crashdownTextColorGradient;
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
+    public CosmeticEffect crashdownCosmeticEffect;
 
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
@@ -365,6 +364,8 @@ public class CrashdownGameRoot : MonoBehaviour
                             // Crashdown Exit
                             player.transform.position = player.CrashdownTarget.Value + Vector3.up * player.height / 2.0f;
                             ActorUsesWeapon(player, player.crashdownSmashWeapon, projectilePrefab);
+                            // spawn here.
+                            CosmeticEffect.Spawn(crashdownCosmeticEffect, 2, player.transform.position, Quaternion.identity);
                             player.CrashdownTarget = null;
                             float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
                             while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
