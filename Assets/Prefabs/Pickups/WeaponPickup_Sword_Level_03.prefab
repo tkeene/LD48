@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8848951055791111239}
   - component: {fileID: 6088468925084973376}
+  - component: {fileID: 6855927154860301547}
   m_Layer: 7
   m_Name: Sword Sprite
   m_TagString: Untagged
@@ -83,6 +84,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6855927154860301547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022148179804147562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bc0d396031dd44c8b3da5f0f4d5bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7325442757291093248
 GameObject:
   m_ObjectHideFlags: 0
