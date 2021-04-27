@@ -18,6 +18,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public UnityEngine.UI.Text crashdownText;
     public Gradient crashdownTextColorGradient;
     public SoundEffectData crashdownStartToFinishSound;
+    public SoundEffectData getPowerupSound;
     public CosmeticEffect crashdownCosmeticEffect;
 
     public LayerMask terrainLayer;
@@ -419,25 +420,25 @@ public class CrashdownGameRoot : MonoBehaviour
                                         player.MaxHealth *= player.playerHealthBoostMultiplier;
                                         player.CurrentHealth = player.MaxHealth;
                                         float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
-                                        Debug.Log("TODO: Sound/Particle Effect on leveling up the player's health.");
+                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         break;
                                     case PlayerInteraction.EInteractionType.WeaponPickup:
                                         player.SetCurrentWeapon(thisInteraction.weaponDefinition);
-                                        Debug.Log("TODO Sound/Particle Effect picking up a weapon");
+                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         break;
                                     case PlayerInteraction.EInteractionType.DodgePowerUp:
                                         player.MaximumNumberOfDodges++;
                                         player.RemainingNumberOfDodges = player.MaximumNumberOfDodges;
-                                        Debug.Log("TODO Sound/Particle Effect picking up a dash upgrade");
+                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         break;
                                     case PlayerInteraction.EInteractionType.CrashdownKey:
                                         player.HasCrashdownAttack = true;
                                         player.CurrentHealth = player.MaxHealth; // Fully heal the player so the key can't instakill them.
-                                        Debug.Log("TODO: Sound/Particle Effect picking up the crashdown key");
+                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         crashdownPromptRoot.gameObject.SetActive(true);
                                         break;
                                     case PlayerInteraction.EInteractionType.WinTheGame:
-                                        Debug.LogError("Some delay and a fireworks show?");
+                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.victorySceneIndex);
                                         break;
                                     case PlayerInteraction.EInteractionType.Nothing:
