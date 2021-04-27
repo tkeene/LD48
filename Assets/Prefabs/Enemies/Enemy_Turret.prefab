@@ -52,6 +52,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4333793412a74654483fbe43f3b5743e, type: 2}
   friendsToNotify: []
   toSpawnWhenKoed: []
+  hurtEffect: {fileID: 53634591097558172, guid: 6ed968c4b503b8446a968f982791ee70, type: 3}
+  deathEffect: {fileID: 53634591097558172, guid: 88f6ebae014745d40830c3082a879b52, type: 3}
   aggroRadius: 15
   maximumRandomAttackDelay: 1
   height: 1
@@ -63,6 +65,10 @@ MonoBehaviour:
   enrageSpeedBonus: 0
   enrageWeaponCooldownMultiplier: 0.4
   enrageSidewaysStaggerSpeed: 0
+  deathTime: 1
+  timeDying: 0
+  movedThisFrame: 0
+  firedThisFrame: 0
   aiType: 1
 --- !u!135 &3832413115603464917
 SphereCollider:

@@ -662,6 +662,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   crashdownStartToFinishSound: {fileID: 11400000, guid: 5646e07869d1e964581256e4ff653465, type: 2}
+  getPowerupSound: {fileID: 11400000, guid: 8a5ac04f0038b0142afb3c73c862211c, type: 2}
   crashdownCosmeticEffect: {fileID: 1190991373793617889, guid: d8b5985a8b9db154abd06fd12e4d103a, type: 3}
   terrainLayer:
     serializedVersion: 2

@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2316110975215587566, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
+      propertyPath: hurtEffect
+      value: 
+      objectReference: {fileID: 53634591097558172, guid: 6ed968c4b503b8446a968f982791ee70, type: 3}
+    - target: {fileID: 2316110975215587566, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
       propertyPath: toSpawnWhenKoed.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -57,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8958740648068725837, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
       propertyPath: m_Name
-      value: Enemy_EggSac_Empty
+      value: Enemy_EggSac_Empty Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}

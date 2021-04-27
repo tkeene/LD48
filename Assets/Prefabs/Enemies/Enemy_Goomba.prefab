@@ -194,6 +194,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f96ae9783b1f104b904bc1ec681e887, type: 2}
   friendsToNotify: []
   toSpawnWhenKoed: []
+  hurtEffect: {fileID: 53634591097558172, guid: 6ed968c4b503b8446a968f982791ee70, type: 3}
+  deathEffect: {fileID: 53634591097558172, guid: 88f6ebae014745d40830c3082a879b52, type: 3}
   aggroRadius: 15
   maximumRandomAttackDelay: 1
   height: 1
