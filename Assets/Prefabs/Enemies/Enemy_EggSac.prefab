@@ -195,6 +195,8 @@ MonoBehaviour:
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
+  hurtEffect: {fileID: 53634591097558172, guid: 6ed968c4b503b8446a968f982791ee70, type: 3}
+  deathEffect: {fileID: 53634591097558172, guid: 88f6ebae014745d40830c3082a879b52, type: 3}
   aggroRadius: 30
   maximumRandomAttackDelay: 0
   height: 2

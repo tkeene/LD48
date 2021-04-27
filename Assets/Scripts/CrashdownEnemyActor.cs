@@ -9,6 +9,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public WeaponDefinition[] weaponsCycle;
     public List<CrashdownEnemyActor> friendsToNotify;
     public GameObject[] toSpawnWhenKoed;
+    public CosmeticEffect hurtEffect;
+    public CosmeticEffect deathEffect;
     public float aggroRadius = 15.0f;
     public float maximumRandomAttackDelay = 1.0f;
     public float height = 1.0f;
@@ -166,6 +168,17 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         if (CurrentHealth <= 0.0f && CurrentAiState == EAiState.WalkingAndFighting)
         {
             CurrentAiState = EAiState.Dying;
+            if (deathEffect != null)
+            {
+                CosmeticEffect.Spawn(deathEffect, deathEffect.defaultLifetime, transform.position, Quaternion.identity);
+            }
+        }
+        else if (CurrentAiState == EAiState.WalkingAndFighting)
+        {
+            if (hurtEffect != null)
+            {
+                CosmeticEffect.Spawn(hurtEffect, hurtEffect.defaultLifetime, transform.position, Quaternion.identity);
+            }
         }
         if (CurrentAggroTarget == null)
         {
