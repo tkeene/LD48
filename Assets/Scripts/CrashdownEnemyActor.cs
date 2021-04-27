@@ -44,6 +44,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public EAiType aiType = EAiType.InanimateObject;
 
     public Vector3 CurrentFacing { get; set; }
+    public Vector3 CurrentMoving { get; set; }
 
     public enum EAiState
     {

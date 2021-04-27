@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1108851158412259010}
+  correctionAngle: 90
 --- !u!1 &1108851158412259010
 GameObject:
   m_ObjectHideFlags: 0
