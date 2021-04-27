@@ -418,8 +418,8 @@ MonoBehaviour:
   playerDodgeRefreshEffect: {fileID: 7119664739184973055, guid: a7fb7d812709a1348b248e26f3107b0b, type: 3}
   height: 1
   defaultMaxSpeed: 6
-  defaultDodgeDuration: 0.3
-  playerDodgeSpeed: 18
+  defaultDodgeDuration: 0.15
+  playerDodgeSpeed: 36
   playerDodgeRefreshDuration: 2
   playerStartingHealth: 100
   playerHealthBoostMultiplier: 1.3
