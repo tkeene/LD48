@@ -45,7 +45,8 @@ public class HighScoreManager : MonoBehaviour
 
     void Update()
     {
-        if (interactIsHeld)
+        //if (interactIsHeld)
+        // END OF JAM, NO TIME FOR A HIGH SCORE SCREEN! KICK THEM BACK TO THE TITLE SCREEN AFTER ONE SECOND!
         {
             if (currentHeldTime > timeToHoldInteractButton)
             {
