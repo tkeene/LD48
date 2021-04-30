@@ -9,6 +9,7 @@ public class WeaponDefinition : ScriptableObject
     public CosmeticEffect projectileLockedEffect;
     public CosmeticEffect onFinalHitEffect;
 
+    [Multiline(3)]
     public string pickupMessage = "Press E/X to pick up []";
     public string pickupName = "[]";
     public string hudAndHighScoreName = "[]";

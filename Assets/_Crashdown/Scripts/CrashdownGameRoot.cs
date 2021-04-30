@@ -439,10 +439,10 @@ public class CrashdownGameRoot : MonoBehaviour
                                         break;
                                     case PlayerInteraction.EInteractionType.WinTheGame:
                                         AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.victorySceneIndex);
+                                        UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.targetSceneIndex);
                                         break;
                                     case PlayerInteraction.EInteractionType.Nothing:
-                                        // This object is not interactable, just is there for tutorial
+                                        // This object is not interactable, but it can show a tutorial text message when the player is near it.
                                         break;
                                     case PlayerInteraction.EInteractionType.ToggleSomething:
                                         foreach (GameObject thing in thisInteraction.objectsToToggle)

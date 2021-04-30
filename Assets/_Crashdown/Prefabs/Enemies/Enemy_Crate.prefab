@@ -51,6 +51,8 @@ MonoBehaviour:
   friendsToNotify: []
   toSpawnWhenKoed:
   - {fileID: 8958740648068725837, guid: 601a23511e3049349b0f260d17b8e3a4, type: 3}
+  hurtEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
   aggroRadius: 15
   maximumRandomAttackDelay: 1
   height: 1
@@ -65,6 +67,7 @@ MonoBehaviour:
   deathTime: 0.5
   timeDying: 0
   movedThisFrame: 0
+  firedThisFrame: 0
   aiType: 0
 --- !u!65 &310382204452509057
 BoxCollider:
@@ -107,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528800840473757788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 138178685574812233}
@@ -210,9 +213,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actor: {fileID: 6745623983918513899}
   spriteAnimator: {fileID: 6614695677754992761}
+  enragedSprite: {fileID: 0}
   animationIdleLeft: idle
   animationIdleRight: idle
   animationMovingLeft: idle
   animationMovingRight: idle
+  animationFiringLeft: 
+  animationFiringRight: 
   animationDyingLeft: open
   animationDyingRight: open
+  fireAnimationLength: 0.2

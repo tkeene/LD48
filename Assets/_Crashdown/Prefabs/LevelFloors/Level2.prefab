@@ -3439,7 +3439,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 138178685574812232, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_Name
-      value: Enemy_Crate (4)
+      value: Enemy_Crate - dodge
       objectReference: {fileID: 0}
     - target: {fileID: 138178685574812233, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_RootOrder
@@ -4477,7 +4477,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 138178685574812232, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_Name
-      value: Enemy_Crate (1)
+      value: Enemy_Crate - gun3
       objectReference: {fileID: 0}
     - target: {fileID: 138178685574812233, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_RootOrder
@@ -4526,7 +4526,7 @@ PrefabInstance:
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[0]
       value: 
-      objectReference: {fileID: 7325442757291093248, guid: 61db8cedad22d22498f6491d59f388ab, type: 3}
+      objectReference: {fileID: 1970584640455730783, guid: c04c5d7187b99a749ba93bb0f770050e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
 --- !u!4 &3867149877855112136 stripped
@@ -4886,7 +4886,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 138178685574812232, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_Name
-      value: Enemy_Crate
+      value: Enemy_Crate - dodge
       objectReference: {fileID: 0}
     - target: {fileID: 138178685574812233, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_RootOrder
@@ -5223,7 +5223,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 138178685574812232, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_Name
-      value: Enemy_Crate (3)
+      value: Enemy_Crate - superweapons
       objectReference: {fileID: 0}
     - target: {fileID: 138178685574812233, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_RootOrder
@@ -5276,7 +5276,7 @@ PrefabInstance:
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[0]
       value: 
-      objectReference: {fileID: 7325442757291093248, guid: b0ed037f70fcb5c4ea619d38959b9ddb, type: 3}
+      objectReference: {fileID: 1970584640455730783, guid: 1d7d53891a0d105499dee7f14260b27d, type: 3}
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[1]
       value: 
@@ -5891,7 +5891,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 138178685574812232, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_Name
-      value: Enemy_Crate (2)
+      value: Enemy_Crate - sword3
       objectReference: {fileID: 0}
     - target: {fileID: 138178685574812233, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: m_RootOrder
@@ -5940,7 +5940,7 @@ PrefabInstance:
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[0]
       value: 
-      objectReference: {fileID: 7325442757291093248, guid: 1577f4bd68cb494479706996d3ce810d, type: 3}
+      objectReference: {fileID: 1970584640455730783, guid: 5a3fd23d10a2b7d44a60b9191e6ff5cd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
 --- !u!4 &7347220260161486007 stripped

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8858460066934122073}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8958740648068725836}
@@ -146,6 +146,8 @@ MonoBehaviour:
   weaponsCycle: []
   friendsToNotify: []
   toSpawnWhenKoed: []
+  hurtEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
   aggroRadius: 15
   maximumRandomAttackDelay: 1
   height: 1
@@ -157,6 +159,10 @@ MonoBehaviour:
   enrageSpeedBonus: 0
   enrageWeaponCooldownMultiplier: 0
   enrageSidewaysStaggerSpeed: 0
+  deathTime: 1
+  timeDying: 0
+  movedThisFrame: 0
+  firedThisFrame: 0
   aiType: 0
 --- !u!65 &-1686974845774431654
 BoxCollider:

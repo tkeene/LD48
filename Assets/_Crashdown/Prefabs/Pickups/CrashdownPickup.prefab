@@ -52,7 +52,10 @@ MonoBehaviour:
   objectsToToggle: []
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 7325442757450005184}
-  victorySceneIndex: 3
+  labelText: {fileID: 0}
+  itemDisplay: {fileID: 0}
+  targetSceneIndex: 3
+  interactedWithThisFrame: 0
 --- !u!65 &7325442757291093374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -285,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8275247677294932533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7325442757291093249}
@@ -331,7 +334,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4330453193010910178, guid: 35e2cb837cd33144fb4f46105cb6d2ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -20,7 +20,10 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject[] objectsToToggle;
     public bool removeAfterActivation = false;
     public GameObject verbLabelRoot;
-    public int victorySceneIndex = 4;
+    public TMPro.TextMeshProUGUI labelText;
+    public SpriteRenderer itemDisplay;
+    [UnityEngine.Serialization.FormerlySerializedAs("victorySceneIndex")]
+    public int targetSceneIndex = 0;
 
     [HideInInspector]
     public bool interactedWithThisFrame = false;
@@ -32,7 +35,19 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnEnable()
     {
-        verbLabelRoot.gameObject.SetActive(false);
+        if (verbLabelRoot.gameObject != null)
+        {
+            verbLabelRoot.gameObject.SetActive(false);
+        }
+        if (labelText != null && weaponDefinition != null)
+        {
+            labelText.text = string.Format(weaponDefinition.pickupMessage, weaponDefinition.pickupName);
+        }
+        if (itemDisplay != null && weaponDefinition?.pickupAndHudSprite != null)
+        {
+            itemDisplay.sprite = weaponDefinition?.pickupAndHudSprite;
+        }
+
         timeSinceLastPlayerTouch = float.PositiveInfinity;
         activeInteractions.Add(myPlayerCollider, this);
     }

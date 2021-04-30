@@ -5247,7 +5247,7 @@ PrefabInstance:
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[0]
       value: 
-      objectReference: {fileID: 7325442757291093248, guid: 7a904755cf9a8ff4db49b7146294b915, type: 3}
+      objectReference: {fileID: 1970584640455730783, guid: 881fb878443f24b47a1860c4ca6190c6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
 --- !u!4 &392193596091026 stripped
@@ -5755,7 +5755,7 @@ PrefabInstance:
     - target: {fileID: 6745623983918513899, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
       propertyPath: toSpawnWhenKoed.Array.data[0]
       value: 
-      objectReference: {fileID: 7325442757291093248, guid: 1f47124d5aebe534e81584a20690e6d9, type: 3}
+      objectReference: {fileID: 1970584640455730783, guid: 431a14c731068004bac70d936a0fed8e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102e3f3eb21a98a49ab156363ad4e2ad, type: 3}
 --- !u!4 &2065822066227508654 stripped

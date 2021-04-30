@@ -198,12 +198,12 @@ MonoBehaviour:
   aggroRadius: 15
   maximumRandomAttackDelay: 0.25
   height: 1
-  moveSpeed: 4
+  moveSpeed: 2
   ignoresTerrain: 0
   maximumHealth: 75
   tribeNumber: 0
   enrageDuration: 1
-  enrageSpeedBonus: -12
+  enrageSpeedBonus: -10
   enrageWeaponCooldownMultiplier: 4
   enrageSidewaysStaggerSpeed: 1
   deathTime: 0.75

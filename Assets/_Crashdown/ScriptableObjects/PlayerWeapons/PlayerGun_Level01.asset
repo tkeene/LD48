@@ -15,10 +15,10 @@ MonoBehaviour:
   actorEffectOnFiring: {fileID: 53634591097558172, guid: ea29c6b5037dc164e9c9318c2b51e2d0, type: 3}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
-  pickupMessage: Press E/X to pick up {0}
+  pickupMessage: Press E/A to pick up {0}
   pickupName: Cannon LV 1
   hudAndHighScoreName: c4nn0n.L01.pew
-  pickupAndHudSprite: {fileID: 0}
+  pickupAndHudSprite: {fileID: -6071285925984724850, guid: ac7a414a06d99ef499d5e080695b1cc2, type: 3}
   startDistance: 0.5
   radius: 0.2
   moveSpeed: 14
