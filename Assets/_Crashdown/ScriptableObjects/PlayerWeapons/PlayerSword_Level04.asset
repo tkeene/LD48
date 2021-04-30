@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
+  m_Name: PlayerSword_Level04
+  m_EditorClassIdentifier: 
+  actorEffectOnFiring: {fileID: 5797155174901540253, guid: f2a36d4a5dd80e34e816eef921282b86, type: 3}
+  projectileLockedEffect: {fileID: 0}
+  onFinalHitEffect: {fileID: 0}
+  pickupMessage: Press E/A to pick up {0}
+  pickupName: Sword LV 4
+  hudAndHighScoreName: sw0rd5.L04.cut
+  pickupAndHudSprite: {fileID: 8528883819169448780, guid: a0d449acb6f52e84f9affe4b4eca123f, type: 3}
+  startDistance: 0.1
+  radius: 1.5
+  moveSpeed: 4
+  lifetime: 0.2
+  cooldown: 0.2
+  damage: 150
+  maximumEnemiesHit: 128
+  numberToSpawn: 3
+  treatProjectilesAsOneWave: 1
+  spreadBetweenShotsDegrees: 30
+  hiddenAttack: 1
