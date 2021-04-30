@@ -10,17 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00a5285376f79f444a658a571557fe81, type: 3}
-  m_Name: PlayerSword_Level05
+  m_Name: PlayerSword_Level01
   m_EditorClassIdentifier: 
-  actorEffectOnFiring: {fileID: 5797155174901540253, guid: da4db8a4b30c4c44c861d1ed3662746f, type: 3}
+  actorEffectOnFiring: {fileID: 53634591097558172, guid: 550557e70ce5bfc4494deaf89c4b2d58, type: 3}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
+  pickupMessage: Press E/X to pick up {0}
+  pickupName: Sword LV 1
+  hudAndHighScoreName: sw0rd5.L01.cut
+  pickupAndHudSprite: {fileID: 0}
   startDistance: 0.1
-  radius: 1.6
+  radius: 1
   moveSpeed: 4
   lifetime: 0.2
   cooldown: 0.2
-  damage: 200
+  damage: 30
   maximumEnemiesHit: 128
   numberToSpawn: 3
   treatProjectilesAsOneWave: 1

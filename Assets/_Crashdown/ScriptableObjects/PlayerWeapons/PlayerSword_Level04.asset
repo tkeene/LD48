@@ -15,6 +15,10 @@ MonoBehaviour:
   actorEffectOnFiring: {fileID: 5797155174901540253, guid: f2a36d4a5dd80e34e816eef921282b86, type: 3}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
+  pickupMessage: Press E/X to pick up {0}
+  pickupName: Sword LV 4
+  hudAndHighScoreName: sw0rd5.L04.cut
+  pickupAndHudSprite: {fileID: 0}
   startDistance: 0.1
   radius: 1.5
   moveSpeed: 4
