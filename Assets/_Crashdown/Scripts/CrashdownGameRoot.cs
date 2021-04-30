@@ -20,6 +20,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
     public CosmeticEffect crashdownCosmeticEffect;
+    public UnityEngine.UI.Image[] currentWeaponSprites;
 
     public LayerMask terrainLayer;
     public LayerMask actorsLayer;
@@ -424,6 +425,8 @@ public class CrashdownGameRoot : MonoBehaviour
                                         break;
                                     case PlayerInteraction.EInteractionType.WeaponPickup:
                                         player.SetCurrentWeapon(thisInteraction.weaponDefinition);
+                                        currentWeaponSprites[0].sprite = thisInteraction.weaponDefinition.pickupAndHudSprite;
+                                        currentWeaponSprites[0].color = Color.white;
                                         AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
                                         break;
                                     case PlayerInteraction.EInteractionType.DodgePowerUp:
