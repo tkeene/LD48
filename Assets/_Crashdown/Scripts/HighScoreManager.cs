@@ -11,6 +11,8 @@ public class HighScoreManager : MonoBehaviour
     public string victoryMessage = "CorpsCore.exe not found, system data unrecoverable.";
     public string gameOverMessage = "Virus Crashdown.exe detcted and quarantined. Game over n00b!";
     public int rollingOutputSpeedInFrames = 5;
+    public string randomCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    public int numberOfAdditionalCharactersToRandomize = 20;
 
     private Controls _controls;
 
@@ -111,10 +113,54 @@ public class HighScoreManager : MonoBehaviour
 
         if (!isDoneWithHighScoreDisplay)
         {
-            highScoreOutput.text = string.Format(originalHighScoreString, formatVictoryOrGameOverMessage,
+            if (Time.frameCount % rollingOutputSpeedInFrames == 0)
+            {
+                currentRollingOutputCounter++;
+            }
+
+            string victoryOrGameOverMessageToUse = formatVictoryOrGameOverMessage;
+            if (currentRollingOutputCounter >= victoryOrGameOverMessageToUse.Length)
+            {
+                isDoneWithHighScoreDisplay = true;
+            }
+            else
+            {
+                int amountToGarble = victoryOrGameOverMessageToUse.Length - currentRollingOutputCounter;
+                if (amountToGarble > 0)
+                {
+                    string garbageCharcaters = GenerateGarbageString(amountToGarble);
+                    victoryOrGameOverMessageToUse = victoryOrGameOverMessageToUse.Substring(0, currentRollingOutputCounter) + garbageCharcaters;
+                }
+            }
+            string outputText = string.Format(originalHighScoreString, victoryOrGameOverMessageToUse,
                 formatEnemiesKilled, formatSecretsFound, formatBossesKilled, formatTimeTaken, formatWeaponUsed,
                 formatTextColor);
-            isDoneWithHighScoreDisplay = true;
+            if (!isDoneWithHighScoreDisplay)
+            {
+                int lengthOfOutput = outputText.Length;
+                for (int i = 0; i < numberOfAdditionalCharactersToRandomize; i++)
+                {
+                    int target = UnityEngine.Random.Range(0, lengthOfOutput);
+                    if (!Char.IsWhiteSpace(outputText[target]))
+                    {
+                        outputText = outputText.Remove(target, 1);
+                        outputText = outputText.Insert(target, GenerateGarbageString(1));
+                    }
+                }
+            }
+
+            highScoreOutput.text = outputText;
         }
+    }
+
+    public string GenerateGarbageString(int length)
+    {
+        System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+        for (int i = 0; i < length; i++)
+        {
+            int indexToUse = UnityEngine.Random.Range(0, randomCharacters.Length);
+            stringBuilder.Append(randomCharacters[indexToUse]);
+        }
+        return stringBuilder.ToString();
     }
 }
