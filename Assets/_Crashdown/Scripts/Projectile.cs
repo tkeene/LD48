@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject Renderer;
+    public SphereCollider reflectionCollider;
+
     public WeaponDefinition MyWeaponData { get; set; }
     public IGameActor MyOwner { get; set; }
     public float RemainingLifetime { get; set; }
     public int RemainingHits { get; set; }
     public uint MyId { get; set; }
-    public GameObject Renderer;
 
     public static List<Projectile> activeProjectiles = new List<Projectile>();
+    public static Dictionary<Collider, IGameActor> reflectingColliders = new Dictionary<Collider, IGameActor>();
 
     private static Dictionary<uint, List<IGameActor>> actorsHitbyProjectile = new Dictionary<uint, List<IGameActor>>();
 
@@ -25,6 +28,7 @@ public class Projectile : MonoBehaviour
     {
         activeProjectiles.Remove(this);
         actorsHitbyProjectile.Remove(MyId);
+        reflectingColliders.Remove(reflectionCollider);
     }
 
     public static void Spawn(Projectile prefab, WeaponDefinition weapon, IGameActor owner, Vector3 position, Quaternion rotation, uint projectileId)
@@ -42,6 +46,12 @@ public class Projectile : MonoBehaviour
         MyId = projectileId;
         Renderer.SetActive(!weapon.hiddenAttack);
         // Don't spawn the actorsHitByProjectile array until it actually hits something.
+        if (weapon.reflectsOtherAttacks)
+        {
+            reflectionCollider.gameObject.SetActive(true);
+            reflectionCollider.radius = weapon.radius;
+            reflectingColliders[reflectionCollider] = MyOwner;
+        }
     }
 
     public bool IsLifetimeOver()
@@ -97,5 +107,10 @@ public class Projectile : MonoBehaviour
             }
             RemainingHits--;
         }
+    }
+
+    public void RedirectTowards(Vector3 target)
+    {
+        transform.LookAt(target, Vector3.up);
     }
 }

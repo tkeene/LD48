@@ -15,6 +15,10 @@ MonoBehaviour:
   actorEffectOnFiring: {fileID: 0}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
+  pickupMessage: Press E/X to pick up []
+  pickupName: '[]'
+  hudAndHighScoreName: '[]'
+  pickupAndHudSprite: {fileID: 0}
   startDistance: 0
   radius: 5
   moveSpeed: 0.01
@@ -26,3 +30,5 @@ MonoBehaviour:
   treatProjectilesAsOneWave: 1
   spreadBetweenShotsDegrees: 1
   hiddenAttack: 1
+  reflectsOtherAttacks: 1
+  isReflectable: 0
