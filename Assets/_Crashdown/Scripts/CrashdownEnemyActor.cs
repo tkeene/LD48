@@ -25,6 +25,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     public float deathTime = 1f;
 
+    public bool isBoss = false;
+
     [HideInInspector]
     public float timeDying = 0f;
 
@@ -169,6 +171,14 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         if (CurrentHealth <= 0.0f && CurrentAiState == EAiState.WalkingAndFighting)
         {
             CurrentAiState = EAiState.Dying;
+            if (isBoss)
+            {
+                CrashdownGameRoot.TotalBossesKilled++;
+            }
+            else
+            {
+                CrashdownGameRoot.TotalEnemiesKilled++;
+            }
             if (deathEffect != null)
             {
                 CosmeticEffect.Spawn(deathEffect, deathEffect.defaultLifetime, transform.position, Quaternion.identity);

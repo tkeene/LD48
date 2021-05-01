@@ -33,6 +33,11 @@ public class CrashdownGameRoot : MonoBehaviour
     public bool debugCombat = false;
     public bool debugAi = false;
 
+    public static int TotalBossesKilled { get; set; }
+    public static int TotalEnemiesKilled { get; set; }
+    public static string FinalWeaponUsed { get; set; }
+    public static float TotalTimeUsed { get; set; }
+
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
     private float _gameOverTimer = 0.0f;
@@ -71,6 +76,11 @@ public class CrashdownGameRoot : MonoBehaviour
 
         _currentControlScheme = playerInput.currentControlScheme;
         _aimAction = playerInput.actions["Aim"];
+
+        TotalBossesKilled = 0;
+        TotalEnemiesKilled = 0;
+        FinalWeaponUsed = null;
+        TotalTimeUsed = 0.0f;
     }
 
     private void OnDisable()
@@ -425,6 +435,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                         break;
                                     case PlayerInteraction.EInteractionType.WeaponPickup:
                                         player.SetCurrentWeapon(thisInteraction.weaponDefinition);
+                                        FinalWeaponUsed = thisInteraction.weaponDefinition?.hudAndHighScoreName;
                                         currentWeaponSprites[0].sprite = thisInteraction.weaponDefinition.pickupAndHudSprite;
                                         currentWeaponSprites[0].color = Color.white;
                                         AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
@@ -523,6 +534,10 @@ public class CrashdownGameRoot : MonoBehaviour
         {
             gameOverScreen.SetActive(true);
             _gameOverTimer += Time.deltaTime;
+            if (CrashdownPlayerController.activePlayerInstances[0].InputInteractDownThisFrame)
+            {
+                _gameOverTimer += gameOverScreenDuration / 2.0f;
+            }
             const float kCameraSpeed = 3.0f;
             Camera.main.transform.position += Vector3.up * Time.deltaTime * kCameraSpeed;
             if (_gameOverTimer > gameOverScreenDuration)
@@ -703,6 +718,8 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateGameLogic()
     {
+        TotalTimeUsed += Time.deltaTime;
+
         for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
         {
             Projectile currentProjectile = Projectile.activeProjectiles[i];
