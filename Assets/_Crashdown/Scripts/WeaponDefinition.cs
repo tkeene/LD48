@@ -26,4 +26,6 @@ public class WeaponDefinition : ScriptableObject
     public bool treatProjectilesAsOneWave = false;
     public float spreadBetweenShotsDegrees = 5.0f;
     public bool hiddenAttack = false;
+    public bool reflectsOtherAttacks = false;
+    public bool isReflectable = false;
 }

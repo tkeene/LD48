@@ -749,6 +749,18 @@ public class CrashdownGameRoot : MonoBehaviour
                             currentProjectile.AddHitToActor(touchedActor);
                         }
                     }
+                    else if (Projectile.reflectingColliders.TryGetValue(hitCollider, out IGameActor reflectingActor)
+                        && (reflectingActor == null || currentProjectile.MyOwner == null || (reflectingActor.GetTribe() != currentProjectile.MyOwner.GetTribe())))
+                    {
+                        if (currentProjectile.MyOwner != null)
+                        {
+                            currentProjectile.RedirectTowards(currentProjectile.MyOwner.GetPosition());
+                        }
+                        if (reflectingActor != null)
+                        {
+                            currentProjectile.MyOwner = reflectingActor;
+                        }
+                    }
                     else
                     {
                         // Recently destroyed colliders might still take raycasts if we're not using DestroyImmediate, so just ignore them.
