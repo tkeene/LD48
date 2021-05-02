@@ -15,7 +15,9 @@ MonoBehaviour:
   actorEffectOnFiring: {fileID: 53634591097558172, guid: ea29c6b5037dc164e9c9318c2b51e2d0, type: 3}
   projectileLockedEffect: {fileID: 0}
   onFinalHitEffect: {fileID: 0}
-  pickupMessage: Press E/A to pick up {0}
+  pickupMessage: '<sprite=6>||<sprite=1>
+
+    {0}'
   pickupName: Cannon LV 5
   hudAndHighScoreName: c4nn0n.L05.pew
   pickupAndHudSprite: {fileID: 6859798509477071828, guid: 0d51b2cb7890b5e4d8159eb7e1ef52e3, type: 3}

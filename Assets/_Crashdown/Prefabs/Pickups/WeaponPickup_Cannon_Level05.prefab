@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 841764399299035177, guid: 5590e7acc288d8941a21260c148392df, type: 3}
       propertyPath: weaponDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 1bd5551b445fc9945ba483393dba3e82, type: 2}
+      objectReference: {fileID: 11400000, guid: bd3ff9814c7826340b8a13c121fd65a1, type: 2}
     - target: {fileID: 841764399299035222, guid: 5590e7acc288d8941a21260c148392df, type: 3}
       propertyPath: m_Name
       value: WeaponPickup_Cannon_Level05
