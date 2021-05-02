@@ -697,6 +697,7 @@ MonoBehaviour:
   enrageWeaponCooldownMultiplier: 0.7
   enrageSidewaysStaggerSpeed: 3
   deathTime: 3
+  isBoss: 1
   timeDying: 0
   movedThisFrame: 0
   firedThisFrame: 0

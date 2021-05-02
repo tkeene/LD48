@@ -1,19 +1,18 @@
 fileFormatVersion: 2
-guid: cf2035290f7f2be4bb89a0329ddb01c3
+guid: 318c30bea4f07b447bb426ac94a5d392
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: 0
+  forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Crashdown Title_FOR REAL THIS TIME
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 07fff5b9d012e1243b0d5fff7abe9f7f, type: 3}
+  - Crashdown Thin Pixels Wider Spaced
+  fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 2
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
