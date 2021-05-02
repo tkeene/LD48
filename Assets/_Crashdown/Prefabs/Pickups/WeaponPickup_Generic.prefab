@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPlayerCollider: {fileID: 841764399299035176}
   interactionType: 1
-  weaponDefinition: {fileID: 11400000, guid: f5edeae0753570e41ad61bcd31977525, type: 2}
+  weaponDefinition: {fileID: 11400000, guid: 024433790efa5e24c8eb47beb45f75e1, type: 2}
   objectsToToggle: []
   removeAfterActivation: 1
   verbLabelRoot: {fileID: 841764398048663446}
@@ -343,10 +343,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <sprite=6>/<sprite=1> to pick up {0}
+  m_text: '<sprite=6>||<sprite=1>
+
+    {0}
+
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9bf213cfbc331914a8b51bd73949f6fc, type: 2}
+  m_sharedMaterial: {fileID: 2796138410419202542, guid: 9bf213cfbc331914a8b51bd73949f6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

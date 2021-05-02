@@ -15,7 +15,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public int gameOverSceneIndex = 3;
     public float gameOverScreenDuration = 6.0f;
     public GameObject crashdownPromptRoot;
-    public UnityEngine.UI.Text crashdownText;
+    public TMPro.TextMeshProUGUI crashdownText;
     public Gradient crashdownTextColorGradient;
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
