@@ -30,3 +30,5 @@ MonoBehaviour:
   treatProjectilesAsOneWave: 0
   spreadBetweenShotsDegrees: 5
   hiddenAttack: 0
+  reflectsOtherAttacks: 0
+  isReflectable: 1
