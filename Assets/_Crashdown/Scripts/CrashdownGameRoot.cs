@@ -49,6 +49,7 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private string _currentControlScheme;
     private InputAction _aimAction;
+    private CrashdownLevelParent currentCrashdownLevel = null;
 
     private void OnEnable()
     {
@@ -783,14 +784,15 @@ public class CrashdownGameRoot : MonoBehaviour
             }
         }
 
-        if (CrashdownLevelParent.activeCrashdownLevels.Count > 0
-            && MusicManager.instance.musicSource.clip != CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusic)
+        if (CrashdownLevelParent.activeCrashdownLevels.Count > 0 && CrashdownLevelParent.activeCrashdownLevels.Values[0] != currentCrashdownLevel)
         {
+            currentCrashdownLevel = CrashdownLevelParent.activeCrashdownLevels.Values[0];
             float currentTime = MusicManager.instance.musicSource.time;
-            MusicManager.instance.musicSource.clip = CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusic;
-            MusicManager.instance.musicSource.pitch = CrashdownLevelParent.activeCrashdownLevels.Values[0].myMusicSpeed;
+            MusicManager.instance.musicSource.clip = currentCrashdownLevel.myMusic;
+            MusicManager.instance.musicSource.pitch = currentCrashdownLevel.myMusicSpeed;
             MusicManager.instance.musicSource.Play();
             MusicManager.instance.musicSource.time = currentTime;
+            MusicManager.instance.CurrentLowpassDefault = currentCrashdownLevel.defaultLowpassLevel;
         }
         if (CrashdownPlayerController.activePlayerInstances[0].IsDead())
         {

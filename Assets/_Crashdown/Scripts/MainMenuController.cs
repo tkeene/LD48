@@ -7,4 +7,9 @@ public class MainMenuController : MonoBehaviour
     {
         SceneManager.LoadScene("PlayerTestRoom");
     }
+
+    public void GUI_OpenWebpage(string url)
+    {
+        Application.OpenURL(url);
+    }
 }

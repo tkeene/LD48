@@ -7,6 +7,7 @@ public class CrashdownLevelParent : MonoBehaviour
 {
     public AudioClip myMusic;
     public float myMusicSpeed = 1.0f;
+    public float defaultLowpassLevel = 1.0f;
 
     public static SortedList<float, CrashdownLevelParent> activeCrashdownLevels = new SortedList<float, CrashdownLevelParent>();
 
