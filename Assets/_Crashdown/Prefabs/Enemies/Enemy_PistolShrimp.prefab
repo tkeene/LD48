@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427281522295448292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8901934923409214076}
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: dd2e048b148c5704b83fbf9918633666, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   enrageWeaponCooldownMultiplier: 4
   enrageSidewaysStaggerSpeed: 1
   deathTime: 0.75
+  isBoss: 0
   timeDying: 0
   movedThisFrame: 0
   firedThisFrame: 0
@@ -241,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3560243749463359167, guid: e0911a2384841df4fa9b167b69d1561b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.211
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3560243749463359167, guid: e0911a2384841df4fa9b167b69d1561b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -279,6 +280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terror
       objectReference: {fileID: 0}
+    - target: {fileID: 7134778065195593614, guid: e0911a2384841df4fa9b167b69d1561b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd2e048b148c5704b83fbf9918633666, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0911a2384841df4fa9b167b69d1561b, type: 3}
 --- !u!1 &8884271646108776679 stripped

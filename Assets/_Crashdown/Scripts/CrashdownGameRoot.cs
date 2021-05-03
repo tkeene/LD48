@@ -517,6 +517,11 @@ public class CrashdownGameRoot : MonoBehaviour
             float playerHealthAmount = player.CurrentHealth / player.MaxHealth;
             playerHealthBar.SetMaxHealth((int)player.MaxHealth);
             playerHealthBar.SetHealth((int)player.CurrentHealth);
+
+            if (player.HasCrashdownAttack)
+            {
+                playerHealthBar.SetColor(crashdownText.color = crashdownTextColorGradient.Evaluate(_currentCrashdownPromptFlash));
+            }
         }
 
         // Update the camera after all the players have moved.

@@ -28,4 +28,9 @@ public class HealthbarFill : MonoBehaviour
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    public void SetColor(Color color)
+    {
+        fill.color = color;
+    }
 }
