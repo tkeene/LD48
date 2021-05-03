@@ -27,7 +27,7 @@ MonoBehaviour:
   damage: 95
   maximumEnemiesHit: 1
   numberToSpawn: 15
-  treatProjectilesAsOneWave: 0
+  treatProjectilesAsOneWave: 1
   spreadBetweenShotsDegrees: 15
   hiddenAttack: 0
   reflectsOtherAttacks: 0

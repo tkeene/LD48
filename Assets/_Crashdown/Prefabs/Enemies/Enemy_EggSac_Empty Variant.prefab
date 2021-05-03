@@ -15,14 +15,6 @@ PrefabInstance:
       propertyPath: toSpawnWhenKoed.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5518073086876619428, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518073086876619428, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8958740648068725836, guid: d13024afd2b014c4dbd5db78a36ff017, type: 3}
       propertyPath: m_RootOrder
       value: 0

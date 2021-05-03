@@ -721,7 +721,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'MAINFRAME BYPASS READY
 
-    <size=48>Press <sprite=7> || <sprite=3> to
+    <size=48>Press <sprite=8> || <sprite=3> to
     initiate CRASHDOWN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9bf213cfbc331914a8b51bd73949f6fc, type: 2}

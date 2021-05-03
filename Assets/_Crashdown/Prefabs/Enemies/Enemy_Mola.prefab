@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6751227032410736306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2750683006924059681}
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: dd2e048b148c5704b83fbf9918633666, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   enrageWeaponCooldownMultiplier: 1
   enrageSidewaysStaggerSpeed: 0.1
   deathTime: 0.5
+  isBoss: 0
   timeDying: 0
   movedThisFrame: 0
   firedThisFrame: 0
@@ -245,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 182202535410233404, guid: 67c9d8bf2bda386469bb28c4b72d93f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.532
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 182202535410233404, guid: 67c9d8bf2bda386469bb28c4b72d93f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -279,6 +280,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5831040253550878989, guid: 67c9d8bf2bda386469bb28c4b72d93f1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd2e048b148c5704b83fbf9918633666, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c9d8bf2bda386469bb28c4b72d93f1, type: 3}
 --- !u!1 &2804934180993582778 stripped
