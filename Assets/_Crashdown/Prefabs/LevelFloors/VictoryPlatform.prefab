@@ -310,8 +310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec2e66f5d4a6ac4b8f99010241f8030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMusic: {fileID: 8300000, guid: b1f3a184c31061643ad6b08814c2ff40, type: 3}
+  myMusic: {fileID: 8300000, guid: e8865eda0e844664f9e70f961bf861ca, type: 3}
   myMusicSpeed: 1
+  defaultLowpassLevel: 0
 --- !u!1 &8734672170868293348
 GameObject:
   m_ObjectHideFlags: 0
