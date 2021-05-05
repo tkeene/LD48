@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CrashdownSkybox
+  m_Shader: {fileID: 4800000, guid: d3275f37b1faff14f983ccbdd194b930, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _GridLineSpacing: 80
+    - _GridLineWidth: 0.996
+    m_Colors:
+    - _CameraOffsetStrength: {r: 0.005, g: 0.01, b: 0.01, a: 1}
+    - _CurrentCameraOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _GroundColor: {r: 0.08233158, g: 0.062744744, b: 0.09433961, a: 1}
+    - _HorizonColor: {r: 0.30980393, g: 0.9921569, b: 0.62352943, a: 1}
+    - _SkyColor: {r: 0.08235294, g: 0.0627451, b: 0.09411766, a: 1}
+  m_BuildTextureStacks: []
