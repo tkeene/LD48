@@ -15,7 +15,7 @@ public class StandardTriplanarInspector : ShaderGUI
         static public readonly GUIContent occlusion = new GUIContent("Occlusion", "Occlusion (G)");
     }
 
-    bool _initialized;
+    //bool _initialized;
 
     public override void OnGUI(MaterialEditor editor, MaterialProperty[] props)
     {
@@ -42,11 +42,13 @@ public class StandardTriplanarInspector : ShaderGUI
 
         editor.ShaderProperty(FindProperty("_MapScale", props), "Texture Scale");
 
+        editor.ShaderProperty(FindProperty("_MapOffset", props), "Texture Offset");
+
         //if (EditorGUI.EndChangeCheck() || !_initialized)
         //    foreach (Material m in editor.targets)
         //        SetMaterialKeywords(m);
 
-        _initialized = true;
+        //_initialized = true;
     }
 
     //static void SetMaterialKeywords(Material material)
@@ -55,13 +57,13 @@ public class StandardTriplanarInspector : ShaderGUI
     //    SetKeyword(material, "_OCCLUSIONMAP", material.GetTexture("_OcclusionMap"));
     //}
 
-    static void SetKeyword(Material m, string keyword, bool state)
-    {
-        if (state)
-            m.EnableKeyword(keyword);
-        else
-            m.DisableKeyword(keyword);
-    }
+    //static void SetKeyword(Material m, string keyword, bool state)
+    //{
+    //    if (state)
+    //        m.EnableKeyword(keyword);
+    //    else
+    //        m.DisableKeyword(keyword);
+    //}
 }
 
 #endif
