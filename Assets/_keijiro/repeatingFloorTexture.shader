@@ -1,6 +1,7 @@
 // Standard shader with triplanar mapping
 // https://github.com/keijiro/StandardTriplanar
 
+// See also StandardTriplanarInspector.cs
 Shader "Standard Triplanar"
 {
     Properties
@@ -18,6 +19,7 @@ Shader "Standard Triplanar"
         //_OcclusionMap("", 2D) = "white" {}
 
         _MapScale("", Float) = 1
+        [ShowAsVector2] _MapOffset("Mapping Offset", Vector) = (0, 0, 0) // Third Vector component is unused.
     }
     SubShader
     {
@@ -48,6 +50,7 @@ Shader "Standard Triplanar"
         //sampler2D _OcclusionMap;
 
         half _MapScale;
+        half2 _MapOffset;
 
         struct Input
         {
@@ -63,6 +66,8 @@ Shader "Standard Triplanar"
             //data.localCoord = v.vertex.xyz;
             //data.localNormal = v.normal.xyz;
             data.worldCoord = mul(unity_ObjectToWorld, v.vertex);
+            data.worldCoord.x -= _MapOffset.x;
+            data.worldCoord.z -= _MapOffset.y;
             data.worldNormal = mul(unity_ObjectToWorld, v.normal);
         }
 
