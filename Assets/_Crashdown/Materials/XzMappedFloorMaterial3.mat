@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 367e50f662e71db40b47b02e19417463, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3f1a349d0f58d44d9ca4056859e4ea4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -35,9 +35,10 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Glossiness: 0
-    - _MapScale: 1
+    - _MapScale: 0.1
     - _Metallic: 0
     - _OcclusionStrength: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _MapOffset: {r: 1, g: -5.87, b: 0, a: 1}
   m_BuildTextureStacks: []
