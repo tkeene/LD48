@@ -19,6 +19,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public Gradient crashdownTextColorGradient;
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
+    public SoundEffectData gameGlitchSound;
     public CosmeticEffect crashdownCosmeticEffect;
     public UnityEngine.UI.Image[] currentWeaponSprites;
 
@@ -28,6 +29,11 @@ public class CrashdownGameRoot : MonoBehaviour
 
     public Vector3 defaultCameraOffset = new Vector3(0.0f, 5.0f, 0.0f);
     public float defaultCameraAcceleration = 5.0f;
+
+    public PostProcess glitchRenderer;
+    public Material[] glitchRendererStages;
+    public float glitchRendererTimeBetweenStages = 0.7f;
+
     public bool debugInput = false;
     public bool debugPhysics = false;
     public bool debugCombat = false;
@@ -51,6 +57,10 @@ public class CrashdownGameRoot : MonoBehaviour
     private InputAction _aimAction;
     private CrashdownLevelParent currentCrashdownLevel = null;
 
+    private int glitchRendererCurrentStage = 0;
+    private float glitchRendererCurrentTime = 0.0f;
+    private int nextSceneIndexToLoad = -1;
+
     private void OnEnable()
     {
         if (_controls == null)
@@ -60,6 +70,7 @@ public class CrashdownGameRoot : MonoBehaviour
 
         QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 60;
+        glitchRenderer.enabled = false;
 
         crashdownPromptRoot.gameObject.SetActive(false);
 
@@ -158,9 +169,34 @@ public class CrashdownGameRoot : MonoBehaviour
 
     void Update()
     {
-        UpdatePlayers();
-        UpdateEnemies();
-        UpdateGameLogic();
+        if (nextSceneIndexToLoad == -1)
+        {
+            UpdatePlayers();
+            UpdateEnemies();
+            UpdateGameLogic();
+        }
+        else
+        {
+            // Play a glitch effect for a bit before loading the next level.
+            glitchRenderer.enabled = true;
+            if (glitchRendererCurrentStage < glitchRendererStages.Length)
+            {
+                glitchRendererCurrentTime += Time.deltaTime;
+                if (glitchRendererCurrentTime > glitchRendererTimeBetweenStages)
+                {
+                    glitchRendererCurrentTime = 0.0f;
+                    glitchRendererCurrentStage++;
+                    if (glitchRendererCurrentStage < glitchRendererStages.Length)
+                    {
+                        glitchRenderer.material = glitchRendererStages[glitchRendererCurrentStage];
+                    }
+                }
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneIndexToLoad);
+            }
+        }
     }
 
     private void LateUpdate()
@@ -454,7 +490,10 @@ public class CrashdownGameRoot : MonoBehaviour
                                         break;
                                     case PlayerInteraction.EInteractionType.WinTheGame:
                                         AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        UnityEngine.SceneManagement.SceneManager.LoadScene(thisInteraction.targetSceneIndex);
+                                        AudioManager.instance.PlaySound(gameGlitchSound, player.transform.position);
+                                        nextSceneIndexToLoad = thisInteraction.targetSceneIndex;
+                                        glitchRenderer.enabled = true;
+                                        glitchRenderer.material = glitchRendererStages[0];
                                         break;
                                     case PlayerInteraction.EInteractionType.Nothing:
                                         // This object is not interactable, but it can show a tutorial text message when the player is near it.
