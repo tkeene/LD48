@@ -14,6 +14,10 @@ public class HighScoreManager : MonoBehaviour
     public string randomCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     public int numberOfAdditionalCharactersToRandomize = 20;
 
+    public PostProcess glitchRenderer;
+    public Material[] glitchRendererStages;
+    public float glitchRendererTimeBetweenStages = 0.7f;
+
     private Controls _controls;
 
     private bool interactIsHeld = false;
@@ -29,7 +33,19 @@ public class HighScoreManager : MonoBehaviour
     private string formatWeaponUsed = "404";
     private string formatTextColor = "white";
 
+    private int glitchRendererCurrentStage = 0;
+    private float glitchRendererCurrentTime = 0.0f;
+
     private bool isDoneWithHighScoreDisplay = false;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
+
+        glitchRenderer.material = glitchRendererStages[0];
+        glitchRenderer.enabled = true;
+    }
 
     private void OnEnable()
     {
@@ -150,6 +166,24 @@ public class HighScoreManager : MonoBehaviour
             }
 
             highScoreOutput.text = outputText;
+
+            if (glitchRendererCurrentStage < glitchRendererStages.Length)
+            {
+                glitchRendererCurrentTime += Time.deltaTime;
+                if (glitchRendererCurrentTime > glitchRendererTimeBetweenStages)
+                {
+                    glitchRendererCurrentTime = 0.0f;
+                    glitchRendererCurrentStage++;
+                    if (glitchRendererCurrentStage < glitchRendererStages.Length)
+                    {
+                        glitchRenderer.material = glitchRendererStages[glitchRendererCurrentStage];
+                    }
+                }
+            }
+            else
+            {
+                glitchRenderer.enabled = false;
+            }
         }
     }
 
