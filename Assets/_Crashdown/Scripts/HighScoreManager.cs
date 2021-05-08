@@ -166,24 +166,24 @@ public class HighScoreManager : MonoBehaviour
             }
 
             highScoreOutput.text = outputText;
+        }
 
-            if (glitchRendererCurrentStage < glitchRendererStages.Length)
+        if (glitchRendererCurrentStage < glitchRendererStages.Length)
+        {
+            glitchRendererCurrentTime += Time.deltaTime;
+            if (glitchRendererCurrentTime > glitchRendererTimeBetweenStages)
             {
-                glitchRendererCurrentTime += Time.deltaTime;
-                if (glitchRendererCurrentTime > glitchRendererTimeBetweenStages)
+                glitchRendererCurrentTime = 0.0f;
+                glitchRendererCurrentStage++;
+                if (glitchRendererCurrentStage < glitchRendererStages.Length)
                 {
-                    glitchRendererCurrentTime = 0.0f;
-                    glitchRendererCurrentStage++;
-                    if (glitchRendererCurrentStage < glitchRendererStages.Length)
-                    {
-                        glitchRenderer.material = glitchRendererStages[glitchRendererCurrentStage];
-                    }
+                    glitchRenderer.material = glitchRendererStages[glitchRendererCurrentStage];
                 }
             }
-            else
-            {
-                glitchRenderer.enabled = false;
-            }
+        }
+        else
+        {
+            glitchRenderer.enabled = false;
         }
     }
 

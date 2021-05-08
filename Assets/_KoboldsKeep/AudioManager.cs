@@ -48,6 +48,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(AudioClip clip, Vector3 position, float volume = 1.0f, float pitchVariation = 1.0f)
     {
         AudioSource spawnedAudioSource = GameObject.Instantiate<AudioSource>(defaultAudioPrefab);
+        DontDestroyOnLoad(spawnedAudioSource);
         spawnedAudioSource.transform.position = position;
         spawnedAudioSource.clip = clip;
         spawnedAudioSource.volume = volume;
