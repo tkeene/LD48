@@ -53,6 +53,8 @@ public class CrashdownGameRoot : MonoBehaviour
     private static Collider[] cachedColliderHitArray = new Collider[8];
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
 
+    public static List<GameObject> DisposeOnLevelChange = new List<GameObject>();
+
     private string _currentControlScheme;
     private InputAction _aimAction;
     private CrashdownLevelParent currentCrashdownLevel = null;
@@ -415,6 +417,10 @@ public class CrashdownGameRoot : MonoBehaviour
                             // spawn here.
                             CosmeticEffect.Spawn(crashdownCosmeticEffect, 2, player.transform.position, Quaternion.identity);
                             player.CrashdownTarget = null;
+                            foreach (GameObject o in DisposeOnLevelChange)
+                            {
+                                o.SetActive(false);
+                            }
                             float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
                             while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
                                 && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
