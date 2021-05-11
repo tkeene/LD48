@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerGun_Level03
   m_EditorClassIdentifier: 
   actorEffectOnFiring: {fileID: 53634591097558172, guid: ea29c6b5037dc164e9c9318c2b51e2d0, type: 3}
-  projectileLockedEffect: {fileID: 0}
+  projectileLockedEffect: {fileID: 3766281711389110847, guid: 2ad0f1520c61b574d9d4ace580b1f71f, type: 3}
   onFinalHitEffect: {fileID: 0}
   pickupMessage: '<sprite=6>||<sprite=1>
 

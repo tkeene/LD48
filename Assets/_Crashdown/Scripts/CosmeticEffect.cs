@@ -9,11 +9,17 @@ public class CosmeticEffect : MonoBehaviour
     private Transform transformToFollow = null;
     private float remainingLifetime = 0.0f;
 
-    public static void Spawn(CosmeticEffect prefab, float lifetime, Vector3 position, Quaternion rotation, Transform transformToFollow = null)
+    public static CosmeticEffect Spawn(CosmeticEffect prefab, float lifetime, Vector3 position, Quaternion rotation, Transform transformToFollow = null)
     {
         CosmeticEffect spawnedEffect = GameObject.Instantiate<CosmeticEffect>(prefab, position, rotation);
         spawnedEffect.remainingLifetime = lifetime;
         spawnedEffect.transformToFollow = transformToFollow;
+        return spawnedEffect;
+    }
+
+    public void Despawn()
+    {
+        remainingLifetime = float.NegativeInfinity;
     }
 
     private void OnEnable()

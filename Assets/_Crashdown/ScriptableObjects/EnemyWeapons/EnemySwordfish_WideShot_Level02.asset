@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemySwordfish_WideShot_Level02
   m_EditorClassIdentifier: 
   actorEffectOnFiring: {fileID: 0}
-  projectileLockedEffect: {fileID: 0}
+  projectileLockedEffect: {fileID: 3766281711389110847, guid: 58145334380983a4eb7180c9de4fd389, type: 3}
   onFinalHitEffect: {fileID: 0}
   pickupMessage: Press E/X to pick up []
   pickupName: '[]'
