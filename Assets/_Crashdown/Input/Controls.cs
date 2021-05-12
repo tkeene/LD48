@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_Crashdown/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -161,7 +161,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""17447cf7-750c-468e-98cd-0f0641975580"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone"",
+                    ""processors"": ""StickDeadzone,InvertVector2(invertX=false)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
