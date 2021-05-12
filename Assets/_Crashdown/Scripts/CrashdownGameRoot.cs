@@ -20,6 +20,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
     public SoundEffectData gameGlitchSound;
+    public SoundEffectData buttonPressSound;
     public CosmeticEffect crashdownCosmeticEffect;
     public UnityEngine.UI.Image[] currentWeaponSprites;
 
@@ -33,6 +34,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public PostProcess glitchRenderer;
     public Material[] glitchRendererStages;
     public float glitchRendererTimeBetweenStages = 0.7f;
+    public float buttonInteractCoolDown = .65f;
 
     public bool debugInput = false;
     public bool debugPhysics = false;
@@ -505,10 +507,15 @@ public class CrashdownGameRoot : MonoBehaviour
                                         // This object is not interactable, but it can show a tutorial text message when the player is near it.
                                         break;
                                     case PlayerInteraction.EInteractionType.ToggleSomething:
-                                        foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                        if (thisInteraction.interactionCoolDown <= 0f)
                                         {
-                                            bool toggle = thing.activeInHierarchy;
-                                            thing.SetActive(!toggle);
+                                            thisInteraction.interactionCoolDown = buttonInteractCoolDown;
+                                            AudioManager.instance.PlaySound(buttonPressSound, player.transform.position);
+                                            foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                            {
+                                                bool toggle = thing.activeInHierarchy;
+                                                thing.SetActive(!toggle);
+                                            }
                                         }
                                         break;
                                     default:

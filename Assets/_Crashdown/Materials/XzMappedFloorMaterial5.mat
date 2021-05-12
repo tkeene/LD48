@@ -35,7 +35,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Glossiness: 0
-    - _MapScale: 1
+    - _MapScale: 0.5
     - _Metallic: 0
     - _OcclusionStrength: 1
     m_Colors:
