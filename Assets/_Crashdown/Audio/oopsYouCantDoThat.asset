@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: oopsYouCantDoThat
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: cf4e2497dac4d20408feeaf9d193019a, type: 3}
-  volume: 1
+  volume: 0.7
   pitchVariation: 0.1
   timeBetweenMultipleSounds: 0.25

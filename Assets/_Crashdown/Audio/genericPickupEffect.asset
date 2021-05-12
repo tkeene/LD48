@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: genericPickupEffect
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 4ec40f08c8b62ef4d95fbfb99f0060f4, type: 3}
-  volume: 0.4
+  volume: 0.3
   pitchVariation: 0.05
   timeBetweenMultipleSounds: 0.1

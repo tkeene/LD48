@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: bossDeath
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 36ce4d8f83ee2ce45a101e3087483735, type: 3}
-  volume: 0.5
+  volume: 0.3
   pitchVariation: 0
   timeBetweenMultipleSounds: 0.1

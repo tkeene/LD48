@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: buttonPressSound
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: e6e60c5e00e77a947989b2234d4726a0, type: 3}
-  volume: 1
+  volume: 0.3
   pitchVariation: 0.1
   timeBetweenMultipleSounds: 0.65

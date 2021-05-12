@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: swordSlash01
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 302c869f632788d43a58850e1bd7e7b6, type: 3}
-  volume: 1
+  volume: 0.8
   pitchVariation: 0.2
   timeBetweenMultipleSounds: 0.1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: errorSfx
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: fc4564415406e744fbf63932c7a54008, type: 3}
-  volume: 0.5
+  volume: 0.4
   pitchVariation: 0.01
   timeBetweenMultipleSounds: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: crashdown
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 907af75a57c4d504fb6f2da08daee7e7, type: 3}
-  volume: 0.75
+  volume: 0.4
   pitchVariation: 0
   timeBetweenMultipleSounds: 0.25

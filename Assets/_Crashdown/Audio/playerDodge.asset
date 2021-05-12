@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: playerDodge
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: a79196425aa829c4a921f0150a5975b4, type: 3}
-  volume: 1
+  volume: 0.4
   pitchVariation: 0.2
   timeBetweenMultipleSounds: 0.1

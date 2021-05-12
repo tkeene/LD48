@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: genericEnemyDeath
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 66c6ae511c019fe45ab2dfbaa8b53cab, type: 3}
-  volume: 0.5
+  volume: 0.3
   pitchVariation: 0.1
   timeBetweenMultipleSounds: 0.1
