@@ -44,8 +44,9 @@ public class CrashdownGameRoot : MonoBehaviour
     public static int TotalBossesKilled { get; set; }
     public static int TotalEnemiesKilled { get; set; }
     public static string FinalWeaponUsed { get; set; }
-    public static uint TotalFrameCount { get; set }
+    public static uint TotalFrameCount { get; set; }
     public static float TotalTimeUsed { get; set; }
+    public static List<SecretAreaTrigger> SecretAreasFound = new List<SecretAreaTrigger>();
 
     private Controls _controls;
     private Vector3 _currentCameraVelocity = Vector3.zero;
@@ -99,6 +100,7 @@ public class CrashdownGameRoot : MonoBehaviour
         FinalWeaponUsed = null;
         TotalTimeUsed = 0.0f;
         TotalFrameCount = 0;
+        SecretAreasFound.Clear();
     }
 
     private void OnDisable()
@@ -421,10 +423,16 @@ public class CrashdownGameRoot : MonoBehaviour
                             // spawn here.
                             CosmeticEffect.Spawn(crashdownCosmeticEffect, 2, player.transform.position, Quaternion.identity);
                             player.CrashdownTarget = null;
+
                             foreach (GameObject o in DisposeOnLevelChange)
                             {
-                                o.SetActive(false);
+                                if (o != null)
+                                {
+                                    o.SetActive(false);
+                                }
                             }
+                            DisposeOnLevelChange.Clear();
+
                             float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
                             while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
                                 && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
@@ -461,76 +469,90 @@ public class CrashdownGameRoot : MonoBehaviour
                         player.CurrentHealthRegenDelay = 1.0f;
                     }
 
-                    // Player Interactions
+                    // Player Interactions & Secret Areas
                     int numberOfInteractions = Physics.OverlapSphereNonAlloc(player.transform.position, player.height / 2.0f, cachedColliderHitArray, interactionsLayer.value);
                     if (numberOfInteractions > 0)
                     {
-                        // Only handle the first one, overlapping could get messy.
-                        Collider thisInteractionCollider = cachedColliderHitArray[0];
-                        if (PlayerInteraction.activeInteractions.TryGetValue(thisInteractionCollider, out PlayerInteraction thisInteraction))
+                        // Only handle the first interaction, overlapping could get messy.
+                        bool hasFoundAnInteraction = false;
+                        for (int interactionIndex = 0; interactionIndex < numberOfInteractions; interactionIndex++)
                         {
-                            thisInteraction.OnPlayerStaysThisFrame();
-                            if (player.InputInteractDownThisFrame)
+                            Collider thisInteractionCollider = cachedColliderHitArray[interactionIndex];
+                            if (!hasFoundAnInteraction && PlayerInteraction.activeInteractions.TryGetValue(thisInteractionCollider, out PlayerInteraction thisInteraction))
                             {
-                                switch (thisInteraction.interactionType)
+                                thisInteraction.OnPlayerStaysThisFrame();
+                                hasFoundAnInteraction = true;
+                                if (player.InputInteractDownThisFrame)
                                 {
-                                    case PlayerInteraction.EInteractionType.HealthPowerUp:
-                                        player.MaxHealth *= player.playerHealthBoostMultiplier;
-                                        player.CurrentHealth = player.MaxHealth;
-                                        float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
-                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        break;
-                                    case PlayerInteraction.EInteractionType.WeaponPickup:
-                                        player.SetCurrentWeapon(thisInteraction.weaponDefinition);
-                                        FinalWeaponUsed = thisInteraction.weaponDefinition?.hudAndHighScoreName;
-                                        currentWeaponSprites[0].sprite = thisInteraction.weaponDefinition.pickupAndHudSprite;
-                                        currentWeaponSprites[0].color = Color.white;
-                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        break;
-                                    case PlayerInteraction.EInteractionType.DodgePowerUp:
-                                        player.MaximumNumberOfDodges++;
-                                        player.RemainingNumberOfDodges = player.MaximumNumberOfDodges;
-                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        break;
-                                    case PlayerInteraction.EInteractionType.CrashdownKey:
-                                        player.HasCrashdownAttack = true;
-                                        player.CurrentHealth = player.MaxHealth; // Fully heal the player so the key can't instakill them.
-                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        crashdownPromptRoot.gameObject.SetActive(true);
-                                        break;
-                                    case PlayerInteraction.EInteractionType.WinTheGame:
-                                        AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
-                                        AudioManager.instance.PlaySound(gameGlitchSound, player.transform.position);
-                                        nextSceneIndexToLoad = thisInteraction.targetSceneIndex;
-                                        glitchRenderer.enabled = true;
-                                        glitchRenderer.material = glitchRendererStages[0];
-                                        break;
-                                    case PlayerInteraction.EInteractionType.Nothing:
-                                        // This object is not interactable, but it can show a tutorial text message when the player is near it.
-                                        break;
-                                    case PlayerInteraction.EInteractionType.ToggleSomething:
-                                        if (thisInteraction.interactionCoolDown <= 0f)
-                                        {
-                                            thisInteraction.interactionCoolDown = buttonInteractCoolDown;
-                                            AudioManager.instance.PlaySound(buttonPressSound, player.transform.position);
-                                            foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                    switch (thisInteraction.interactionType)
+                                    {
+                                        case PlayerInteraction.EInteractionType.HealthPowerUp:
+                                            player.MaxHealth *= player.playerHealthBoostMultiplier;
+                                            player.CurrentHealth = player.MaxHealth;
+                                            float playerHealthRatio = player.MaxHealth / player.playerStartingHealth;
+                                            AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
+                                            break;
+                                        case PlayerInteraction.EInteractionType.WeaponPickup:
+                                            player.SetCurrentWeapon(thisInteraction.weaponDefinition);
+                                            FinalWeaponUsed = thisInteraction.weaponDefinition?.hudAndHighScoreName;
+                                            currentWeaponSprites[0].sprite = thisInteraction.weaponDefinition.pickupAndHudSprite;
+                                            currentWeaponSprites[0].color = Color.white;
+                                            AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
+                                            break;
+                                        case PlayerInteraction.EInteractionType.DodgePowerUp:
+                                            player.MaximumNumberOfDodges++;
+                                            player.RemainingNumberOfDodges = player.MaximumNumberOfDodges;
+                                            AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
+                                            break;
+                                        case PlayerInteraction.EInteractionType.CrashdownKey:
+                                            player.HasCrashdownAttack = true;
+                                            player.CurrentHealth = player.MaxHealth; // Fully heal the player so the key can't instakill them.
+                                            AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
+                                            crashdownPromptRoot.gameObject.SetActive(true);
+                                            break;
+                                        case PlayerInteraction.EInteractionType.WinTheGame:
+                                            AudioManager.instance.PlaySound(getPowerupSound, player.transform.position);
+                                            AudioManager.instance.PlaySound(gameGlitchSound, player.transform.position);
+                                            nextSceneIndexToLoad = thisInteraction.targetSceneIndex;
+                                            glitchRenderer.enabled = true;
+                                            glitchRenderer.material = glitchRendererStages[0];
+                                            break;
+                                        case PlayerInteraction.EInteractionType.Nothing:
+                                            // This object is not interactable, but it can show a tutorial text message when the player is near it.
+                                            break;
+                                        case PlayerInteraction.EInteractionType.ToggleSomething:
+                                            if (thisInteraction.interactionCoolDown <= 0f)
                                             {
-                                                bool toggle = thing.activeInHierarchy;
-                                                thing.SetActive(!toggle);
+                                                thisInteraction.interactionCoolDown = buttonInteractCoolDown;
+                                                AudioManager.instance.PlaySound(buttonPressSound, player.transform.position);
+                                                foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                                {
+                                                    bool toggle = thing.activeInHierarchy;
+                                                    thing.SetActive(!toggle);
+                                                }
                                             }
-                                        }
-                                        break;
-                                    default:
-                                        Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
-                                        break;
+                                            break;
+                                        default:
+                                            Debug.LogError("TODO: " + thisInteraction.interactionType.ToString());
+                                            break;
+                                    }
+                                    if (thisInteraction.removeAfterActivation)
+                                    {
+                                        GameObject.Destroy(thisInteraction.gameObject);
+                                    }
+                                    else
+                                    {
+                                        thisInteraction.interactedWithThisFrame = true;
+                                    }
                                 }
-                                if (thisInteraction.removeAfterActivation)
+                            }
+                            else if (SecretAreaTrigger.activeSecretAreas.TryGetValue(thisInteractionCollider, out SecretAreaTrigger secretArea))
+                            {
+                                // But do check for all secret areas, don't want to miss one because you landed on a weapon but skipped it.
+                                // Trigger Secret Areas On Enter
+                                if (!SecretAreasFound.Contains(secretArea))
                                 {
-                                    GameObject.Destroy(thisInteraction.gameObject);
-                                }
-                                else
-                                {
-                                    thisInteraction.interactedWithThisFrame = true;
+                                    SecretAreasFound.Add(secretArea);
                                 }
                             }
                         }

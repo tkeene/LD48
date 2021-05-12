@@ -82,8 +82,11 @@ public class HighScoreManager : MonoBehaviour
             formatBossesKilled = "0" + formatBossesKilled;
         }
 
-        Debug.LogError("TODO: Track secrets");
-        //formatSecretsFound = ;
+        formatSecretsFound = CrashdownGameRoot.SecretAreasFound.Count.ToString();
+        while (formatSecretsFound.Length < 2)
+        {
+            formatSecretsFound = "0" + formatSecretsFound;
+        }
 
         float timeMinutes = Mathf.Floor(CrashdownGameRoot.TotalTimeUsed / 60.0f);
         float timeSeconds = Mathf.Repeat(CrashdownGameRoot.TotalTimeUsed, 60.0f);
