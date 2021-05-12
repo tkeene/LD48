@@ -44,6 +44,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public static int TotalBossesKilled { get; set; }
     public static int TotalEnemiesKilled { get; set; }
     public static string FinalWeaponUsed { get; set; }
+    public static uint TotalFrameCount { get; set }
     public static float TotalTimeUsed { get; set; }
 
     private Controls _controls;
@@ -97,6 +98,7 @@ public class CrashdownGameRoot : MonoBehaviour
         TotalEnemiesKilled = 0;
         FinalWeaponUsed = null;
         TotalTimeUsed = 0.0f;
+        TotalFrameCount = 0;
     }
 
     private void OnDisable()
@@ -776,7 +778,12 @@ public class CrashdownGameRoot : MonoBehaviour
 
     private void UpdateGameLogic()
     {
-        TotalTimeUsed += Time.deltaTime;
+        TotalFrameCount++;
+        if (TotalFrameCount > 2)
+        {
+            // In editor, the first two frames of the scene lag a lot because of initialization. We shouldn't add them because they might be hardware-dependent, which hardly seems fair.
+            TotalTimeUsed += Time.deltaTime;
+        }
 
         for (int i = 0; i < Projectile.activeProjectiles.Count; i++)
         {
