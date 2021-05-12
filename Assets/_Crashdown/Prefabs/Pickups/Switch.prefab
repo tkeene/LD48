@@ -80,7 +80,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<sprite=6>||<sprite=1>
 
-    Operate Switch'
+    Operate Switch
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9bf213cfbc331914a8b51bd73949f6fc, type: 2}
   m_sharedMaterial: {fileID: 2796138410419202542, guid: 9bf213cfbc331914a8b51bd73949f6fc, type: 2}
@@ -115,7 +118,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
