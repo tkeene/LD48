@@ -3464,6 +3464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myMusic: {fileID: 8300000, guid: c7ee9918140230a47b5c587a3c4e08fa, type: 3}
   myMusicSpeed: 1
+  defaultLowpassLevel: 1
 --- !u!1 &5844643067308336099
 GameObject:
   m_ObjectHideFlags: 0
