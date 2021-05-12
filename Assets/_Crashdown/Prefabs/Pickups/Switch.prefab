@@ -206,6 +206,7 @@ MonoBehaviour:
   itemDisplay: {fileID: 0}
   targetSceneIndex: 3
   interactedWithThisFrame: 0
+  interactionCoolDown: 0
 --- !u!65 &1253790210268550055
 BoxCollider:
   m_ObjectHideFlags: 0

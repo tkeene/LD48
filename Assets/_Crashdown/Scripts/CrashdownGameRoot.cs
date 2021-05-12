@@ -20,6 +20,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public SoundEffectData crashdownStartToFinishSound;
     public SoundEffectData getPowerupSound;
     public SoundEffectData gameGlitchSound;
+    public SoundEffectData buttonPressSound;
     public CosmeticEffect crashdownCosmeticEffect;
     public UnityEngine.UI.Image[] currentWeaponSprites;
 
@@ -33,6 +34,7 @@ public class CrashdownGameRoot : MonoBehaviour
     public PostProcess glitchRenderer;
     public Material[] glitchRendererStages;
     public float glitchRendererTimeBetweenStages = 0.7f;
+    public float buttonInteractCoolDown = .65f;
 
     public bool debugInput = false;
     public bool debugPhysics = false;
@@ -52,6 +54,8 @@ public class CrashdownGameRoot : MonoBehaviour
     private static RaycastHit[] cachedRaycastHitArray = new RaycastHit[32];
     private static Collider[] cachedColliderHitArray = new Collider[8];
     public static Dictionary<Collider, IGameActor> actorColliders = new Dictionary<Collider, IGameActor>();
+
+    public static List<GameObject> DisposeOnLevelChange = new List<GameObject>();
 
     private string _currentControlScheme;
     private InputAction _aimAction;
@@ -415,6 +419,10 @@ public class CrashdownGameRoot : MonoBehaviour
                             // spawn here.
                             CosmeticEffect.Spawn(crashdownCosmeticEffect, 2, player.transform.position, Quaternion.identity);
                             player.CrashdownTarget = null;
+                            foreach (GameObject o in DisposeOnLevelChange)
+                            {
+                                o.SetActive(false);
+                            }
                             float levelCutoff = player.transform.position.y + CrashdownLevelParent.kExpectedDistanceBetweenFloors / 2.0f;
                             while (CrashdownLevelParent.activeCrashdownLevels.Count > 0
                                 && CrashdownLevelParent.activeCrashdownLevels.Values[0].transform.position.y > levelCutoff)
@@ -499,10 +507,15 @@ public class CrashdownGameRoot : MonoBehaviour
                                         // This object is not interactable, but it can show a tutorial text message when the player is near it.
                                         break;
                                     case PlayerInteraction.EInteractionType.ToggleSomething:
-                                        foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                        if (thisInteraction.interactionCoolDown <= 0f)
                                         {
-                                            bool toggle = thing.activeInHierarchy;
-                                            thing.SetActive(!toggle);
+                                            thisInteraction.interactionCoolDown = buttonInteractCoolDown;
+                                            AudioManager.instance.PlaySound(buttonPressSound, player.transform.position);
+                                            foreach (GameObject thing in thisInteraction.objectsToToggle)
+                                            {
+                                                bool toggle = thing.activeInHierarchy;
+                                                thing.SetActive(!toggle);
+                                            }
                                         }
                                         break;
                                     default:

@@ -22,7 +22,7 @@ MonoBehaviour:
   startDistance: 0.2
   radius: 0.05
   moveSpeed: 20
-  lifetime: 0.2
+  lifetime: 0.5
   cooldown: 2.5
   damage: 24
   maximumEnemiesHit: 1

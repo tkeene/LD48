@@ -1114,6 +1114,7 @@ MonoBehaviour:
   crashdownStartToFinishSound: {fileID: 11400000, guid: 5646e07869d1e964581256e4ff653465, type: 2}
   getPowerupSound: {fileID: 11400000, guid: 8a5ac04f0038b0142afb3c73c862211c, type: 2}
   gameGlitchSound: {fileID: 11400000, guid: 5bb395ce52b607f45bbb12009d3f0a12, type: 2}
+  buttonPressSound: {fileID: 11400000, guid: b045b826b14f5b34887be9a7f0bd9ccd, type: 2}
   crashdownCosmeticEffect: {fileID: 1190991373793617889, guid: d8b5985a8b9db154abd06fd12e4d103a, type: 3}
   currentWeaponSprites:
   - {fileID: 3749123946720833682}
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 43ad27395f9ffa14ea0ae28a0698a684, type: 2}
   - {fileID: 2100000, guid: 8d1022fe3daf6c6429da6c92be0185f4, type: 2}
   glitchRendererTimeBetweenStages: 0.7
+  buttonInteractCoolDown: 0.65
   debugInput: 0
   debugPhysics: 0
   debugCombat: 0

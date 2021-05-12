@@ -28,6 +28,9 @@ public class PlayerInteraction : MonoBehaviour
     [HideInInspector]
     public bool interactedWithThisFrame = false;
 
+    [HideInInspector]
+    public float interactionCoolDown = 0f;
+
     public static Dictionary<Collider, PlayerInteraction> activeInteractions = new Dictionary<Collider, PlayerInteraction>();
 
     private float timeSinceLastPlayerTouch = float.PositiveInfinity;
@@ -49,6 +52,8 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         timeSinceLastPlayerTouch = float.PositiveInfinity;
+        interactionCoolDown = 0f;
+
         activeInteractions.Add(myPlayerCollider, this);
     }
 
@@ -59,6 +64,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
+        if (interactionCoolDown > 0f)
+        {
+            interactionCoolDown -= Time.deltaTime;
+        }
+
         if (timeSinceLastPlayerTouch < 0.25f)
         {
             timeSinceLastPlayerTouch += Time.deltaTime;

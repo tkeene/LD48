@@ -126,5 +126,13 @@ public class Projectile : MonoBehaviour
     public void RedirectTowards(Vector3 target)
     {
         transform.LookAt(target, Vector3.up);
+        if (spawnedEffect != null)
+        {
+            spawnedEffect.transform.rotation = transform.rotation;
+        }
+        if (MyWeaponData != null)
+        {
+            RemainingLifetime = MyWeaponData.lifetime;
+        }
     }
 }
