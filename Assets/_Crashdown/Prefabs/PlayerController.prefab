@@ -248,9 +248,11 @@ MonoBehaviour:
   animationDodgeRight: dash_right
   animationAttackRight: attack_right
   animationHurtRight: hurt_right
+  animationCrashdown: crashdown
   dashAnimLength: 0.3
   attackAnimLength: 0.2
   hurtAnimLength: 1
+  crashdownLength: 1.75
 --- !u!1 &8353119716330253982
 GameObject:
   m_ObjectHideFlags: 0

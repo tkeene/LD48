@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9208764070938439809}
   - component: {fileID: 1099143796532478716}
   - component: {fileID: 2565870978391401113}
+  - component: {fileID: 6733626364022401922}
   m_Layer: 6
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -142,6 +143,22 @@ MonoBehaviour:
   animationDyingLeft: die_flip
   animationDyingRight: die
   fireAnimationLength: 0.2
+--- !u!114 &6733626364022401922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724803353759544226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d62e1036d89b73429e62601d6868896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyActor: {fileID: 2316110975215587566}
+  spriteRenderer: {fileID: 9152115140083329877}
+  blinkFor: 0.6
+  blinkCycle: 0.12
 --- !u!1 &8958740648068725837
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +228,7 @@ MonoBehaviour:
   timeDying: 0
   movedThisFrame: 0
   firedThisFrame: 0
+  damagedThisFrame: 0
   aiType: 2
 --- !u!135 &3832413115603464917
 SphereCollider:

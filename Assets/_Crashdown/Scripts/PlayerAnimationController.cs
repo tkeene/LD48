@@ -38,9 +38,12 @@ public class PlayerAnimationController : MonoBehaviour
     public string animationAttackRight;
     public string animationHurtRight;
 
+    public string animationCrashdown;
+
     public float dashAnimLength;
     public float attackAnimLength;
     public float hurtAnimLength;
+    public float crashdownLength;
 
     private float _timeForCurrentState = 0f;
     private float _timeInCurrentState = 0f;
@@ -73,6 +76,9 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (playerController.WasDamagedThisFrame)
             animToPlay = HurtAnimation();
+
+        if (playerController.InputCrashdownDownThisFrame)
+            animToPlay = CrashdownAnimation();
         
         spriteAnimator.CrossFade(animToPlay, 0f);
     }
@@ -174,6 +180,15 @@ public class PlayerAnimationController : MonoBehaviour
             default:
                 return animationHurtDown;
         }
+    }
+
+    private string CrashdownAnimation()
+    {
+        _inActionAnimation = true;
+        _timeInCurrentState = 0f;
+        _timeForCurrentState = crashdownLength;
+
+        return animationCrashdown;
     }
 
     private Facing GetFacing()

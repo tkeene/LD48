@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 2496443032864910376}
   - component: {fileID: 4142288386041900994}
   - component: {fileID: 5182535223998730911}
+  - component: {fileID: 4330892058235988661}
   m_Layer: 6
   m_Name: TankSprite
   m_TagString: Untagged
@@ -243,6 +244,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2316110975215587566}
+--- !u!114 &4330892058235988661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3492089253118773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d62e1036d89b73429e62601d6868896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyActor: {fileID: 2316110975215587566}
+  spriteRenderer: {fileID: 5040870593465278627}
+  blinkFor: 0.6
+  blinkCycle: 0.12
 --- !u!1 &3538312731051237820
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +718,7 @@ MonoBehaviour:
   timeDying: 0
   movedThisFrame: 0
   firedThisFrame: 0
+  damagedThisFrame: 0
   aiType: 2
 --- !u!135 &3832413115603464917
 SphereCollider:
