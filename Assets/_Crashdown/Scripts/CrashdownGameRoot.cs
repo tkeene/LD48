@@ -839,7 +839,7 @@ public class CrashdownGameRoot : MonoBehaviour
                     else if (Projectile.reflectingColliders.TryGetValue(hitCollider, out IGameActor reflectingActor)
                         && (reflectingActor == null || currentProjectile.MyOwner == null || (reflectingActor.GetTribe() != currentProjectile.MyOwner.GetTribe())))
                     {
-                        if (currentProjectile.MyOwner != null)
+                        if (!currentProjectile.MyOwner.Equals(null))
                         {
                             currentProjectile.RedirectTowards(currentProjectile.MyOwner.GetPosition());
                         }
