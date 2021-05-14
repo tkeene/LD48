@@ -36,6 +36,9 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     [HideInInspector]
     public bool firedThisFrame = false;
 
+    [HideInInspector]
+    public bool damagedThisFrame = false;
+
     public static List<CrashdownEnemyActor> activeEnemies = new List<CrashdownEnemyActor>();
 
     public enum EAiType
@@ -142,6 +145,7 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     {
         movedThisFrame = false;
         firedThisFrame = false;
+        damagedThisFrame = false;
     }
 
     Vector3 IGameActor.GetFacing()
@@ -166,6 +170,8 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
 
     void IGameActor.TakeDamage(float damage, IGameActor attacker)
     {
+        damagedThisFrame = true;
+
         // TODO Loot.
         CurrentHealth -= damage;
         if (CurrentHealth <= 0.0f && CurrentAiState == EAiState.WalkingAndFighting)
