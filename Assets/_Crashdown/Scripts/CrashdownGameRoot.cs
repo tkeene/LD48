@@ -389,6 +389,7 @@ public class CrashdownGameRoot : MonoBehaviour
                         if (canDodge)
                         {
                             player.RemainingDodgeTime = player.GetDodgeDuration();
+                            player.StartedDodgingThisFrame = true;
                             player.RemainingNumberOfDodges--;
                             CosmeticEffect.Spawn(player.playerDodgeEffect, player.playerDodgeEffect.defaultLifetime,
                                 player.transform.position, player.transform.rotation);
@@ -449,6 +450,7 @@ public class CrashdownGameRoot : MonoBehaviour
                                 out RaycastHit raycastHit, CrashdownLevelParent.kExpectedDistanceBetweenFloors * 1.5f, terrainLayer.value))
                             {
                                 // Crashdown Start
+                                player.StartedCrashdownThisFrame = true;
                                 Vector3 targetPoint = raycastHit.point;
                                 player.CrashdownTarget = targetPoint;
                                 player.CurrentCrashdownTime = 0.0f;
@@ -965,6 +967,8 @@ public class CrashdownGameRoot : MonoBehaviour
             player.InputCrashdownDownThisFrame = false;
             player.InputInteractDownThisFrame = false;
             player.WasDamagedThisFrame = false;
+            player.StartedCrashdownThisFrame = false;
+            player.StartedDodgingThisFrame = false;
         }
 
         foreach (CrashdownEnemyActor enemy in CrashdownEnemyActor.activeEnemies)

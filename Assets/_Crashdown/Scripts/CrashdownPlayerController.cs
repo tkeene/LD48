@@ -30,6 +30,8 @@ public class CrashdownPlayerController : MonoBehaviour, IGameActor
     public bool InputCrashdownDownThisFrame { get; set; }
     public bool InputInteractDownThisFrame { get; set; }
     public bool WasDamagedThisFrame { get; set; }
+    public bool StartedCrashdownThisFrame { get; set; }
+    public bool StartedDodgingThisFrame { get; set; }
 
     public Vector3 CurrentFacing { get; set; }
     public float CurrentHealth { get; set; }

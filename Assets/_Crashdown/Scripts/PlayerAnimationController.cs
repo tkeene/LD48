@@ -68,7 +68,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         string animToPlay = WalkOrIdleAnimation();
 
-        if (playerController.InputDodgeDownThisFrame)
+        if (playerController.StartedDodgingThisFrame)
             animToPlay = DashAnimation();
 
         if (playerController.InputAttackDownThisFrame)
@@ -77,7 +77,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (playerController.WasDamagedThisFrame)
             animToPlay = HurtAnimation();
 
-        if (playerController.InputCrashdownDownThisFrame)
+        if (playerController.StartedCrashdownThisFrame)
             animToPlay = CrashdownAnimation();
         
         spriteAnimator.CrossFade(animToPlay, 0f);
