@@ -12,4 +12,13 @@ public class MainMenuController : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+
+    public void GUI_Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
