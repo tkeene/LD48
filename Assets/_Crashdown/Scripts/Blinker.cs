@@ -41,13 +41,14 @@ public class Blinker : MonoBehaviour
                 return;
             }
 
-            _blinkCycleRemaining -= Time.deltaTime;
-            if (_blinkCycleRemaining <= 0f)
-            {
-                _blinkCycleRemaining = blinkCycle;
-                _blinkCycleStage = (_blinkCycleStage+1)%3;
-                spriteRenderer.enabled = _blinkCycleStage == 0;
-            }
+            //_blinkCycleRemaining -= Time.deltaTime;
+            //if (_blinkCycleRemaining <= 0f)
+            //{
+            //    _blinkCycleRemaining = blinkCycle;
+            //    _blinkCycleStage = (_blinkCycleStage+1)%3;
+            //    spriteRenderer.enabled = _blinkCycleStage == 0;
+            //}
+            spriteRenderer.enabled = !spriteRenderer.enabled;
         }
     }
 }
