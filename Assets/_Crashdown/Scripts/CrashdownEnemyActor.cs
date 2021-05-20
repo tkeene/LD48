@@ -85,11 +85,9 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     private void Start()
     {
         // This fixes a bug where an enemy that spawns precisely inside a floor (like if you drag and drop a spawner into the scene view) will not be able to seek down and find the floor.
-        Debug.Log("Apple " + gameObject.name, gameObject);
         if (CrashdownGameRoot.instance != null
             && Physics.Raycast(transform.position + Vector3.up * kDistanceToSpawnAboveFloor, Vector3.down, out RaycastHit floorHit, kDistanceToCheckForFloor, CrashdownGameRoot.instance.terrainLayer.value))
         {
-            Debug.Log("Banana " + gameObject.name, gameObject);
             transform.position = floorHit.point + Vector3.up * kDistanceToSpawnAboveFloor;
         }
     }
