@@ -41,6 +41,8 @@ public class CrashdownGameRoot : MonoBehaviour
     public bool debugCombat = false;
     public bool debugAi = false;
 
+    public static CrashdownGameRoot instance = null;
+
     public static int TotalBossesKilled { get; set; }
     public static int TotalEnemiesKilled { get; set; }
     public static string FinalWeaponUsed { get; set; }
@@ -66,6 +68,11 @@ public class CrashdownGameRoot : MonoBehaviour
     private int glitchRendererCurrentStage = 0;
     private float glitchRendererCurrentTime = 0.0f;
     private int nextSceneIndexToLoad = -1;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void OnEnable()
     {
