@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Blinker : MonoBehaviour
@@ -13,13 +14,22 @@ public class Blinker : MonoBehaviour
     private float _blinkCycleRemaining = 0f;
     private int _blinkCycleStage = 2;
 
+    const string kBlinkShaderPropertyName = "_DamageTint";
+    private int cachedBlinkShaderProperty = 0;
+
+    private void Start()
+    {
+        spriteRenderer.material = new Material(spriteRenderer.material);
+        cachedBlinkShaderProperty = Shader.PropertyToID(kBlinkShaderPropertyName);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (enemyActor.CurrentAiState == CrashdownEnemyActor.EAiState.Dying || enemyActor.CurrentAiState == CrashdownEnemyActor.EAiState.IsDead)
         {
             _blinking = false;
-            spriteRenderer.enabled = true;
+            SetBlinkAmount(0.0f);
             return;
         }
 
@@ -27,7 +37,7 @@ public class Blinker : MonoBehaviour
         {
             _blinkRemaining = blinkFor;
             _blinking = true;
-            spriteRenderer.enabled = _blinkCycleStage != 0;
+            SetBlinkAmount(_blinkCycleStage);
         }
 
         if (_blinking)
@@ -37,18 +47,23 @@ public class Blinker : MonoBehaviour
             {
                 _blinkRemaining = 0f;
                 _blinking = false;
-                spriteRenderer.enabled = true;
+                SetBlinkAmount(0.0f);
                 return;
             }
 
-            //_blinkCycleRemaining -= Time.deltaTime;
-            //if (_blinkCycleRemaining <= 0f)
-            //{
-            //    _blinkCycleRemaining = blinkCycle;
-            //    _blinkCycleStage = (_blinkCycleStage+1)%3;
-            //    spriteRenderer.enabled = _blinkCycleStage == 0;
-            //}
-            spriteRenderer.enabled = !spriteRenderer.enabled;
+            _blinkCycleRemaining -= Time.deltaTime;
+            if (_blinkCycleRemaining <= 0f)
+            {
+                _blinkCycleRemaining = blinkCycle;
+                _blinkCycleStage = (_blinkCycleStage + 1) % 3;
+                SetBlinkAmount(_blinkCycleStage);
+            }
         }
+    }
+
+    private void SetBlinkAmount(float amount)
+    {
+        const float kBlinkScale = 0.4f;
+        spriteRenderer.material.SetFloat(cachedBlinkShaderProperty, kBlinkScale * amount);
     }
 }

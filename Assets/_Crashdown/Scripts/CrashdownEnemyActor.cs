@@ -68,14 +68,11 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
     public float CurrentSidewaysStaggerAmount { get; set; }
 
     private int currentAttack = 0;
+    const float kDistanceToSpawnAboveFloor = 0.2f;
+    const float kDistanceToCheckForFloor = 1.0f;
 
     private void OnEnable()
     {
-        if (aiType != EAiType.InanimateObject)
-        {
-            // This is a hack to fix a bug where an enemy that spawns precisely inside a floor (like if you drag and drop a spawner into the scene view) will not be able to seek down and find the floor.
-            transform.position += Vector3.up * 0.02f;
-        }
         activeEnemies.Add(this);
         foreach (Collider collider in myColliders)
         {
@@ -83,6 +80,16 @@ public class CrashdownEnemyActor : MonoBehaviour, IGameActor
         }
         CurrentAiState = EAiState.JustSpawned;
         CurrentHealth = maximumHealth;
+    }
+
+    private void Start()
+    {
+        // This fixes a bug where an enemy that spawns precisely inside a floor (like if you drag and drop a spawner into the scene view) will not be able to seek down and find the floor.
+        if (CrashdownGameRoot.instance != null
+            && Physics.Raycast(transform.position + Vector3.up * kDistanceToSpawnAboveFloor, Vector3.down, out RaycastHit floorHit, kDistanceToCheckForFloor, CrashdownGameRoot.instance.terrainLayer.value))
+        {
+            transform.position = floorHit.point + Vector3.up * kDistanceToSpawnAboveFloor;
+        }
     }
 
     private void OnDisable()

@@ -3,6 +3,7 @@ Shader "Crashdown/Modified Unlit Sprite"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _DamageTint ("Damage Tint", float) = 0
     }
     SubShader
     {
@@ -35,6 +36,7 @@ Shader "Crashdown/Modified Unlit Sprite"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            fixed _DamageTint;
 
             v2f vert (appdata v)
             {
@@ -49,6 +51,7 @@ Shader "Crashdown/Modified Unlit Sprite"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
+                col += fixed4(_DamageTint, -_DamageTint/2, -_DamageTint/2, 0);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 // Alpha cutoff
